@@ -16,7 +16,7 @@
                       foreach ($img as $vn) { 
                         ?>
                     	<li>
-		                    <div class="banner-content-wrap" style="background-image:url("<?php echo base_url();?>uploads/banner/.$vn"); no-repeat center center; background-size: cover;">
+		                    <div class="banner-content-wrap" style="background-image:url("<?php echo base_url('uploads/banner/'.$vn);?>"); no-repeat center center; background-size: cover;">
 
 
 		                    	<!-- <img src="<?php echo base_url(); ?>assets/frontend/assets/images/project-image2.jpg"> -->
