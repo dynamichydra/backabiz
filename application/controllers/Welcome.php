@@ -45,8 +45,11 @@ class Welcome extends CI_Controller {
 
 	public function faqs()
 	{
+		$where=array("status"=>"active");
+		$table="faq";
+		$data["faq"]=$this->AdminModel->getdata($where,$table);
 		$this->load->view('include/header');
-		$this->load->view('faqs');
+		$this->load->view('faqs',$data);
 		$this->load->view('include/footer');
 	}
 }

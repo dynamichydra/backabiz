@@ -43,7 +43,7 @@
                 <?php
                      if (isset($vn['icon_image'])) {
                         ?>
-                    <img src="<?php echo base_url() . 'uploads/category/' . $vn['icon_image']; ?>" width="5%"><?php 
+                    <img src="<?php echo base_url() . 'uploads/banner/' . $vn['icon_image']; ?>" width="5%"><?php 
 
                     }
                     ?>
