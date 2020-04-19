@@ -1,7 +1,4 @@
- <!-- body content start -->
- <style type="text/css">
- 	/*.slides li{background: #FED857 url("images/slide-3.jpg") no-repeat center center; background-size: cover;}*/
- </style>
+
           <main>
           	<section>
           		<div class="flexslider" id="main-slider">
@@ -9,9 +6,9 @@
 
                     <?php
                      if (isset($banner)) {
-                     	 foreach ($banner as $key) { 
+                     	 foreach ($banner as $key) {
                       $img=explode(",",$key['image']);
-                      foreach ($img as $vn) { 
+                      foreach ($img as $vn) {
                         ?>
                     	<li>
 		                    <div class="banner-content-wrap" style="background-image:url(<?php echo base_url('uploads/banner/'.$vn);?>); no-repeat center center; background-size: cover;">
@@ -41,26 +38,26 @@
             <section id="explore-project" class="section-padding">
                 <div class="container">
                 	<div class="row">
-                		<div class="col-sm-12">   
+                		<div class="col-sm-12">
 	                    <h2 class="main-heading">Browse by Categories</h2>
 	                    <p class="sub-heading">Discover projects just for you and get great recommendations when you select your interests.</p>
                      	</div>
                 	</div>
                 </div>
             </section>
-            <section id="explore-project-item">   
+            <section id="explore-project-item">
                 <div class="container">
                    	<div class="row">
                    		 <?php
                      if (isset($category)) {
-                     	 foreach ($category as $key=>$value) { 
-                      
+                     	 foreach ($category as $key=>$value) {
+
                         ?>
                       	<div class="col-sm-2">
 	                      	<div class="flip-box">
-	                      		<a href="#">
+	                      		<a href="<?php echo base_url('category/'.$value['cat_name']);?>">
 	                      			<i class="<?php echo $value['icon_name']?>"></i>
-	                      			<h3 class="flip-box-heading"><?php echo $value['cat_name']?></h3>   
+	                      			<h3 class="flip-box-heading"><?php echo $value['cat_name']?></h3>
 	                      		</a>
 	                      	</div>
                       	</div>
@@ -68,47 +65,8 @@
                       		}
                       	}
                       	?>
-                      	<div class="col-sm-2">
-	                      	<div class="flip-box">
-	                      		<a href="#">
-	                      			<i class="fa fa-puzzle-piece"></i>
-	                      			<h3 class="flip-box-heading">Design</h3>
-	                      		</a>
-	                      	</div>
-                      	</div>
-                      	<div class="col-sm-2">
-	                      	<div class="flip-box">
-	                      		<a href="#">
-	                      			<i class="fa fa-film"></i>
-	                      			<h3 class="flip-box-heading">Film & Video</h3>
-	                      		</a>
-	                      	</div>
-                      	</div>
-                      	<div class="col-sm-2">
-	                      	<div class="flip-box">
-	                      		<a href="#">
-	                      			<i class="fa fa-coffee"></i>
-	                      			<h3 class="flip-box-heading">Food</h3>
-	                      		</a>
-	                      	</div>
-                      	</div>
-                      	<div class="col-sm-2">
-	                      	<div class="flip-box">
-	                      		<a href="#">
-	                      			<i class="fa fa-gamepad"></i>
-	                      			<h3 class="flip-box-heading">Games</h3>
-	                      		</a>
-	                      	</div>
-                      	</div>   
-                      	<div class="col-sm-2">
-	                      	<div class="flip-box">
-	                      		<a href="#">
-	                      			<i class="fa fa-link"></i>
-	                      			<h3 class="flip-box-heading">Technology</h3>
-	                      		</a>
-	                      	</div>
-                      	</div>
-                      
+
+
                    </div>
                 </div>
              </section>
@@ -116,7 +74,7 @@
             <section id="project-sec" class="section-padding">
                 <div class="container">
                    <div class="row">
-                   		<div class="col-sm-12">   
+                   		<div class="col-sm-12">
 	                        <h2 class="main-heading">Explore Our Projects</h2>
 	                        <p class="sub-heading">Discover projects just for you and get great recommendations when you select your interests.</p>
                      	</div>
@@ -145,7 +103,7 @@
 	                      		<div class="progression-studios-funding-goal">raised of $52,000</div>
 	                      		<div class="progression-studios-index-time-remaining"> <i class="fa fa-clock-o"></i>438 Days to go</div>
 	                      	</div>
-	                      </div>   
+	                      </div>
                       </div><!--project-item end -->
                       <div class="col-sm-4">
 	                      <div class="project-item">
@@ -172,7 +130,7 @@
 	                      		<div class="progression-studios-funding-goal">raised of $52,000</div>
 	                      		<div class="progression-studios-index-time-remaining"> <i class="fa fa-clock-o"></i>438 Days to go</div>
 	                      	</div>
-	                      </div>   
+	                      </div>
                       </div><!--project-item end -->
                       <div class="col-sm-4">
 	                      <div class="project-item">
@@ -199,7 +157,7 @@
 	                      		<div class="progression-studios-funding-goal">raised of $52,000</div>
 	                      		<div class="progression-studios-index-time-remaining"> <i class="fa fa-clock-o"></i>438 Days to go</div>
 	                      	</div>
-	                      </div>   
+	                      </div>
                       </div><!--project-item end -->
                       <div class="col-sm-4">
 	                      <div class="project-item">
@@ -208,13 +166,13 @@
 	                      			<img src="<?php echo base_url(); ?>assets/frontend/assets/images/project-image2.jpg" alt="project-one">
 	                      		</a>
 	                      		<ul class="project-link">
-                                    <li>   
+                                    <li>
                                       <a href="#">food</a>
                                     </li>
                                     <li>
                                       <a href="#">tech</a>
                                     </li>
-                                </ul>   
+                                </ul>
 	                      		<!--<a href="#" class="project-link">Film &amp; Video</a>-->
 	                      		<div class="author-avatar"><a href="#"> <img src="<?php echo base_url(); ?>assets/frontend/assets/images/profile-image.jpg" alt="Avatar"> </a></div>
 	                      	</div>
@@ -229,7 +187,7 @@
 	                      		<div class="progression-studios-funding-goal">raised of $52,000</div>
 	                      		<div class="progression-studios-index-time-remaining"> <i class="fa fa-clock-o"></i>438 Days to go</div>
 	                      	</div>
-	                      </div>   
+	                      </div>
                       </div><!--project-item end -->
                       <div class="col-sm-4">
 	                      <div class="project-item">
@@ -259,7 +217,7 @@
 	                      		<div class="progression-studios-funding-goal">raised of $52,000</div>
 	                      		<div class="progression-studios-index-time-remaining"> <i class="fa fa-clock-o"></i>438 Days to go</div>
 	                      	</div>
-	                      </div>   
+	                      </div>
                       </div><!--project-item end -->
                       <div class="col-sm-4">
 	                      <div class="project-item">
@@ -289,7 +247,7 @@
 	                      		<div class="progression-studios-funding-goal">raised of $52,000</div>
 	                      		<div class="progression-studios-index-time-remaining"> <i class="fa fa-clock-o"></i>438 Days to go</div>
 	                      	</div>
-	                      </div>   
+	                      </div>
                       </div><!--project-item end -->
                       <div class="col-sm-12 text-center"><a href="#" class="yellow">MORE PROJECTS <i class="fa fa-arrow-circle-o-down"></i></a></div>
                   </div>
@@ -299,19 +257,19 @@
              <section id="project-counter-sec" class="section-padding">
                 <div class="container">
                    <div class="row">
-                      <div class="col-sm-3">   
+                      <div class="col-sm-3">
                          <h2>84k</h2>
                          <p>Projects are Completed</p>
                       </div>
-                      <div class="col-sm-3">   
+                      <div class="col-sm-3">
                          <h2>22k</h2>
                          <p>Ideas Raised Funds</p>
                       </div>
-                      <div class="col-sm-3">   
+                      <div class="col-sm-3">
                          <h2>17k</h2>
                          <p>Categories Served</p>
                       </div>
-                      <div class="col-sm-3">   
+                      <div class="col-sm-3">
                          <h2>88k</h2>
                          <p>Happy Customers</p>
                       </div>
@@ -322,7 +280,7 @@
              <section id="market-sec">
                 <div class="container-fluid">
                    <div class="row">
-                      <div class="col-sm-6"> 
+                      <div class="col-sm-6">
                       	<div class="market-left">
                       		<h2>We Help at Every Step from Concept to Market</h2>
                       		<p>Discover projects just for you and get great recommendations when you select your interests.</p>
@@ -333,13 +291,13 @@
                       		</ul>
                       	</div>
                       </div>
-                      <div class="col-sm-6 market-right"> 
+                      <div class="col-sm-6 market-right">
                       	<div class="market-right-bg">
                       		<div class="market-right-container">
 	                      		<div class="market-right-text">
 	                      			<h3>All the Right Experts to Help<br> Your Business</h3>
 	                      		</div>
-                      		</div>                      	
+                      		</div>
                  		</div>
                       </div>
                   </div>
@@ -349,11 +307,11 @@
              <section id="testimonial-sec" class="section-padding">
                 <div class="container">
                    <div class="row">
-                      <div class="col-sm-12">   
+                      <div class="col-sm-12">
                          <h2 class="main-heading">Our Testimonials</h2>
                          <p class="sub-heading">Discover projects just for you and get great recommendations when you select your interests.</p>
                       </div>
-                      <div class="col-sm-4">  
+                      <div class="col-sm-4">
                       	<div class="testmonial-item">
                       		<p class="author-desc">"There are many variations of passages of lorem ipsum but the majority have alteration in some form, by randomised words look. It has survived not only five centuries"</p>
                       		<img src="<?php echo base_url(); ?>assets/frontend/assets/images/testimonial-author.png" alt="testimonial-author-image">
@@ -384,7 +342,7 @@
              <section id="your-story-sec" class="section-padding">
                 <div class="container">
                    <div class="row">
-                      <div class="col-sm-12">   
+                      <div class="col-sm-12">
                          <h2>Your Story Starts Here</h2>
                          <p>Find a cause you believe in and make good things happen</p>
                          <a href="#">START A PROJECT</a>
