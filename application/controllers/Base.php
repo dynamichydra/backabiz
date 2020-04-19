@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Base extends CI_Controller {
 
-	$data	= array();
+	public $data	= array();
 	public function __construct()
     {
         parent::__construct();
