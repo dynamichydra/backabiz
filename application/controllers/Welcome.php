@@ -34,8 +34,8 @@ class Welcome extends CI_Controller {
 	{
 		// $this->load->view('welcome_message');
 		$where=array("status"=>"active");
-		$table="banner";
-		$data["banner"]=$this->AdminModel->getdata($where,$table);
+		$data["banner"]=$this->AdminModel->getdata($where,'banner');
+		$data["category"]=$this->AdminModel->getdata($where,'category');
 		// print_r($data);
 		// die;
 		$this->load->view('include/header');

@@ -11,15 +11,12 @@
                      if (isset($banner)) {
                      	 foreach ($banner as $key) { 
                       $img=explode(",",$key['image']);
-                      // print_r($img);
-                      // die;
                       foreach ($img as $vn) { 
                         ?>
                     	<li>
-		                    <div class="banner-content-wrap" style="background-image:url("<?php echo base_url('uploads/banner/'.$vn);?>"); no-repeat center center; background-size: cover;">
+		                    <div class="banner-content-wrap" style="background-image:url(<?php echo base_url('uploads/banner/'.$vn);?>); no-repeat center center; background-size: cover;">
 
 
-		                    	<!-- <img src="<?php echo base_url(); ?>assets/frontend/assets/images/project-image2.jpg"> -->
 		                        <div class="banner-content">
 
 		                        	<div class="banner-text">
@@ -35,17 +32,8 @@
                     }
                     }
                     ?>
-                    	<!--  <li>
-		                     <div class="banner-content-wrap">
-		                        <div class="banner-content">
-		                        	<div class="banner-text">
-		                        		<h2><span>Reach More.<br> Raise More.<br> Do More.</span></h2>
-		                        		<p>Raising money has never been so easy. <br>We are here to help your cause starting today!</p>
-		                        		<a href="#" class="">Explore Projects</a>
-		                        	</div>
-		                        </div><!--end banner-content -->
 		                    </div>
-                    	 </li> -->
+                    	 </li>
 				    </ul>
 				</div>
           	</section>
@@ -63,14 +51,23 @@
             <section id="explore-project-item">   
                 <div class="container">
                    	<div class="row">
+                   		 <?php
+                     if (isset($category)) {
+                     	 foreach ($category as $key=>$value) { 
+                      
+                        ?>
                       	<div class="col-sm-2">
 	                      	<div class="flip-box">
 	                      		<a href="#">
-	                      			<i class="fa fa-graduation-cap"></i>
-	                      			<h3 class="flip-box-heading">Education</h3>   
+	                      			<i class="<?php echo $value['icon_name']?>"></i>
+	                      			<h3 class="flip-box-heading"><?php echo $value['cat_name']?></h3>   
 	                      		</a>
 	                      	</div>
                       	</div>
+                      	<?php
+                      		}
+                      	}
+                      	?>
                       	<div class="col-sm-2">
 	                      	<div class="flip-box">
 	                      		<a href="#">
