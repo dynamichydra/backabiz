@@ -45,17 +45,17 @@
                       <span ui-include="'../assets/images/i_1.svg'"></span>
                     </i>
                   </span> -->
-                  <span class="nav-text">User management</span>
+                  <span class="nav-text">user management</span>
                 </a>
                 <ul class="nav-sub">
                   <li>
                     <a href="<?php echo base_url('admin/add_user'); ?>" >
-                      <span class="nav-text">Add user</span>
+                      <span class="nav-text">add user</span>
                     </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/user_lists'); ?>" >
-                      <span class="nav-text">User list</span>
+                      <span class="nav-text">user list</span>
                     </a>
                   </li>
                 </ul>
@@ -74,17 +74,17 @@
                       <span ui-include="'../assets/images/i_1.svg'"></span>
                     </i>
                   </span> -->
-                  <span class="nav-text">Home Page Settings</span>
+                  <span class="nav-text">home page settings</span>
                 </a>
                 <ul class="nav-sub">
                   <li>
                     <a href="<?php echo base_url('admin/banner'); ?>" >
-                      <span class="nav-text">Upload Banner</span>
+                      <span class="nav-text">upload banner</span>
                     </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/banner_list'); ?>" >
-                      <span class="nav-text">Banner List</span>
+                      <span class="nav-text">banner list</span>
                     </a>
                   </li>
                 </ul>
@@ -103,7 +103,7 @@
                       <span ui-include="'../assets/images/i_1.svg'"></span>
                     </i>
                   </span> -->
-                  <span class="nav-text">Category & List</span>
+                  <span class="nav-text">category & list</span>
                 </a>
                 <ul class="nav-sub">
                   <li>
@@ -113,7 +113,7 @@
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/category_list'); ?>" >
-                      <span class="nav-text">category List</span>
+                      <span class="nav-text">category list</span>
                     </a>
                   </li>
                 </ul>
@@ -132,17 +132,17 @@
                       <span ui-include="'../assets/images/i_1.svg'"></span>
                     </i>
                   </span> -->
-                  <span class="nav-text">Manage Project</span>
+                  <span class="nav-text">manage project</span>
                 </a>
                 <ul class="nav-sub">
                   <li>
                     <a href="<?php echo base_url('admin/project'); ?>" >
-                      <span class="nav-text">New Project</span>
+                      <span class="nav-text">new project</span>
                     </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/project_list'); ?>" >
-                      <span class="nav-text">Project list</span>
+                      <span class="nav-text">project list</span>
                     </a>
                   </li>
                 </ul>
@@ -161,12 +161,12 @@
                 <ul class="nav-sub">
                   <li>
                     <a href="<?php echo base_url('admin/cmspages/about-us'); ?>" >
-                      <span class="nav-text">About us page</span>
+                      <span class="nav-text">about us page</span>
                     </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/cmspages/contact-us'); ?>" >
-                      <span class="nav-text">Contact us page</span>
+                      <span class="nav-text">contact us page</span>
                     </a>
                   </li>
                   <li>
@@ -177,12 +177,12 @@
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/cmspages/privacy-policy'); ?>" >
-                      <span class="nav-text">Privacy policy page</span>
+                      <span class="nav-text">privacy policy page</span>
                     </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/cmspages/terms-of-use'); ?>" >
-                      <span class="nav-text">Terms of use page</span>
+                      <span class="nav-text">terms of use page</span>
                     </a>
                   </li>
                 </ul>
