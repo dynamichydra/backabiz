@@ -239,7 +239,7 @@
            }
                                 ?>
 
-            <button type="submit"  class="btn btn-fw info">Update Project</button>
+            <button type="submit"  class="btn white m-b">Update Project</button>
           </form>
         </div>
       </div>

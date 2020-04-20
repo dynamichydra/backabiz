@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="box-footer">
-                        <button type="submit"  class="btn btn-info pull-right">Save Banner</button>
+                        <button type="submit"  class="btn white m-b">Save Banner</button>
                     </div>
                 </form>
             </div>

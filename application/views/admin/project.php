@@ -200,7 +200,7 @@
               <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Quantity of physical products" required>
             </div>
 
-            <button type="submit"  class="btn btn-fw info">Submit Project</button>
+            <button type="submit"  class="btn white m-b">Submit Project</button>
           </form>
         </div>
       </div>
