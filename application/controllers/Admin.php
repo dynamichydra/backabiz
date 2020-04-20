@@ -352,7 +352,6 @@ class Admin extends CI_Controller
         $table="category";
         $category = $this->AdminModel->getdata($where,$table);
             $cover_data = array(
-                'icon_image' => $image,
                 'cat_name'=>$this->input->post('cat_name'),
                 'icon_name'=>$this->input->post('icon_name'),
                 'status'=>'active'

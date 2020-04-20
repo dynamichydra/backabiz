@@ -78,12 +78,21 @@
                                 <li class="menu-item menu-item-has-children">
                                     <a href="explore.html">Explore <i class="fa fa-angle-down"></i></a>
                                     <ul class="sub-menu">
-                                        <li class="menu-item"><a href="project-display.html"><i class="fa fa-graduation-cap"></i> Education</a></li>
-                                        <li class="menu-item"><a href="project-display.html"><i class="fa fa-puzzle-piece"></i>Design</a></li>
+                                                         <?php
+                                       if (isset($category)) {
+                                         foreach ($category as $key=>$value) {
+
+                                          ?>
+                                        <li class="menu-item"><a href="<?php echo base_url('category/'.$value['cat_name']);?>"><i class="<?php echo $value['icon_name']?>"></i><?php echo $value['cat_name']?></a></li>
+                                                        <?php
+                                          }
+                                        }
+                                        ?>
+                                       <!--  <li class="menu-item"><a href="project-display.html"><i class="fa fa-puzzle-piece"></i>Design</a></li>
                                         <li class="menu-item"><a href="project-display.html"><i class="fa fa-film"></i> Film & Video</a></li>
                                         <li class="menu-item"><a href="project-display.html"><i class="fa fa-coffee"></i> Food</a></li>
                                         <li class="menu-item"><a href="project-display.html"><i class="fa fa-gamepad"></i> Games</a></li>
-                                        <li class="menu-item"><a href="project-display.html"><i class="fa fa-link"></i> Technology</a></li>
+                                        <li class="menu-item"><a href="project-display.html"><i class="fa fa-link"></i> Technology</a></li> -->
                                     </ul>
                                 </li>
                                 <li class="menu-item"><a href="news.html">News</a></li>

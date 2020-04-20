@@ -25,7 +25,7 @@ class Base extends CI_Controller {
 
 	public function render_front($name){
 		$this->data['page_name']=$name;
-		$this->load->view('include/header');
+		$this->load->view('include/header',$this->data);
 		$this->load->view($name,$this->data);
 		$this->load->view('include/footer');
 	}
