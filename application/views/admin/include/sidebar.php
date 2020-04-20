@@ -103,7 +103,7 @@
                       <span ui-include="'../assets/images/i_1.svg'"></span>
                     </i>
                   </span> -->
-                  <span class="nav-text">Category $ List</span>
+                  <span class="nav-text">Category & List</span>
                 </a>
                 <ul class="nav-sub">
                   <li>

@@ -351,45 +351,6 @@ class Admin extends CI_Controller
         $where=array('status'=>'active');
         $table="category";
         $category = $this->AdminModel->getdata($where,$table);
-    //     // print_r($banner_img);
-    //     // die;
-        if (!empty($category)){
-        foreach($category as $key=>$value) {
-    //         $path = FCPATH . '/uploads/banner/' . $value['image'];
-    //         unlink($path);
-            $img=$value['icon_image'];
-        }
-    }
-        $cname = $_FILES['userfile']['name'];
-        $filename = time() . sha1($cname);
-
-
-        $config['upload_path'] = "uploads/category/";
-        $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['max_size'] = '409600';
-        $config['file_name'] = $filename;
-        $config['create_thumb'] = TRUE;
-
-        $this->upload->initialize($config);
-
-        if ($this->upload->do_upload('userfile')) {
-            $imageDetailArray = $this->upload->data();
-
-            $configer = array(
-                'image_library' => 'gd2',
-                'source_image' => $imageDetailArray['full_path'],
-                'maintain_ratio' => TRUE,
-                'width' => 1920,
-                'height' => 1080,
-            );
-            $this->image_lib->clear();
-            $this->image_lib->initialize($configer);
-            $this->image_lib->resize();
-
-            $image = $imageDetailArray['file_name'];
-        }else{
-            $image=$img;
-        }
             $cover_data = array(
                 'icon_image' => $image,
                 'cat_name'=>$this->input->post('cat_name'),

@@ -17,9 +17,6 @@
               <th data-hide="phone,tablet">
                   Icon Name
               </th>
-              <th data-hide="phone,tablet" data-name="Date Of Birth">
-                  Icon Image
-              </th>
               <th data-hide="phone">
                   Status
               </th>
@@ -38,16 +35,6 @@
           <tr>
               <td><?php echo $vn['cat_name'];?></td>
               <td><a href><?php echo $vn['icon_name'];?></a></td>
-
-              <td>
-                <?php
-                     if (isset($vn['icon_image'])) {
-                        ?>
-                    <img src="<?php echo base_url() . 'uploads/banner/' . $vn['icon_image']; ?>" width="5%"><?php 
-
-                    }
-                    ?>
-              </td>
                <!-- <td><?php echo $vn['icon_image'];?></td> -->
               <?php
               if($vn['status']=="active"){

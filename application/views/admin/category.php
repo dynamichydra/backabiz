@@ -34,23 +34,6 @@
               <label for="exampleInputEmail1">Icon Name</label>
               <input type="text" class="form-control" name="icon_name" id="exampleInputEmail1" placeholder="Enter email">
             </div>
-            <div class="form-group">
-                            <label for="exampleInputFile">Icon Image</label>
-                            <input type="file" id="exampleInputFile" name="userfile">
-
-                            <p class="help-block">Upload an image for the icon of this category</p>
-                        </div>
-
-            <!-- <div class="form-group">
-              <label for="exampleInputFile">File input</label>
-              <input type="file" id="exampleInputFile" class="form-control">
-              <p class="help-block">Example block-level help text here.</p>
-            </div>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox"> Check me out
-              </label>
-            </div> -->
             <button type="submit"  class="btn white m-b">Submit</button>
           </form>
         </div>
