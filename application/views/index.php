@@ -104,7 +104,14 @@
 	                      		<div class="progression-studios-raised-percent">86.54%</div>
 	                      		<div class="progression-studios-fund-raised">$45,000</div>
 	                      		<div class="progression-studios-funding-goal">raised of $<?php echo $value['funding_goal']?></div>
-	                      		<div class="progression-studios-index-time-remaining"> <i class="fa fa-clock-o"></i>438 Days to go</div>
+	                      		 <?php
+	                      		$date1=date_create($value['end_date']);
+								$data=date("Y/m/d");
+								$date2=date_create($data);
+								$diff=date_diff($date1,$date2);
+								$result=$diff->format("%a");
+	                      		?>
+	                      		<div class="progression-studios-index-time-remaining"> <i class="fa fa-clock-o"></i><?php echo $result; ?> Days to go</div>
 	                      	</div>
 	                      </div>
                       </div><!--project-item end -->
