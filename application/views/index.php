@@ -76,15 +76,20 @@
 	                        <h2 class="main-heading">Explore Our Projects</h2>
 	                        <p class="sub-heading">Discover projects just for you and get great recommendations when you select your interests.</p>
                      	</div>
+                     	<?php
+                     if (isset($project)) {
+                     	 foreach ($project as $key=>$value) {
+
+                        ?>
                       <div class="col-sm-4">
 	                      <div class="project-item">
 	                      	<div class="project-image-container">
 	                      		<a href="#">
-	                      			<img src="<?php echo base_url(); ?>assets/frontend/assets/images/project-image2.jpg" alt="project-one">
+	                      			<img src="<?php echo base_url() . 'uploads/project/' . $value['feature_img']; ?>" alt="project-one">
 	                      		</a>
 	                      		<ul class="project-link">
                                     <li>
-                                      <a href="#">design</a>
+                                      <a href="#"><?php echo $value['category']?></a>
                                     </li>
                                 </ul>
 	                      		<!--<a href="#" class="project-link">Film &amp; Video</a>-->
@@ -92,161 +97,21 @@
 	                      	</div>
 	                      	<div class="project-details">
 	                      		<p class="author-byline">by <a href="#">Jane Smith</a></p>
-	                      		<h2 class="productauthor__title"><a href="#">Sonoma County â€“ A Short Film in Wine Country</a></h2>
+	                      		<h2 class="productauthor__title"><a href="#"><?php echo $value['title']?></a></h2>
 	                      		<div class="raised-bar">
 	                      			<div class="neo-progressbar"><div></div></div>
 	                      		</div>
 	                      		<div class="progression-studios-raised-percent">86.54%</div>
 	                      		<div class="progression-studios-fund-raised">$45,000</div>
-	                      		<div class="progression-studios-funding-goal">raised of $52,000</div>
+	                      		<div class="progression-studios-funding-goal">raised of $<?php echo $value['funding_goal']?></div>
 	                      		<div class="progression-studios-index-time-remaining"> <i class="fa fa-clock-o"></i>438 Days to go</div>
 	                      	</div>
 	                      </div>
                       </div><!--project-item end -->
-                      <div class="col-sm-4">
-	                      <div class="project-item">
-	                      	<div class="project-image-container">
-	                      		<a href="#">
-	                      			<img src="<?php echo base_url(); ?>assets/frontend/assets/images/project-image3.jpg" alt="project-one">
-	                      		</a>
-	                      		<ul class="project-link">
-                                    <li>
-                                      <a href="#">design</a>
-                                    </li>
-                                </ul>
-	                      		<!--<a href="#" class="project-link">Film &amp; Video</a>-->
-	                      		<div class="author-avatar"><a href="#"> <img src="<?php echo base_url(); ?>assets/frontend/assets/images/profile-image.jpg" alt="Avatar"> </a></div>
-	                      	</div>
-	                      	<div class="project-details">
-	                      		<p class="author-byline">by <a href="#">Jane Smith</a></p>
-	                      		<h2 class="productauthor__title"><a href="#">Sonoma County â€“ A Short Film in Wine Country</a></h2>
-	                      		<div class="raised-bar">
-	                      			<div class="neo-progressbar"><div></div></div>
-	                      		</div>
-	                      		<div class="progression-studios-raised-percent">86.54%</div>
-	                      		<div class="progression-studios-fund-raised">$45,000</div>
-	                      		<div class="progression-studios-funding-goal">raised of $52,000</div>
-	                      		<div class="progression-studios-index-time-remaining"> <i class="fa fa-clock-o"></i>438 Days to go</div>
-	                      	</div>
-	                      </div>
-                      </div><!--project-item end -->
-                      <div class="col-sm-4">
-	                      <div class="project-item">
-	                      	<div class="project-image-container">
-	                      		<a href="#">
-	                      			<img src="<?php echo base_url(); ?>assets/frontend/assets/images/project-image.jpg" alt="project-one">
-	                      		</a>
-	                      		<ul class="project-link">
-                                    <li>
-                                      <a href="#">design</a>
-                                    </li>
-                                </ul>
-	                      		<!--<a href="#" class="project-link">Film &amp; Video</a>-->
-	                      		<div class="author-avatar"><a href="#"> <img src="<?php echo base_url(); ?>assets/frontend/assets/images/profile-image.jpg" alt="Avatar"> </a></div>
-	                      	</div>
-	                      	<div class="project-details">
-	                      		<p class="author-byline">by <a href="#">Jane Smith</a></p>
-	                      		<h2 class="productauthor__title"><a href="#">Sonoma County â€“ A Short Film in Wine Country</a></h2>
-	                      		<div class="raised-bar">
-	                      			<div class="neo-progressbar"><div></div></div>
-	                      		</div>
-	                      		<div class="progression-studios-raised-percent">86.54%</div>
-	                      		<div class="progression-studios-fund-raised">$45,000</div>
-	                      		<div class="progression-studios-funding-goal">raised of $52,000</div>
-	                      		<div class="progression-studios-index-time-remaining"> <i class="fa fa-clock-o"></i>438 Days to go</div>
-	                      	</div>
-	                      </div>
-                      </div><!--project-item end -->
-                      <div class="col-sm-4">
-	                      <div class="project-item">
-	                      	<div class="project-image-container">
-	                      		<a href="#">
-	                      			<img src="<?php echo base_url(); ?>assets/frontend/assets/images/project-image2.jpg" alt="project-one">
-	                      		</a>
-	                      		<ul class="project-link">
-                                    <li>
-                                      <a href="#">food</a>
-                                    </li>
-                                    <li>
-                                      <a href="#">tech</a>
-                                    </li>
-                                </ul>
-	                      		<!--<a href="#" class="project-link">Film &amp; Video</a>-->
-	                      		<div class="author-avatar"><a href="#"> <img src="<?php echo base_url(); ?>assets/frontend/assets/images/profile-image.jpg" alt="Avatar"> </a></div>
-	                      	</div>
-	                      	<div class="project-details">
-	                      		<p class="author-byline">by <a href="#">Jane Smith</a></p>
-	                      		<h2 class="productauthor__title"><a href="#">Sonoma County â€“ A Short Film in Wine Country</a></h2>
-	                      		<div class="raised-bar">
-	                      			<div class="neo-progressbar"><div></div></div>
-	                      		</div>
-	                      		<div class="progression-studios-raised-percent">86.54%</div>
-	                      		<div class="progression-studios-fund-raised">$45,000</div>
-	                      		<div class="progression-studios-funding-goal">raised of $52,000</div>
-	                      		<div class="progression-studios-index-time-remaining"> <i class="fa fa-clock-o"></i>438 Days to go</div>
-	                      	</div>
-	                      </div>
-                      </div><!--project-item end -->
-                      <div class="col-sm-4">
-	                      <div class="project-item">
-	                      	<div class="project-image-container">
-	                      		<a href="#">
-	                      			<img src="<?php echo base_url(); ?>assets/frontend/assets/images/project-image3.jpg" alt="project-one">
-	                      		</a>
-	                      		<ul class="project-link">
-                                    <li>
-                                      <a href="#">food</a>
-                                    </li>
-                                    <li>
-                                      <a href="#">tech</a>
-                                    </li>
-                                </ul>
-	                      		<!--<a href="#" class="project-link">Film &amp; Video</a>-->
-	                      		<div class="author-avatar"><a href="#"> <img src="<?php echo base_url(); ?>assets/frontend/assets/images/profile-image.jpg" alt="Avatar"> </a></div>
-	                      	</div>
-	                      	<div class="project-details">
-	                      		<p class="author-byline">by <a href="#">Jane Smith</a></p>
-	                      		<h2 class="productauthor__title"><a href="#">Sonoma County â€“ A Short Film in Wine Country</a></h2>
-	                      		<div class="raised-bar">
-	                      			<div class="neo-progressbar"><div></div></div>
-	                      		</div>
-	                      		<div class="progression-studios-raised-percent">86.54%</div>
-	                      		<div class="progression-studios-fund-raised">$45,000</div>
-	                      		<div class="progression-studios-funding-goal">raised of $52,000</div>
-	                      		<div class="progression-studios-index-time-remaining"> <i class="fa fa-clock-o"></i>438 Days to go</div>
-	                      	</div>
-	                      </div>
-                      </div><!--project-item end -->
-                      <div class="col-sm-4">
-	                      <div class="project-item">
-	                      	<div class="project-image-container">
-	                      		<a href="#">
-	                      			<img src="<?php echo base_url(); ?>assets/frontend/assets/images/project-image.jpg" alt="project-one">
-	                      		</a>
-	                      		<ul class="project-link">
-                                    <li>
-                                      <a href="#">food</a>
-                                    </li>
-                                    <li>
-                                      <a href="#">tech</a>
-                                    </li>
-                                </ul>
-	                      		<!--<a href="#" class="project-link">Film &amp; Video</a>-->
-	                      		<div class="author-avatar"><a href="#"> <img src="<?php echo base_url(); ?>assets/frontend/assets/images/profile-image.jpg" alt="Avatar"> </a></div>
-	                      	</div>
-	                      	<div class="project-details">
-	                      		<p class="author-byline">by <a href="#">Jane Smith</a></p>
-	                      		<h2 class="productauthor__title"><a href="#">Sonoma County â€“ A Short Film in Wine Country</a></h2>
-	                      		<div class="raised-bar">
-	                      			<div class="neo-progressbar"><div></div></div>
-	                      		</div>
-	                      		<div class="progression-studios-raised-percent">86.54%</div>
-	                      		<div class="progression-studios-fund-raised">$45,000</div>
-	                      		<div class="progression-studios-funding-goal">raised of $52,000</div>
-	                      		<div class="progression-studios-index-time-remaining"> <i class="fa fa-clock-o"></i>438 Days to go</div>
-	                      	</div>
-	                      </div>
-                      </div><!--project-item end -->
+                      <?php
+                  }
+              }
+                      ?>
                       <div class="col-sm-12 text-center"><a href="#" class="yellow">MORE PROJECTS <i class="fa fa-arrow-circle-o-down"></i></a></div>
                   </div>
               </div>

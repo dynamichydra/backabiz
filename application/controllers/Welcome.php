@@ -12,6 +12,7 @@ class Welcome extends Base {
 	public function index()
 	{
 		$this->data["banner"]=$this->AdminModel->getdata(["status"=>"active"],'banner');
+		$this->data["project"]=$this->AdminModel->getdata(["status"=>"active"],'project');
 		$this->render_front('index');
 	}
 

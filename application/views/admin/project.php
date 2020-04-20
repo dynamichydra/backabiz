@@ -41,7 +41,7 @@
               <div class="form-group">
               <label for="category">Category</label>
               <!-- <div class="col-sm-10"> -->
-                <select name="category" class="form-control c-select" required>
+                <select name="category[]" class="form-control c-select" required multiple>
                   <option value="uncategorized">Uncategorized</option>
                   <option value="design">Design</option>
                   <option value="education">Education</option>

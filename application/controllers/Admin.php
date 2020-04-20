@@ -415,6 +415,8 @@ class Admin extends CI_Controller
     public function insert_project()
     {
         $table="project";
+        $der=$this->input->post('category');
+        $der1=implode(",",$der);
         // $cname = $_FILES['userfile']['name'];
         // $filename = time() . sha1($cname);
 
@@ -429,17 +431,6 @@ class Admin extends CI_Controller
 
         if ($this->upload->do_upload('feature_img')) {
             $imageDetailArray = $this->upload->data();
-
-            // $configer = array(
-            //     'image_library' => 'gd2',
-            //     'source_image' => $imageDetailArray['full_path'],
-            //     'maintain_ratio' => TRUE,
-            //     'width' => 1920,
-            //     'height' => 1080,
-            // );
-            // $this->image_lib->clear();
-            // $this->image_lib->initialize($configer);
-            // $this->image_lib->resize();
 
             $image = $imageDetailArray['file_name'];
         }else{
@@ -458,7 +449,7 @@ class Admin extends CI_Controller
                 'title'=>$this->input->post('title'),
                 'description'=>$this->input->post('description'),
                 'short_description'=>$this->input->post('short_description'),
-                'category'=>$this->input->post('category'),
+                'category'=>$der1,
                 'tag'=>$this->input->post('tag'),
                 'video'=>$this->input->post('video'),
                 'project_end_method'=>$this->input->post('method'),
