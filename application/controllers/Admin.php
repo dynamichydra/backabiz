@@ -63,7 +63,7 @@ class Admin extends CI_Controller
 
         $verify = $this->AdminModel->check_admin($email, $pass);
         if (empty($verify)) {
-            $this->session->set_flashdata('error', 'Username/Password is incorrect');
+            $this->session->set_flashdata('msg', 'Username/Password is incorrect');
             redirect('admin/index');
         } else {
             $this->session->set_userdata('admin_id', $verify->id);
@@ -87,7 +87,8 @@ class Admin extends CI_Controller
         if (empty($user_id)) {
             redirect('admin');
         }
-        $data=array('page_title'=>'Add New User','layout_page'=>'add_user');
+        $data1=$this->AdminModel->get_countries();
+        $data=array('page_title'=>'Add New User','layout_page'=>'add_user','countries'=>$data1);
         $this->load->view('admin/layout',$data);
     }
 
@@ -97,7 +98,7 @@ class Admin extends CI_Controller
             'name'=> $this->input->post("name"),
             'email'=>$this->input->post("email"),
             'phone'=>$this->input->post("phone"),
-            'password'=>md5($this->input->post("password")),
+            'password'=>md5($this->input->post("psw")),
             'user_type'=>"user",
             'status'=>"active"
         );
@@ -106,10 +107,10 @@ class Admin extends CI_Controller
         // die;
         $insert = $this->AdminModel->insert($table,$data);
         if ($insert){
-            $this->session->set_flashdata('msg','user added successfully');
+            $this->session->set_flashdata('success','user added successfully');
             redirect('admin/add_user');
         }else{
-            $this->session->set_flashdata('msg','user registration failed');
+            $this->session->set_flashdata('error','user registration failed');
             redirect('admin/add_user');
         }
     }
@@ -156,10 +157,10 @@ class Admin extends CI_Controller
         // die;
         $insert = $this->AdminModel->doupdate($where,$table,$data);;
         if ($insert){
-            $this->session->set_flashdata('msg','user Updated successfully');
+            $this->session->set_flashdata('success','user Updated successfully');
             redirect('admin/user_lists');
         }else{
-            $this->session->set_flashdata('msg','user update failed');
+            $this->session->set_flashdata('error','user update failed');
             redirect('admin/user_lists');
         }
     }
@@ -171,10 +172,10 @@ class Admin extends CI_Controller
         $table="user";
         $status=$this->AdminModel->doupdate($where,$table,$data);
         if ($status){
-            $this->session->set_flashdata('msg','deleted successfully');
+            $this->session->set_flashdata('success','deleted successfully');
             redirect('admin/user_lists');
         }else{
-            $this->session->set_flashdata('msg','delete failed');
+            $this->session->set_flashdata('error','delete failed');
             redirect('admin/user_lists');
         }
     }
@@ -208,11 +209,11 @@ class Admin extends CI_Controller
         $table="banner";
         $status=$this->AdminModel->doupdate($where,$table,$data);
         if ($status){
-            $this->session->set_flashdata('msg','deleted successfully');
-            redirect('admin/user_lists');
+            $this->session->set_flashdata('success','deleted successfully');
+            redirect('admin/banner_list');
         }else{
-            $this->session->set_flashdata('msg','delete failed');
-            redirect('admin/user_lists');
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/banner_list');
         }
     }
 
@@ -277,16 +278,14 @@ class Admin extends CI_Controller
                         );
                     if(empty($id)){
                         $this->AdminModel->insert($table,$cover_data);
+                        $this->session->set_flashdata('success','New Banner Added Successfully');
                         redirect('admin/banner');
                     }else{
                         $this->AdminModel->doupdate($where1,$table,$cover_data);
-                        redirect('admin/banner');
+                        $this->session->set_flashdata('success','Banner Updated Successfully');
+                        redirect('admin/banner_list');
                     }
-                     
-                    // Upload status message 
-                    $statusMsg = $insert?'Files uploaded successfully!'.$errorUploadType:'Some problem occurred, please try again.'; 
                 }else{ 
-                    // $statusMsg = "Sorry, there was an error uploading your file.".$errorUploadType;
                     $cover_data=array(
                             // 'image' => $img,
                             'title_one'=>$this->input->post('title1'),
@@ -297,9 +296,11 @@ class Admin extends CI_Controller
                         );
                         if(empty($id)){
                         $this->AdminModel->insert($table,$cover_data);
+                        $this->session->set_flashdata('success','New Banner Added Successfully');
                         redirect('admin/banner');
                     }else{
                         $this->AdminModel->doupdate($where1,$table,$cover_data);
+                        $this->session->set_flashdata('success','Banner Updated Successfully');
                         redirect('admin/banner_list');
                     } 
                 } 
@@ -314,6 +315,7 @@ class Admin extends CI_Controller
                             'status'=>'active'
                         ); 
                  $this->AdminModel->doupdate($where1,$table,$cover_data);
+                 $this->session->set_flashdata('success','Banner Updated Successfully');
                         redirect('admin/banner_list');
             } 
         // } 
@@ -345,6 +347,14 @@ class Admin extends CI_Controller
        $data=array('page_title'=>'Category List','layout_page'=>'category_list','category'=>$category);
         $this->load->view('admin/layout', $data);
     }
+    public function edit_category($id)
+    {
+        $where=array('status'=>'active','id'=>$id);
+        $table="category";
+        $cat = $this->AdminModel->getdata($where,$table);
+        $data=array('page_title'=>'Edit Category','layout_page'=>'edit_category','category'=>$cat);
+        $this->load->view('admin/layout', $data);
+    }
     public function insert_category($id=null)
     {
         $where1=array('id'=>$id);
@@ -358,10 +368,12 @@ class Admin extends CI_Controller
             );
             if(empty($id)){
             $this->AdminModel->insert($table,$cover_data);
+            $this->session->set_flashdata('success','New Category Added Successfully');
             redirect('admin/category');
         }else{
             $this->AdminModel->doupdate($where1,$table,$cover_data);
-            redirect('admin/category');
+            $this->session->set_flashdata('success','Category Updated Successfully');
+            redirect('admin/category_list');
         }
     }
 
@@ -372,11 +384,11 @@ class Admin extends CI_Controller
         $table="category";
         $status=$this->AdminModel->doupdate($where,$table,$data);
         if ($status){
-            $this->session->set_flashdata('msg','deleted successfully');
-            redirect('admin/category');
+            $this->session->set_flashdata('success','Deleted Successfully');
+            redirect('admin/category_list');
         }else{
-            $this->session->set_flashdata('msg','delete failed');
-            redirect('admin/category');
+            $this->session->set_flashdata('error','Delete Failed! Pls Try Again');
+            redirect('admin/category_list');
         }
     }
 
@@ -471,10 +483,12 @@ class Admin extends CI_Controller
             );
             if(empty($id)){
             $this->AdminModel->insert($table,$data);
-            redirect('admin/project');
+            $this->session->set_flashdata('success','New Project Added Successfully');
+            redirect('admin/project_list');
         }else{
             $this->AdminModel->doupdate($where1,$table,$cover_data);
-            redirect('admin/project');
+            $this->session->set_flashdata('success','Project Updated Successfully');
+            redirect('admin/project_list');
         }
         
     }
@@ -503,10 +517,10 @@ class Admin extends CI_Controller
         $table="project";
         $status=$this->AdminModel->doupdate($where,$table,$data);
         if ($status){
-            $this->session->set_flashdata('msg','deleted successfully');
+            $this->session->set_flashdata('success','Deleted Successfully');
             redirect('admin/project_list');
         }else{
-            $this->session->set_flashdata('msg','delete failed');
+            $this->session->set_flashdata('error','Deletion Failed');
             redirect('admin/project_list');
         }
     }
@@ -598,10 +612,12 @@ class Admin extends CI_Controller
             );
             if(empty($id)){
             $this->AdminModel->insert($table,$data);
-            redirect('admin/project');
+            $this->session->set_flashdata('success','New Project Added Successfully');
+            redirect('admin/project_list');
         }else{
             $this->AdminModel->doupdate($where,$table,$data);
-            redirect('admin/project');
+            $this->session->set_flashdata('success','Project Updated Successfully');
+            redirect('admin/project_list');
         }
     }
 

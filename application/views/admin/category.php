@@ -13,13 +13,12 @@
       <div class="box">
         <div class="box-header">
           <h2>Add Category</h2>
-        <?php
-    $msg=$this->session->flashdata('msg');
-    if($msg != "")
-    {
-      echo "<div class='alert alert-success'>".$msg."</div>";
-    }
-  ?>  
+        <?php if ($this->session->flashdata('success')) { ?>
+        <div class="alert alert-success"> <?= $this->session->flashdata('success') ?> </div>
+    <?php } ?>
+    <?php if ($this->session->flashdata('error')) { ?>
+    <div class="alert alert-danger"> <?= $this->session->flashdata('error') ?> </div>
+    <?php } ?>
         </div>
         <div class="box-divider m-0"></div>
         <div class="box-body">

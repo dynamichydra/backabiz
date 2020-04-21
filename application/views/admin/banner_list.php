@@ -1,7 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Banner List</title>
+</head>
+<body>
 <div class="padding">
   <div class="box">
     <div class="box-header">
       <h2>Banner List</h2> 
+      <?php if ($this->session->flashdata('success')) { ?>
+        <div class="alert alert-success"> <?= $this->session->flashdata('success') ?> </div>
+    <?php } ?>
+    <?php if ($this->session->flashdata('error')) { ?>
+    <div class="alert alert-danger"> <?= $this->session->flashdata('error') ?> </div>
+    <?php } ?>
       <!-- <small>Make HTML tables on smaller devices look awesome</small> -->
     </div>
     <div class="box-body">
@@ -85,3 +98,5 @@
     </div>
   </div>
 </div>
+</body>
+</html>

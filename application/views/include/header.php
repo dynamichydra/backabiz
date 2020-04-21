@@ -50,7 +50,7 @@
                    <div class="col-md-6">
                        <ul class="top-menu-right">
                          <li><a href='#'><i class="fa fa-file-text-o"></i>Start a Project</a></li>
-                         <li><a href='#'><i class="fa fa-sign-in"></i>Login / Register</a></li>
+                         <li><a href='<?php echo base_url('welcome/login') ?>'><i class="fa fa-sign-in"></i>Login / Register</a></li>
                       </ul>
                    </div>
                 </div>

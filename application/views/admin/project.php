@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>add user</title>
+  <title>Projects</title>
 </head>
 <body>
   <div class="app" id="app">
@@ -13,13 +13,12 @@
       <div class="box">
         <div class="box-header">
           <h2>New Project</h2>
-        <?php
-    $msg=$this->session->flashdata('msg');
-    if($msg != "")
-    {
-      echo "<div class='alert alert-success'>".$msg."</div>";
-    }
-  ?>  
+        <?php if ($this->session->flashdata('success')) { ?>
+        <div class="alert alert-success"> <?= $this->session->flashdata('success') ?> </div>
+    <?php } ?>
+    <?php if ($this->session->flashdata('error')) { ?>
+    <div class="alert alert-danger"> <?= $this->session->flashdata('error') ?> </div>
+    <?php } ?>
         </div>
         <div class="box-divider m-0"></div>
         <div class="box-body">

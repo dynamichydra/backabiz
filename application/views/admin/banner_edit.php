@@ -1,4 +1,10 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>All Banners</title>
+</head>
+<body>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -51,7 +57,8 @@
                             <label for="exampleInputFile">Image</label>
                             <input type="file" id="exampleInputFile" name="files[]" multiple>
 
-                            <p class="help-block">Upload an image for the banner of this site</p>
+                            <p class="help-block">Upload an image to update</p>
+                            <p style="color: red">*required image dimension is 1400*578</p>
                         </div>
                     </div>
                     <div class="box-footer">
@@ -86,3 +93,5 @@
         </div>
     </section>
 </div>
+</body>
+</html>

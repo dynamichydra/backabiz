@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/styles/app.css" type="text/css" />
   <!-- endbuild -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/styles/font.css" type="text/css" />
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/styles/passwordStyle.css" type="text/css" />
 </head>
 <body>
   <div class="app" id="app">

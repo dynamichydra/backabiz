@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>CMS management</title>
+</head>
+<body>
 <div class="padding">
   <div class="box">
     <div class="box-header">

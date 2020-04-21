@@ -17,9 +17,9 @@
         <nav class="scroll nav-stacked nav-active-primary">
           
             <ul class="nav" ui-nav>
-              <li class="nav-header hidden-folded">
+              <!-- <li class="nav-header hidden-folded">
                 <small class="text-muted">Main</small>
-              </li>
+              </li> -->
               
               <li>
                 <a href="<?php echo base_url('admin')?>" >
@@ -50,12 +50,12 @@
                 <ul class="nav-sub">
                   <li>
                     <a href="<?php echo base_url('admin/add_user'); ?>" >
-                      <span class="nav-text">add user</span>
+                      <span class="nav-text">Add a User </span>
                     </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/user_lists'); ?>" >
-                      <span class="nav-text">user list</span>
+                      <span class="nav-text">All Users </span>
                     </a>
                   </li>
                 </ul>
@@ -79,12 +79,12 @@
                 <ul class="nav-sub">
                   <li>
                     <a href="<?php echo base_url('admin/banner'); ?>" >
-                      <span class="nav-text">upload banner</span>
+                      <span class="nav-text">Upload a Banner </span>
                     </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/banner_list'); ?>" >
-                      <span class="nav-text">banner list</span>
+                      <span class="nav-text">All Banners </span>
                     </a>
                   </li>
                 </ul>
@@ -103,17 +103,17 @@
                       <span ui-include="'../assets/images/i_1.svg'"></span>
                     </i>
                   </span> -->
-                  <span class="nav-text">category & list</span>
+                  <span class="nav-text">Categories</span>
                 </a>
                 <ul class="nav-sub">
                   <li>
                     <a href="<?php echo base_url('admin/category'); ?>" >
-                      <span class="nav-text">category</span>
+                      <span class="nav-text">Add A Category</span>
                     </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/category_list'); ?>" >
-                      <span class="nav-text">category list</span>
+                      <span class="nav-text">All Categories</span>
                     </a>
                   </li>
                 </ul>
@@ -132,17 +132,17 @@
                       <span ui-include="'../assets/images/i_1.svg'"></span>
                     </i>
                   </span> -->
-                  <span class="nav-text">manage project</span>
+                  <span class="nav-text">Projects</span>
                 </a>
                 <ul class="nav-sub">
                   <li>
                     <a href="<?php echo base_url('admin/project'); ?>" >
-                      <span class="nav-text">new project</span>
+                      <span class="nav-text">Add a Project</span>
                     </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/project_list'); ?>" >
-                      <span class="nav-text">project list</span>
+                      <span class="nav-text">All Projects</span>
                     </a>
                   </li>
                 </ul>
@@ -156,33 +156,38 @@
                     <i class="fa fa-caret-down"></i>
                   </span>
 
-                  <span class="nav-text">CMS management</span>
+                  <span class="nav-text">CMS Management</span>
                 </a>
                 <ul class="nav-sub">
                   <li>
                     <a href="<?php echo base_url('admin/cmspages/about-us'); ?>" >
-                      <span class="nav-text">about us page</span>
+                      <span class="nav-text">About Us</span>
                     </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/cmspages/contact-us'); ?>" >
-                      <span class="nav-text">contact us page</span>
+                      <span class="nav-text">Contact Us</span>
                     </a>
                   </li>
                   <li>
                     <!-- <a href="<?php echo base_url('admin/cmspages/faq'); ?>" > -->
                       <a href="<?php echo base_url('admin/faq_list'); ?>" >
-                      <span class="nav-text">FAQ page</span>
+                      <span class="nav-text">FAQ</span>
                     </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/cmspages/privacy-policy'); ?>" >
-                      <span class="nav-text">privacy policy page</span>
+                      <span class="nav-text">Privacy Policy</span>
                     </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/cmspages/terms-of-use'); ?>" >
-                      <span class="nav-text">terms of use page</span>
+                      <span class="nav-text">Terms & Conditions</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" >
+                      <span class="nav-text">Refunds </span>
                     </a>
                   </li>
                 </ul>
@@ -209,3 +214,46 @@
     </div>
   </div>
   <!-- / aside -->
+  <script type="text/javascript">
+    
+var setSubItemParent = false;
+
+$(document).ready(function () {
+    var listItems = $('.navbar ul li');
+
+    $.each(listItems, function(key, litem) {
+        iterateLinks(litem);
+    })
+});
+
+function iterateLinks(liItem) {
+    var divchildren = $(liItem).children('div');
+
+    setSubItemParent = false;
+
+    /* If there are div children, iterate them */
+    if (divchildren.length > 0) {
+        iterateLinks(divchildren[0]);
+
+        /* If an item was set and we're in a div, add active to 
+           this element as well. */
+        if(setSubItemParent) {
+            $(liItem).addClass('active');
+        }
+
+    }
+    else {
+        var achildren = $(liItem).children('a');
+
+        /* Run through all a tags and see if they should be active */
+        if (achildren.length > 0 ) {
+            $.each(achildren, function(key, achild) {
+                if (achild.href == document.URL) {
+                    $(achild).addClass('active');
+                    setSubItemParent = true;
+                }
+            });
+        }
+    }
+}
+  </script>

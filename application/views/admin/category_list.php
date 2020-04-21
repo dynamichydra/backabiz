@@ -1,7 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Category List</title>
+</head>
+<body>
 <div class="padding">
   <div class="box">
     <div class="box-header">
-      <h2>Category List</h2> 
+      <h2>Category List</h2>
+      <?php if ($this->session->flashdata('success')) { ?>
+        <div class="alert alert-success"> <?= $this->session->flashdata('success') ?> </div>
+    <?php } ?>
+    <?php if ($this->session->flashdata('error')) { ?>
+    <div class="alert alert-danger"> <?= $this->session->flashdata('error') ?> </div>
+    <?php } ?> 
       <!-- <small>Make HTML tables on smaller devices look awesome</small> -->
     </div>
     <div class="box-body">
@@ -47,7 +60,7 @@
             <?php
           }
           ?>
-          <td><div class="w3-bar"><a href="<?php echo base_url('admin/category/').$vn['id']?>" class="md-btn md-raised m-b-sm w-xs blue"  >Edit</a>
+          <td><div class="w3-bar"><a href="<?php echo base_url('admin/edit_category/').$vn['id']?>" class="md-btn md-raised m-b-sm w-xs blue"  >Edit</a>
             <a href="<?php echo base_url('admin/delete_category/').$vn['id']?>" onclick="return confirm('Are you sure?');" class="md-btn md-raised m-b-sm w-xs red">delete</a></div></td>
           </tr>
           <?php
@@ -67,3 +80,5 @@
     </div>
   </div>
 </div>
+</body>
+</html>

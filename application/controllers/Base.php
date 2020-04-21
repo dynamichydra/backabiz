@@ -14,6 +14,8 @@ class Base extends CI_Controller {
         $this->load->library('image_lib');
         $this->load->library('upload');
         $this->load->helper('url');
+        $this->load->helper('string');
+        $this->load->library(array('form_validation','email'));
 				$this->get_default();
     }
 

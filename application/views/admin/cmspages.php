@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Content Management</title>
+</head>
+<body>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <section class="content">
@@ -58,3 +65,5 @@
         ]
     });
 </script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>add user</title>
+  <title>Users</title>
 </head>
 <body>
   <div class="app" id="app">
@@ -13,15 +13,7 @@
       <div class="box">
         <div class="box-header">
           <h2>New User Form</h2>
-        <?php
-    $msg=$this->session->flashdata('msg');
-    if($msg != "")
-    {
-      echo "<div class='alert alert-success'>".$msg."</div>";
-    }
-  ?>  
-
-  <?php
+                    <?php
                     foreach ($user_data as $key=>$vn) { 
                         ?>
         </div>

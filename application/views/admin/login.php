@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>backabiz</title>
+  <title>Login</title>
   <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,6 +34,13 @@
 <!-- ############ LAYOUT START-->
   <div class="center-block w-xxl w-auto-xs p-y-md">
     <div class="navbar">
+      <?php
+    $msg=$this->session->flashdata('msg');
+    if($msg != "")
+    {
+      echo "<div class='alert alert-danger'>".$msg."</div>";
+    }
+  ?>  
       <div class="pull-center">
         <div ui-include="'../views/blocks/navbar.brand.html'"></div>
       </div>
