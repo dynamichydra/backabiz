@@ -10,6 +10,7 @@
                       $img=explode(",",$key['image']);
                       foreach ($img as $vn) {
                         ?>
+
                     	<li>
 		                    <div class="banner-content-wrap" style="background-image:url(<?php echo base_url('uploads/banner/'.$vn);?>); no-repeat center center; background-size: cover;">
 
@@ -21,7 +22,7 @@
 		                        		<h2><span><?php echo $key['title_two'];?></span></h2>
 		                        		<a href="<?php echo $key['button_link'];?>" class=""><?php echo $key['button_title'];?></a>
 		                        	</div>
-		                        </div><!--end banner-content -->
+		                        </div>
 		                    </div>
                     	 </li>
                     	 <?php
@@ -124,55 +125,33 @@
               </div>
             </section>
           	  <!--project-counter-sec start -->
+              <?php
+              if(isset($home_number) && count($home_number)>0){
+              ?>
              <section id="project-counter-sec" class="section-padding">
                 <div class="container">
                    <div class="row">
-                      <div class="col-sm-3">
-                         <h2>84k</h2>
-                         <p>Projects are Completed</p>
-                      </div>
-                      <div class="col-sm-3">
-                         <h2>22k</h2>
-                         <p>Ideas Raised Funds</p>
-                      </div>
-                      <div class="col-sm-3">
-                         <h2>17k</h2>
-                         <p>Categories Served</p>
-                      </div>
-                      <div class="col-sm-3">
-                         <h2>88k</h2>
-                         <p>Happy Customers</p>
-                      </div>
+                      <?php echo $home_number[0]['page_content'];?>
                    </div>
                 </div>
              </section>
+             <?php
+            }
+             ?>
           	<!--market-sec start -->
+            <?php
+            if(isset($home_market) && count($home_market)>0){
+            ?>
              <section id="market-sec">
                 <div class="container-fluid">
                    <div class="row">
-                      <div class="col-sm-6">
-                      	<div class="market-left">
-                      		<h2>We Help at Every Step from Concept to Market</h2>
-                      		<p>Discover projects just for you and get great recommendations when you select your interests.</p>
-                      		<ul>
-                      			<li>Raise funds with a crowdfunding campaign</li>
-                      			<li>Extend your campaign with InDemand</li>
-                      			<li>Fast track to the global market</li>
-                      		</ul>
-                      	</div>
-                      </div>
-                      <div class="col-sm-6 market-right">
-                      	<div class="market-right-bg">
-                      		<div class="market-right-container">
-	                      		<div class="market-right-text">
-	                      			<h3>All the Right Experts to Help<br> Your Business</h3>
-	                      		</div>
-                      		</div>
-                 		</div>
-                      </div>
+                      <?php echo $home_market[0]['page_content'];?>
                   </div>
               </div>
          	 </section>
+           <?php
+          }
+           ?>
           	<!--Testimonial section start  -->
              <section id="testimonial-sec" class="section-padding">
                 <div class="container">
@@ -181,30 +160,17 @@
                          <h2 class="main-heading">Our Testimonials</h2>
                          <p class="sub-heading">Discover projects just for you and get great recommendations when you select your interests.</p>
                       </div>
-                      <div class="col-sm-4">
-                      	<div class="testmonial-item">
-                      		<p class="author-desc">"There are many variations of passages of lorem ipsum but the majority have alteration in some form, by randomised words look. It has survived not only five centuries"</p>
-                      		<img src="<?php echo base_url(); ?>assets/frontend/assets/images/testimonial-author.png" alt="testimonial-author-image">
-                      		<h3 class="author-name">Jane Smith</h3>
-                      		<p class="author-post">Creator/Seller</p>
-                      	</div>
-                      </div>
-                      <div class="col-sm-4">
-                      	<div class="testmonial-item">
-                      		<p class="author-desc">"There are many variations of passages of lorem ipsum but the majority have alteration in some form, by randomised words look. It has survived not only five centuries"</p>
-                      		<img src="<?php echo base_url(); ?>assets/frontend/assets/images/testimonial-author.png" alt="testimonial-author-image">
-                      		<h3 class="author-name">Jane Smith</h3>
-                      		<p class="author-post">Creator/Seller</p>
-                      	</div>
-                      </div>
-                      <div class="col-sm-4">
-                      	<div class="testmonial-item">
-                      		<p class="author-desc">"There are many variations of passages of lorem ipsum but the majority have alteration in some form, by randomised words look. It has survived not only five centuries"</p>
-                      		<img src="<?php echo base_url(); ?>assets/frontend/assets/images/testimonial-author.png" alt="testimonial-author-image">
-                      		<h3 class="author-name">Jane Smith</h3>
-                      		<p class="author-post">Creator/Seller</p>
-                      	</div>
-                      </div>
+                      <?php
+                      foreach($testimonial as $k=>$v){
+                        ?>
+                        <div class="col-sm-4">
+                          <div class="testmonial-item">
+                            <?php echo $v['page_content'];?>
+                          </div>
+                        </div>
+                        <?php
+                      }
+                      ?>
                    </div>
                 </div>
              </section>

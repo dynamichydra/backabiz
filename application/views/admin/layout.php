@@ -37,7 +37,7 @@
 
 
 
-  
+
 <!-- ############ LAYOUT START-->
  <!-- content -->
   <div id="content" class="app-content box-shadow-z1" role="main">
@@ -48,10 +48,10 @@
               <i class="material-icons">&#xe5d2;</i>
             </a>
             <!-- / -->
-        
+
             <!-- Page title - Bind to $state's title -->
             <div class="mb-0 h5 no-wrap" ng-bind="$state.current.data.title" id="pageTitle"></div>
-        
+
             <!-- navbar collapse -->
             <div class="collapse navbar-collapse" id="collapse">
               <!-- link and dropdown -->
@@ -61,12 +61,12 @@
                   <div ui-include="'../views/blocks/dropdown.new.html'"></div>
                 </li>
               </ul>
-        
+
               <div ui-include="'../views/blocks/navbar.form.html'"></div>
               <!-- / -->
             </div>
             <!-- / navbar collapse -->
-        
+
             <!-- navbar right -->
             <ul class="nav navbar-nav ml-auto flex-row">
               <li class="nav-item dropdown pos-stc-xs">
@@ -83,7 +83,7 @@
                     <i class="on b-white bottom"></i>
                   </span>
                    <ul class="dropdown-menu">
-      <li><a href="<?php echo base_url();?>admin/logout">logout</a></li>
+      <li><a href="<?php echo base_url();?>admin/logout">Logout</a></li>
     </ul>
                 </a>
                 <div ui-include="'../views/blocks/dropdown.user.html'"></div>
@@ -110,21 +110,19 @@
 
 
 
-    <div class="app-footer">
-      <div class="p-2 text-xs">
-        <div class="pull-right text-muted py-1">
-          &copy; Copyright <strong>backabiz</strong> <span class="hidden-xs-down">- Built with Love v1.1.3</span>
-          <a ui-scroll-to="content"><i class="fa fa-long-arrow-up p-x-sm"></i></a>
+
+
+
+
         </div>
-        <div class="nav">
-          <a class="nav-link" href="../">About</a>
-          <a class="nav-link" href="http://themeforest.net/user/flatfull/portfolio?ref=flatfull">Get it</a>
-        </div>
-      </div>
-    </div>
+        <div class="app-footer">
+          <div class="p-2 text-xs">
+            <div class="pull-right text-muted py-1">
+              &copy; Copyright <strong>backabiz</strong>
+              <a ui-scroll-to="content"><i class="fa fa-long-arrow-up p-x-sm"></i></a>
+            </div>
 
-
-
+          </div>
         </div>
 <!-- build:js scripts/app.html.js -->
 <!-- jQuery -->

@@ -27,7 +27,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //     $domainName = $_SERVER['HTTP_HOST'] . '/';
 // $config['base_url'] = 'https://newsystem.xyz/backabiz';
 //$config['base_url'] = 'http://localhost/backabiz';
-$config['base_url'] = $protocol.$_SERVER['HTTP_HOST'].'/backabiz';
+if($_SERVER['HTTP_HOST']=='localhost'){
+  $config['base_url'] = $protocol.$_SERVER['HTTP_HOST'].'/pankaj/backabiz';
+}else{
+  $config['base_url'] = $protocol.$_SERVER['HTTP_HOST'].'/backabiz';
+}
+
 
 /*
 |--------------------------------------------------------------------------

@@ -1,7 +1,7 @@
          <!-- body content start -->
         <main>
           <!-- Breadcrumbs -->
-            <section class="breadcrumbs-sec" style="background: url(<?php echo base_url('assets/frontend/assets/images/breadcrumbs-bg.jpg');?>) no-repeat;">   
+            <section class="breadcrumbs-sec" style="background: url(<?php echo base_url('assets/frontend/assets/images/breadcrumbs-bg.jpg');?>) no-repeat;">
               <div class="container">
                 <div class="breadcrumbs-text">
                   <h3>My account</h3>
@@ -14,16 +14,16 @@
                     </li>
                   </ul>
                 </div>
-              </div><!-- end container --> 
-            </section><!-- end breadcrumbs-sec -->           
-         
+              </div><!-- end container -->
+            </section><!-- end breadcrumbs-sec -->
+
           <!-- Form Section start-->
             <section class="project-form-wrapper section-padding">
               <div class="container">
 
                 <div class="row">
                 	<div class="project-form-content">
-                		<form type="post" method="post" action="<?php echo base_url('welcome/login_check')?>">
+                		<form type="post" method="post" action="<?php echo base_url('home/login_check')?>">
                   		<div class="col-md-6 col-sm-6">
                         <h3 class="reward-option" style="font-size: 26px; border-bottom: none;margin-top: 0;">Login</h3>
                         <?php
@@ -32,7 +32,7 @@
     {
       echo "<div class='alert alert-success'>".$msg."</div>";
     }
-  ?>  
+  ?>
                   			<div class="all-form">
                           <div class="form-group">
                               <label>Username or email address *</label>
@@ -53,7 +53,7 @@
           						</div>
                     </form>
 
-                      <form type="post" method="post" action="<?php echo base_url('welcome/register')?>">
+                      <form type="post" method="post" action="<?php echo base_url('home/register')?>">
                       <div class="col-md-6 col-sm-6">
                         <h3 class="reward-option" style="font-size: 26px; border-bottom: none;margin-top: 0;">Register</h3>
                         <div class="all-form">
@@ -67,7 +67,7 @@
                         </div>
                       </div>
 
-                    
+
                 	</form>
                 	</div>
                 </div>

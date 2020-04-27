@@ -58,7 +58,7 @@
             </div>
             <div class="form-group">
               <label for="exampleInputFile">Feature Image</label>
-              <input type="file" name=" feature_img" id="exampleInputFile" class="form-control" required>
+              <input type="file" name="feature_img" id="exampleInputFile" class="form-control" required>
               <p class="help-block">Upload a project feature image.</p>
             </div>
             <div class="form-group">
@@ -120,6 +120,16 @@
                 </div>
             </div>
             <div class="form-group">
+                <label>Contributor Table</label>
+                <div class="checkbox-wrap"><input type="checkbox" name="contributor_table" value="1">Show contributor table on project single page</div>
+
+            </div>
+            <div class="form-group">
+                <label>Contributor Anonymity</label>
+                <div class="checkbox-wrap"><input type="checkbox" name="contributor_anonymity" value="1">Make contributors anonymous on the contributor table</div>
+
+            </div>
+            <div class="form-group">
               <label for="country">country</label>
               <!-- <div class="col-sm-10"> -->
                 <select name="country" class="form-control c-select" required>
@@ -145,7 +155,7 @@
             </div>
             <div class="form-group">
               <label for="reward_img">Reward Image</label>
-              <input type="file" name=" reward_img" id="reward_img" class="form-control" required>
+              <input type="file" name="reward_img" id="reward_img" class="form-control" required>
               <p class="help-block">Upload a reward image.</p>
             </div>
             <div class="form-group">

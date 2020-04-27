@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>Projects</title>
-</head>
-<body>
+
   <div class="app" id="app">
 
 <!-- ############ PAGE START-->
@@ -17,7 +11,7 @@
     <?php } ?>
     <?php if ($this->session->flashdata('error')) { ?>
     <div class="alert alert-danger"> <?= $this->session->flashdata('error') ?> </div>
-    <?php } ?> 
+    <?php } ?>
       <!-- <small>Make HTML tables on smaller devices look awesome</small> -->
     </div>
     <div class="box-body">
@@ -58,7 +52,7 @@
           <!-- <?php print_r('$data'); ?> -->
           <?php
                                 if (!empty($project)) {
-                                    foreach ($project as $key=>$vn) { 
+                                    foreach ($project as $key=>$vn) {
                                         ?>
           <tr>
               <td><?php echo $vn['title'];?></td>
@@ -100,6 +94,4 @@
 <!-- ############ PAGE END-->
 
     </div>
-  </div>
-</body>
-</html>
+  

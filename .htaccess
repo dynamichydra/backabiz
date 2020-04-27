@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
-RewriteEngine On 
-RewriteBase /backabiz/
+RewriteEngine On
+RewriteBase /pankaj/backabiz/
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

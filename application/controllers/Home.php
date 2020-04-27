@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'Base.php';
-class Welcome extends Base {
+class Home extends Base {
 
 	public function __construct()
     {
@@ -13,6 +13,9 @@ class Welcome extends Base {
 	{
 		$this->data["banner"]=$this->AdminModel->getdata(["status"=>"active"],'banner');
 		$this->data["project"]=$this->AdminModel->getdata(["status"=>"active"],'project');
+		$this->data["testimonial"] = $this->baseModel->_get('cmspages',['page_title'=>'testimonials']);
+		$this->data["home_market"] = $this->baseModel->_get('cmspages',['page_title'=>'home_market']);
+		$this->data["home_number"] = $this->baseModel->_get('cmspages',['page_title'=>'home_number']);
 		$this->render_front('index');
 	}
 
@@ -26,11 +29,6 @@ class Welcome extends Base {
 	{
 		$this->render_front('login');
 	}
-	public function dashboard()
-	{
-		// $this->data["user"]=$this->AdminModel->getdata(["status"=>"active"],'user');
-		$this->render_front('dashboard');
-	}
 
 	public function login_check()
     {
@@ -39,30 +37,31 @@ class Welcome extends Base {
 
         $pass = md5($pass);
 
-        $verify = $this->AdminModel->check_admin($email, $pass);
-        echo $verify;
-        die;
+        $verify = $this->BaseModel->_get('user',['email'=>$email,password=>$pass,'status'=>'active'] );
+
         if (empty($verify)) {
-            $this->session->set_flashdata('error', 'Username/Password is incorrect');
-            redirect('welcome/login');
+            $this->session->set_flashdata(['msg'=> 'Username/Password is incorrect','type'=>'error']);
+            redirect('home/login');
         } else {
-            // $this->data["user"]=$this->AdminModel->getdata(["status"=>"active"],'user');
-            redirect('welcome/dashboard');
+					$this->session->set_userdata(['user'=>$verify[0]]);
+            $this->data["user"]=$this->AdminModel->getdata(["status"=>"active"],'user');
+            redirect('dashboard');
         }
     }
     public function logout()
     {
         $this->session->sess_destroy();
-        redirect('');
+        redirect('/');
     }
-   public function register() 
+
+   public function register()
    {
           $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email');
           if ($this->form_validation->run() == TRUE) {
 
               $registration_data = array(
                   'email' => $this->input->post('email'),
-                  'password' =>random_string('alnum',5),
+                  'password' =>md5(random_string('alnum',5)),
                   'user_type' => 'user',
                  'hash' => md5(rand(0, 1000))
               );
@@ -83,15 +82,13 @@ class Welcome extends Base {
           	$user_pass=$value['password'];
           	$User_hash=$value['hash'];
           }
-          echo $user_pass;
-          die;
          $this->load->library('email');     //load email library
         $this->email->from('sampleemail', 'Site'); //sender's email
         $subject="Welcome!";    //subject
         $message= /*-----------email body starts-----------*/
           'Thanks for signing up,
 
-          Your account has been created. 
+          Your account has been created.
           Here are your login details.
           -------------------------------------------------
           Email   : ' . $_POST['email'] . '
@@ -100,16 +97,26 @@ class Welcome extends Base {
 
           Please click this link to activate your account:
 
-          ' . base_url() . 'user/verify?' . 
+          ' . base_url() . 'user/verify?' .
           'email=' . $_POST['email'] . '&hash=' . 'hash';
 
-        /*-----------email body ends-----------*/             
+        /*-----------email body ends-----------*/
         $this->email->to($address);
         $this->email->subject($subject);
         $this->email->message($message);
         $this->email->send();
-
+				$this->session->set_flashdata(['msg'=> 'An email varification link send to your email','type'=>'success']);
+				redirect('home/message');
 
       }
   }
+
+	function message(){
+		$this->data["msg"] = $this->session->flashdata('msg');
+		$this->data["type"] = $this->session->flashdata('type');
+		if($this->data["msg"]!='')
+			$this->render_front('cms/message');
+		else
+			redirect('/');
+	}
 }

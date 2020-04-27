@@ -8,21 +8,18 @@ class Base extends CI_Controller {
     {
         parent::__construct();
         $this->CI = get_instance();
-        $this->load->library('session');
-        $this->load->library('pagination');
         $this->load->model('AdminModel');
+				$this->load->model('BaseModel');
         $this->load->library('image_lib');
         $this->load->library('upload');
-        $this->load->helper('url');
         $this->load->helper('string');
-        $this->load->library(array('form_validation','email'));
-				$this->get_default();
+        $this->get_default();
     }
 
 	public function get_default()
 	{
 		$this->data["category"]=$this->AdminModel->getdata(["status"=>"active"],'category');
-
+		$this->data['session_user']	= $this->session->userdata('user');
 	}
 
 	public function render_front($name){

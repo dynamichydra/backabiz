@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en-US" prefix="og: http://ogp.me/ns#">      
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
    <head>
       <!-- Basic page needs
          ============================================ -->
       <meta UTF-8>
       <meta name="description" content="">
-      <meta name="author" content="">    
-      <title>Backabiz</title>           
+      <meta name="author" content="">
+      <title>Backabiz</title>
       <!-- Mobile specific metas
          ============================================ -->
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
       <link rel="shortcut icon" type="image/x-icon"  href="<?php echo base_url(); ?>assets/frontend/assets/images/favicon.png"/>
       <!-- Google web fonts
          ============================================ -->
-      <link href="https://fonts.googleapis.com/css?family=Barlow:400,500,600,700,800&display=swap" rel="stylesheet"> 
+      <link href="https://fonts.googleapis.com/css?family=Barlow:400,500,600,700,800&display=swap" rel="stylesheet">
       <!-- CSS  -->
       <!-- Bootstrap CSS
          ============================================ -->
@@ -29,10 +29,11 @@
       <!-- menu-->
       <!-- main CSS
          ============================================ -->
-      <link rel="stylesheet" href="<?php echo base_url(); ?>assets/frontend/assets/css/custom.css"> 
+      <link rel="stylesheet" href="<?php echo base_url(); ?>assets/frontend/assets/css/custom.css">
       <link rel="stylesheet" href="<?php echo base_url(); ?>assets/frontend/assets/style.css">
+      <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
      </head>
-     <body class="header-fixed page no-sidebar header-style-2 topbar-style-2">  
+     <body class="header-fixed page no-sidebar header-style-2 topbar-style-2">
       <div class="wrapper">
           <!-- header start -->
         <header>
@@ -45,19 +46,23 @@
                          <li><a href='#'><i class="fa fa-twitter"></i></a></li>
                          <li><a href='#'><i class="fa fa-instagram"></i></a></li>
                          <li><a href='#'><i class="fa fa-pinterest"></i></a></li>
-                      </ul>   
+                      </ul>
                    </div>
                    <div class="col-md-6">
                        <ul class="top-menu-right">
-                         <li><a href='#'><i class="fa fa-file-text-o"></i>Start a Project</a></li>
-                         <li><a href='<?php echo base_url('welcome/login') ?>'><i class="fa fa-sign-in"></i>Login / Register</a></li>
+                         <li><a href='<?php echo base_url('new-project')?>'><i class="fa fa-file-text-o"></i>Start a Project</a></li>
+                         <li><a href='<?php echo base_url('home/login') ?>'><i class="fa fa-sign-in"></i>Login / Register</a></li>
                       </ul>
                    </div>
                 </div>
              </div>
           </div>
-          <div id="site-header">
-                <div id="site-header-inner" class="container">                    
+          <div id="site-header" style="position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;">
+                <div id="site-header-inner" class="container">
                     <div class="wrap-inner clearfix">
                         <div id="site-logo" class="clearfix">
                             <div id="site-log-inner">
@@ -71,7 +76,7 @@
                             <span></span>
                         </div><!-- /.mobile-button -->
 
-                        <nav id="main-nav" class="main-nav">   
+                        <nav id="main-nav" class="main-nav">
                             <ul id="menu-primary-menu" class="menu">
                                 <li class="menu-item current-menu-item"><a href="<?php echo base_url()?>">Home</a></li>
                                 <li class="menu-item"><a href="about.html">About</a></li>
@@ -83,7 +88,7 @@
                                          foreach ($category as $key=>$value) {
 
                                           ?>
-                                        <li class="menu-item"><a href="<?php echo base_url('category/'.$value['cat_name']);?>"><i class="<?php echo $value['icon_name']?>"></i><?php echo $value['cat_name']?></a></li>
+                                        <li class="menu-item"><a href="<?php echo base_url('category/'.$value['cat_name']);?>"><i class="<?php echo $value['icon_name']?>"></i>&nbsp;<?php echo $value['cat_name']?></a></li>
                                                         <?php
                                           }
                                         }
@@ -96,12 +101,12 @@
                                     </ul>
                                 </li>
                                 <li class="menu-item"><a href="news.html">News</a></li>
-                                <li class="menu-item"><a href="<?php echo base_url('welcome/faqs') ?>">Faqs</a></li>
+                                <li class="menu-item"><a href="<?php echo base_url('home/faqs') ?>">Faqs</a></li>
                                 <li class="menu-item"><a href="contact.html">Contact</a></li>
                             </ul>
                         </nav><!-- /#main-nav -->
-                      
-                    </div><!-- /.wrap-inner -->                    
+
+                    </div><!-- /.wrap-inner -->
                 </div><!-- /#site-header-inner -->
             </div><!-- /#site-header -->
         </header>

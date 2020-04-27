@@ -6,21 +6,19 @@
         <a class="navbar-brand">
         	<div ></div>
         	<img src="<?php echo base_url(); ?>/assets/images/backabiz.svg" alt="." class="hide">
-        	<!-- <span class="hidden-folded inline">backabiz</span> -->
+        	<span class="hidden-folded inline">backabiz</span>
         </a>
         <!-- / brand -->
       </div>
-      <div flex-no-shrink>
-        <div ui-include="'../views/blocks/aside.top.2.html'"></div>
-      </div>
+
       <div flex class="hide-scroll">
         <nav class="scroll nav-stacked nav-active-primary">
-          
+
             <ul class="nav" ui-nav>
               <!-- <li class="nav-header hidden-folded">
                 <small class="text-muted">Main</small>
               </li> -->
-              
+
               <li>
                 <a href="<?php echo base_url('admin')?>" >
                   <span class="nav-icon">
@@ -37,25 +35,18 @@
                   <span class="nav-caret">
                     <i class="fa fa-caret-down"></i>
                   </span>
-                  <!-- <span class="nav-label">
-                    <b class="label rounded label-sm primary">5</b>
-                  </span> -->
-                  <!-- <span class="nav-icon">
-                    <i class="material-icons">&#xe5c3;
-                      <span ui-include="'../assets/images/i_1.svg'"></span>
-                    </i>
-                  </span> -->
-                  <span class="nav-text">user management</span>
+
+                  <span class="nav-text">User Management</span>
                 </a>
                 <ul class="nav-sub">
                   <li>
                     <a href="<?php echo base_url('admin/add_user'); ?>" >
-                      <span class="nav-text">Add a User </span>
+                      <span class="nav-text">Add User </span>
                     </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/user_lists'); ?>" >
-                      <span class="nav-text">All Users </span>
+                      <span class="nav-text">User List </span>
                     </a>
                   </li>
                 </ul>
@@ -66,25 +57,17 @@
                   <span class="nav-caret">
                     <i class="fa fa-caret-down"></i>
                   </span>
-                  <!-- <span class="nav-label">
-                    <b class="label rounded label-sm primary">5</b>
-                  </span> -->
-                  <!-- <span class="nav-icon">
-                    <i class="material-icons">&#xe5c3;
-                      <span ui-include="'../assets/images/i_1.svg'"></span>
-                    </i>
-                  </span> -->
-                  <span class="nav-text">home page settings</span>
+                  <span class="nav-text">Home Page Settings</span>
                 </a>
                 <ul class="nav-sub">
                   <li>
                     <a href="<?php echo base_url('admin/banner'); ?>" >
-                      <span class="nav-text">Upload a Banner </span>
+                      <span class="nav-text">Upload Banner </span>
                     </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/banner_list'); ?>" >
-                      <span class="nav-text">All Banners </span>
+                      <span class="nav-text">Banner List </span>
                     </a>
                   </li>
                 </ul>
@@ -95,25 +78,17 @@
                   <span class="nav-caret">
                     <i class="fa fa-caret-down"></i>
                   </span>
-                  <!-- <span class="nav-label">
-                    <b class="label rounded label-sm primary">5</b>
-                  </span> -->
-                  <!-- <span class="nav-icon">
-                    <i class="material-icons">&#xe5c3;
-                      <span ui-include="'../assets/images/i_1.svg'"></span>
-                    </i>
-                  </span> -->
                   <span class="nav-text">Categories</span>
                 </a>
                 <ul class="nav-sub">
                   <li>
                     <a href="<?php echo base_url('admin/category'); ?>" >
-                      <span class="nav-text">Add A Category</span>
+                      <span class="nav-text">Add Category</span>
                     </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/category_list'); ?>" >
-                      <span class="nav-text">All Categories</span>
+                      <span class="nav-text">Category List</span>
                     </a>
                   </li>
                 </ul>
@@ -124,25 +99,17 @@
                   <span class="nav-caret">
                     <i class="fa fa-caret-down"></i>
                   </span>
-                  <!-- <span class="nav-label">
-                    <b class="label rounded label-sm primary">5</b>
-                  </span> -->
-                  <!-- <span class="nav-icon">
-                    <i class="material-icons">&#xe5c3;
-                      <span ui-include="'../assets/images/i_1.svg'"></span>
-                    </i>
-                  </span> -->
                   <span class="nav-text">Projects</span>
                 </a>
                 <ul class="nav-sub">
                   <li>
                     <a href="<?php echo base_url('admin/project'); ?>" >
-                      <span class="nav-text">Add a Project</span>
+                      <span class="nav-text">Add Project</span>
                     </a>
                   </li>
                   <li>
                     <a href="<?php echo base_url('admin/project_list'); ?>" >
-                      <span class="nav-text">All Projects</span>
+                      <span class="nav-text">Project List</span>
                     </a>
                   </li>
                 </ul>
@@ -160,62 +127,31 @@
                 </a>
                 <ul class="nav-sub">
                   <li>
-                    <a href="<?php echo base_url('admin/cmspages/about-us'); ?>" >
-                      <span class="nav-text">About Us</span>
+                    <a href="<?php echo base_url('admin/cms'); ?>" >
+                      <span class="nav-text">New Page</span>
                     </a>
                   </li>
                   <li>
-                    <a href="<?php echo base_url('admin/cmspages/contact-us'); ?>" >
-                      <span class="nav-text">Contact Us</span>
-                    </a>
-                  </li>
-                  <li>
-                    <!-- <a href="<?php echo base_url('admin/cmspages/faq'); ?>" > -->
-                      <a href="<?php echo base_url('admin/faq_list'); ?>" >
-                      <span class="nav-text">FAQ</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="<?php echo base_url('admin/cmspages/privacy-policy'); ?>" >
-                      <span class="nav-text">Privacy Policy</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="<?php echo base_url('admin/cmspages/terms-of-use'); ?>" >
-                      <span class="nav-text">Terms & Conditions</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" >
-                      <span class="nav-text">Refunds </span>
+                    <a href="<?php echo base_url('admin/cmslist'); ?>" >
+                      <span class="nav-text">All Page</span>
                     </a>
                   </li>
                 </ul>
               </li>
 
 
-          
-              <li class="nav-header hidden-folded">
-                <small class="text-muted">Help</small>
-              </li>
-              
-              <li class="hidden-folded" >
-                <a href="docs.html" >
-                  <span class="nav-text">Documents</span>
-                </a>
-              </li>
-          
+
+
+
             </ul>
         </nav>
       </div>
-      <div flex-no-shrink>
-        <div ui-include="'../views/blocks/aside.bottom.0.html'"></div>
-      </div>
+
     </div>
   </div>
   <!-- / aside -->
   <script type="text/javascript">
-    
+
 var setSubItemParent = false;
 
 $(document).ready(function () {
@@ -235,7 +171,7 @@ function iterateLinks(liItem) {
     if (divchildren.length > 0) {
         iterateLinks(divchildren[0]);
 
-        /* If an item was set and we're in a div, add active to 
+        /* If an item was set and we're in a div, add active to
            this element as well. */
         if(setSubItemParent) {
             $(liItem).addClass('active');

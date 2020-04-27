@@ -4,22 +4,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin extends CI_Controller
 {
-
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     * 		http://example.com/index.php/welcome
-     * 	- or -
-     * 		http://example.com/index.php/welcome/index
-     * 	- or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see https://codeigniter.com/user_guide/general/urls.html
-     */
     public function __construct()
     {
         parent::__construct();
@@ -231,42 +215,42 @@ class Admin extends CI_Controller
     }
         // echo $img;
         // die;
-             
-            // If files are selected to upload 
-            if(!empty($_FILES['files']['name']) && count(array_filter($_FILES['files']['name'])) > 0){ 
-                $filesCount = count($_FILES['files']['name']); 
-                for($i = 0; $i < $filesCount; $i++){ 
-                    $_FILES['file']['name']     = $_FILES['files']['name'][$i]; 
-                    $_FILES['file']['type']     = $_FILES['files']['type'][$i]; 
-                    $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i]; 
-                    $_FILES['file']['error']     = $_FILES['files']['error'][$i]; 
-                    $_FILES['file']['size']     = $_FILES['files']['size'][$i]; 
-                     
-                    // File upload configuration 
-                    $uploadPath = 'uploads/banner/'; 
-                    $config['upload_path'] = $uploadPath; 
-                    $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
-                    //$config['max_size']    = '100'; 
-                    //$config['max_width'] = '1024'; 
-                    //$config['max_height'] = '768'; 
-                     
-                    // Load and initialize upload library 
-                    $this->load->library('upload', $config); 
-                    $this->upload->initialize($config); 
-                     
-                    // Upload file to server 
-                    if($this->upload->do_upload('file')){ 
-                        // Uploaded file data 
-                        $fileData = $this->upload->data(); 
+
+            // If files are selected to upload
+            if(!empty($_FILES['files']['name']) && count(array_filter($_FILES['files']['name'])) > 0){
+                $filesCount = count($_FILES['files']['name']);
+                for($i = 0; $i < $filesCount; $i++){
+                    $_FILES['file']['name']     = $_FILES['files']['name'][$i];
+                    $_FILES['file']['type']     = $_FILES['files']['type'][$i];
+                    $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+                    $_FILES['file']['error']     = $_FILES['files']['error'][$i];
+                    $_FILES['file']['size']     = $_FILES['files']['size'][$i];
+
+                    // File upload configuration
+                    $uploadPath = 'uploads/banner/';
+                    $config['upload_path'] = $uploadPath;
+                    $config['allowed_types'] = 'jpg|jpeg|png|gif';
+                    //$config['max_size']    = '100';
+                    //$config['max_width'] = '1024';
+                    //$config['max_height'] = '768';
+
+                    // Load and initialize upload library
+                    $this->load->library('upload', $config);
+                    $this->upload->initialize($config);
+
+                    // Upload file to server
+                    if($this->upload->do_upload('file')){
+                        // Uploaded file data
+                        $fileData = $this->upload->data();
                         $uploadData[$i] = $fileData['file_name'];
-                    }else{  
-                        $errorUploadType .= $_FILES['file']['name'].' | ';  
-                    } 
-                } 
-                 
-                $errorUploadType = !empty($errorUploadType)?'<br/>File Type Error: '.trim($errorUploadType, ' | '):''; 
-                if(!empty($uploadData)){ 
-                    // Insert files data into the database 
+                    }else{
+                        $errorUploadType .= $_FILES['file']['name'].' | ';
+                    }
+                }
+
+                $errorUploadType = !empty($errorUploadType)?'<br/>File Type Error: '.trim($errorUploadType, ' | '):'';
+                if(!empty($uploadData)){
+                    // Insert files data into the database
                     $img=implode(",", $uploadData);
                     $cover_data=array(
                             'image' => $img,
@@ -285,7 +269,7 @@ class Admin extends CI_Controller
                         $this->session->set_flashdata('success','Banner Updated Successfully');
                         redirect('admin/banner_list');
                     }
-                }else{ 
+                }else{
                     $cover_data=array(
                             // 'image' => $img,
                             'title_one'=>$this->input->post('title1'),
@@ -302,9 +286,9 @@ class Admin extends CI_Controller
                         $this->AdminModel->doupdate($where1,$table,$cover_data);
                         $this->session->set_flashdata('success','Banner Updated Successfully');
                         redirect('admin/banner_list');
-                    } 
-                } 
-            }else{ 
+                    }
+                }
+            }else{
                 // $statusMsg = 'Please select image files to upload.';
                 $cover_data=array(
                             'image' => $img,
@@ -313,15 +297,15 @@ class Admin extends CI_Controller
                             'button_title'=>$this->input->post('b_title'),
                             'button_link'=>$this->input->post('b_link'),
                             'status'=>'active'
-                        ); 
+                        );
                  $this->AdminModel->doupdate($where1,$table,$cover_data);
                  $this->session->set_flashdata('success','Banner Updated Successfully');
                         redirect('admin/banner_list');
-            } 
-        // } 
+            }
+        // }
         redirect('admin/banner_list');
-    } 
- 
+    }
+
     public function category($id=null)
     {
         if(empty($id="")){
@@ -391,25 +375,46 @@ class Admin extends CI_Controller
             redirect('admin/category_list');
         }
     }
-
-    public function cmspages($pagename = NULL)
+    public function cms($pageid = NULL)
     {
-        $content = $this->AdminModel->get_page_data($pagename);
-        $data=array('page_title'=>$pagename,'layout_page'=>'cmspages','contents'=>$content);
+        $content=null;
+        if($pageid){
+          $content = $this->AdminModel->_get('cmspages',['id'=>$pageid]);
+          $content=$content[0];
+        }
+
+        $data=array('page_title'=>"CMS List",'layout_page'=>'cmspages','content'=>$content);
         $this->load->view('admin/layout', $data);
     }
 
-    public function updatepage($pagename = NULL)
+    public function cmslist()
     {
-        $page_title = $this->input->post('page_title');
-        $page_content = $this->input->post('content');
-
-        $val = array("page_content" => $page_content);
-        $this->AdminModel->save_page_data($val, $page_title);
-
-        $content = $this->AdminModel->get_page_data($pagename);
-        $data=array('page_title'=>$pagename,'layout_page'=>'cmspages','contents'=>$content);
+        $content = $this->AdminModel->_get('cmspages');
+        $data=array('page_title'=>"CMS List",'layout_page'=>'cmslist','content'=>$content);
         $this->load->view('admin/layout', $data);
+    }
+
+    public function updatecms()
+    {
+        $data = [
+          'page_title'=>$this->input->post('page_title'),
+          'page_content' => $this->input->post('content'),
+          'display_name' => $this->input->post('display_name')
+        ];
+        $id = $this->input->post('id');
+        if(isset($id) && $id>0){
+          $this->AdminModel->_set_update('cmspages', $data,['id'=>$id]);
+        }else{
+          $this->AdminModel->_set_insert('cmspages', $data);
+        }
+        $this->session->set_flashdata(['msg'=> 'CMS updated successfully.','type'=>'success']);
+				redirect('admin/cmslist');
+    }
+
+    public function cmsdelete($id=null){
+      $this->AdminModel->_set_delete('cmspages', ['id'=>$id]);
+      $this->session->set_flashdata(['msg'=> 'CMS deleted successfully.','type'=>'success']);
+      redirect('admin/cmslist');
     }
 
     public function project()
@@ -490,7 +495,7 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('success','Project Updated Successfully');
             redirect('admin/project_list');
         }
-        
+
     }
 
     public function project_list()
