@@ -27,7 +27,7 @@ $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVE
 //     $domainName = $_SERVER['HTTP_HOST'] . '/';
 // $config['base_url'] = 'https://newsystem.xyz/backabiz';
 $config['base_url'] = 'http://localhost/backabiz';
-$config['base_url'] = $protocol.$_SERVER['HTTP_HOST'].'/backabiz';
+$config['base_url'] = $protocol.$_SERVER['HTTP_HOST'].'/pankaj/backabiz';
 //echo($protocol.$config['base_url'] );
 
 /*

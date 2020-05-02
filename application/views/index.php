@@ -85,8 +85,8 @@
                       <div class="col-sm-4">
 	                      <div class="project-item">
 	                      	<div class="project-image-container">
-	                      		<a href="#">
-	                      			<img src="<?php echo base_url() . 'uploads/project/' . $value['feature_img']; ?>" alt="project-one">
+	                      		<a href="<?php echo base_url('project/'.$value['id']);?>">
+	                      			<img src="<?php echo base_url('uploads/project/' . $value['feature_img']); ?>" alt="project-one">
 	                      		</a>
 	                      		<ul class="project-link">
                                     <li>
@@ -98,7 +98,7 @@
 	                      	</div>
 	                      	<div class="project-details">
 	                      		<p class="author-byline">by <a href="#">Jane Smith</a></p>
-	                      		<h2 class="productauthor__title"><a href="#"><?php echo $value['title']?></a></h2>
+	                      		<h2 class="productauthor__title"><a href="<?php echo base_url('project/'.$value['id']);?>"><?php echo $value['title']?></a></h2>
 	                      		<div class="raised-bar">
 	                      			<div class="neo-progressbar"><div></div></div>
 	                      		</div>
