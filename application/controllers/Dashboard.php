@@ -11,8 +11,16 @@ class Dashboard extends Base {
 
 	public function index()
 	{
+		if( !isset($_SESSION["user"]) ){
+		redirect('home/login');
+		}
+		else
+		{
+			$id=$_SESSION["user"];
+		$this->data['user'] =$id;
 		$this->data['title']	= 'Dashboard';
 		$this->render_front('user/index');
+		}
 	}
 
 	public function new_project()

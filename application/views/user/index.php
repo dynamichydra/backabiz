@@ -3,11 +3,6 @@
     <?php $this->load->view('include/small_banner');?>
     
       <section class="project-form-wrapper section-padding">
-        <?php
-               if (isset($category)) {
-                 foreach ($category as $key=>$value) {
-
-                  ?>
         <div class="container">
           <div class="row">
             <div class="col-md-12">
@@ -111,18 +106,17 @@
                     	</div>
           			</div>
           		</div>
-
           		<div class="col-md-6">
           			<form type="post" action="">
             			<div class="all-form">
                      		<h3 class="reward-option">My Information</h3>
 						<div class="form-group">
 							<label>Username:</label>
-						    <input type="text" name="first_name" value="<?php echo $value['name']?>" class="form-control">
+						    <input type="text" name="first_name" value="<?php echo $user['name']?>" class="form-control">
 						</div>
 						<div class="form-group">
 						    <label>Email:</label>
-						    <input type="email" name="email" value="<?php echo $value['email']?>" class="form-control">
+						    <input type="email" name="email" value="<?php echo $user['email']?>" class="form-control">
 						</div>
 						<div class="form-group">
 							<label>First Name:</label>
@@ -145,10 +139,6 @@
 						<button class="cancel" style="display: none;">Cancel</button>
 						<button class="blue" style="display: none;">Save</button>
 					</div
-          <?php
-          }
-        }
-          ?>
 				</form>
           		</div>
           	</div>

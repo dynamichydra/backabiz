@@ -37,7 +37,7 @@ class Home extends Base {
 
         $pass = md5($pass);
 
-        $verify = $this->BaseModel->_get('user',['email'=>$email,password=>$pass,'status'=>'active'] );
+        $verify = $this->BaseModel->_get('user',['email'=>$email,'password'=>$pass,'status'=>'active'] );
 
         if (empty($verify)) {
             $this->session->set_flashdata(['msg'=> 'Username/Password is incorrect','type'=>'error']);
