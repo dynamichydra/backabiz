@@ -59,7 +59,7 @@
                                       if($vn['user_type']=="user"){
                                         ?>
           <tr>
-              <td><?php echo $vn['name'];?></td>
+              <td><?php echo $vn['first_name']." ".$vn['last_name'];?></td>
               <td><a href><?php echo $vn['email'];?></a></td>
               <td><?php echo $vn['phone'];?></td>
               <td><?php echo $vn['date_joined'];?></td>

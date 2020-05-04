@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/material-design-icons/material-design-icons.css" type="text/css" />
 
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
   <!-- build:css ../assets/styles/app.min.css -->

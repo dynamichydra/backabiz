@@ -22,6 +22,18 @@ class Dashboard extends Base {
 		$this->render_front('user/index');
 		}
 	}
+   public function profile($id=null)
+	  {
+	  	if( !isset($_SESSION["user"]) ){
+		redirect('home/login');
+		}
+		else
+		{
+	  	$this->data['title']	= 'Profile';
+	    $this->data["user"]=$this->AdminModel->getdata(["id"=>$id],'user');
+	    $this->render_front('user/profile');
+	}
+	  }
 
 	public function new_project()
 	{

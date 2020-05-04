@@ -22,22 +22,22 @@
         </div>
         <div class="box-divider m-0"></div>
         <div class="box-body">
-          <form role="form" method="post" action="<?php echo base_url('admin/insert_user')?>">
+          <form role="form" method="post" action="<?php echo base_url('admin/insert_user')?>" enctype="multipart/form-data">
             <div class="form-group">
-              <label for="exampleInputEmail1">First Name</label>
-              <input type="text" class="form-control" name="name" id="exampleInputEmail1" placeholder="Enter name">
+              <label for="f_name">First Name</label>
+              <input type="text" class="form-control" name="f_name" id="f_name" placeholder="Enter First name">
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Last Name</label>
-              <input type="text" class="form-control" name="name" id="exampleInputEmail1" placeholder="Enter name">
+              <label for="l_name">Last Name</label>
+              <input type="text" class="form-control" name="l_name" id="l_name" placeholder="Enter Last name">
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
               <input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="Enter email">
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Mobile Number</label>
-              <input type="text" class="form-control" name="phone" id="exampleInputEmail1" placeholder="Enter phone no.">
+              <label for="phone">Mobile Number</label>
+              <input type="text" class="form-control" name="phone" id="phone" placeholder="Enter phone no.">
             </div>
             <div class="form-group">
               <label for="password">Password</label>
@@ -55,8 +55,8 @@
               <input type="password" class="form-control" name="c_password" id="c_password" onfocusout="Validate()" placeholder="Password">
             </div>
             <div class="form-group">
-            <label for="exampleInputFile">Profile Photo</label>
-            <input type="file" id="exampleInputFile" name="file" multiple>
+            <label for="pic">Profile Photo</label>
+            <input type="file" id="pic" name="pic" multiple>
             <p class="help-block">Upload a profile pic</p>
             </div>
             <h6><b>Address</b></h6>
@@ -65,19 +65,19 @@
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-addon">Street Address</div>
-                <input class="form-control" type="text" placeholder="Street Address">
+                <input class="form-control" type="text" name="address" placeholder="Street Address">
               </div>
             </div>
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-addon">Address Line 2</div>
-                <input class="form-control" type="text">
+                <input class="form-control" name="address2" type="text">
               </div>
             </div>
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-addon">Country</div>
-                <select name="country" id="country" class="form-control c-select" onChange="getState(this.value);" required>
+                <select name="country" id="country" class="form-control c-select" onchange= "get_state(this.value)" required>
                   <option value="">Select Country</option>
                   <?php
                                 foreach ($countries as $key=>$city) {
@@ -90,7 +90,7 @@
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-addon">State</div>
-                <select name="state" class="form-control c-select" id="state" required>
+                <select name="state" class="form-control c-select" id="state" onchange= "get_city(this.value)" required>
                   <option>Select country first</option>
                 </select>
               </div>
@@ -105,20 +105,20 @@
             </div>
 
             <div class="form-group">
-              <label for="exampleInputEmail1">About Us</label>
-              <input type="text" class="form-control" name="about_us" id="exampleInputEmail1" placeholder="about us">
+              <label for="about">About Us</label>
+              <input type="text" class="form-control" name="about" id="about" placeholder="about us">
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Bio</label>
-              <input type="text" class="form-control" name="bio" id="exampleInputEmail1" placeholder="bio">
+              <label for="bio">Bio</label>
+              <input type="text" class="form-control" name="bio" id="bio" placeholder="bio">
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Fax</label>
-              <input type="text" class="form-control" name="fax" id="exampleInputEmail1" placeholder="fax">
+              <label for="fax">Fax</label>
+              <input type="text" class="form-control" name="fax" id="fax" placeholder="fax">
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Website</label>
-              <input type="text" class="form-control" name="website" id="exampleInputEmail1" placeholder="website">
+              <label for="web">Website</label>
+              <input type="text" class="form-control" name="web" id="web" placeholder="website">
             </div>
             </div>
             <h6><b>Social Profile Links</b></h6>
@@ -228,5 +228,85 @@ myInput.onkeyup = function() {
         return true;
     }
 </script>
+<script type="text/javascript">
+  function get_state(id)
+{
+    $.ajax({
+        url:"<?php echo base_url('admin/get_state_by_country_id') ?>",
+        method:"POST",
+        data:{"country_id":id},
+        success:function(response)
+        {
+            //console.log(response);
+            var json=JSON.parse(response);
+            if(json.status=="success")
+            {
+                var data=json.data;
+                var optionfield='';
+                optionfield+='<option value="" selected disabled>-----Select state-----</option>';
+                for(i=0;i<data.length;i++)
+                {
+                    <?php if(isset($user) && $user!=""){?>
+                        var district=<?php echo $user->district ?>;
+                        if(data[i].slno==district)
+                        {
+                            optionfield+='<option value="'+data[i].id+'" selected>'+data[i].name+'</option>';
+                        }else{
+                            optionfield+='<option value="'+data[i].id+'">'+data[i].name+'</option>';
+                        }
+                    <?php }else{ ?>
+                    optionfield+='<option value="'+data[i].id+'">'+data[i].name+'</option>';
+                    <?php } ?>
+                }
+                $("#state").html(optionfield);
+            
+            }else{
+//                alert(json.data);
+//                return false;
+            }
+        }
+    });
+}
+
+function get_city(id)
+{
+    $.ajax({
+        url:"<?php echo base_url('admin/get_city_by_state_id') ?>",
+        method:"POST",
+        data:{"state_id":id},
+        success:function(response)
+        {
+            //console.log(response);
+            var json=JSON.parse(response);
+            if(json.status=="success")
+            {
+                var data=json.data;
+                var optionfield='';
+                optionfield+='<option value="" selected disabled>-----Select city-----</option>';
+                for(i=0;i<data.length;i++)
+                {
+                    <?php if(isset($user) && $user!=""){?>
+                        var district=<?php echo $user->district ?>;
+                        if(data[i].slno==district)
+                        {
+                            optionfield+='<option value="'+data[i].id+'" selected>'+data[i].name+'</option>';
+                        }else{
+                            optionfield+='<option value="'+data[i].id+'">'+data[i].name+'</option>';
+                        }
+                    <?php }else{ ?>
+                    optionfield+='<option value="'+data[i].id+'">'+data[i].name+'</option>';
+                    <?php } ?>
+                }
+                $("#city").html(optionfield);
+            
+            }else{
+//                alert(json.data);
+//                return false;
+            }
+        }
+    });
+}
+</script>
+
 </body>
 </html>

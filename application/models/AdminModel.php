@@ -87,4 +87,12 @@ class AdminModel extends BaseModel
             return $sql->result_array();
         }
     }
+    public function doGetalldata($data,$table){
+                     $this->db->where($data);
+                     $query = $this->db->get($table);
+                     if($query){
+                         return $query->result();
+                     }
+                 }
+
 }

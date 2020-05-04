@@ -78,13 +78,43 @@ class Admin extends CI_Controller
 
     public function insert_user()
     {
+
+        $config['upload_path'] = "uploads/users/";
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '409600';
+        // $config['file_name'] = $filename;
+        $config['create_thumb'] = TRUE;
+
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_upload('pic')) {
+            $imageDetailArray = $this->upload->data();
+
+            $image = $imageDetailArray['file_name'];
+        }else{
+            $image="N/A";
+        }
         $data=array(
-            'name'=> $this->input->post("name"),
+            'first_name'=> $this->input->post("f_name"),
+            'last_name'=> $this->input->post("l_name"),
+            'about'=> $this->input->post("about"),
+            'bio'=> $this->input->post("bio"),
+            'img'=> $image,
+            'fax'=> $this->input->post("fax"),
+            'website'=> $this->input->post("web"),
             'email'=>$this->input->post("email"),
             'phone'=>$this->input->post("phone"),
             'password'=>md5($this->input->post("psw")),
+            'address'=> $this->input->post("address"),
+            'address2'=> $this->input->post("address2"),
+            'country'=> $this->input->post("country"),
+            'state'=> $this->input->post("state"),
+            'city'=> $this->input->post("city"),
+            'facebook'=> $this->input->post("fb_link"),
+            'twitter'=> $this->input->post("tw_link"),
+            'pinterest'=> $this->input->post("pt_link"),
             'user_type'=>"user",
-            'status'=>"active"
+            'status'=>"pending"
         );
         $table="user";
         // print_r($data);
@@ -701,6 +731,46 @@ class Admin extends CI_Controller
         }else{
             $this->session->set_flashdata('msg','delete failed');
             redirect('admin/faq_list');
+        }
+    }
+
+       private function success($data) {
+        die(json_encode(array(
+            "status" => "success",
+            "data" => $data,
+        )));
+    }
+
+    private function error($data) {
+        die(json_encode(array(
+            "status" => "failed",
+            "data" => $data,
+        )));
+    }
+
+    public function get_state_by_country_id()
+    {
+        $country_id=$this->input->post("country_id");
+        $where=array("country_id="=>$country_id);
+        $data=$this->AdminModel->doGetalldata($where,"states");
+        if($data)
+        {
+            $this->success($data);
+        }else{
+            $this->error("No data found");
+        }
+    }
+
+    public function get_city_by_state_id()
+    {
+        $state_id=$this->input->post("state_id");
+        $where=array("state_id="=>$state_id);
+        $data=$this->AdminModel->doGetalldata($where,"cities");
+        if($data)
+        {
+            $this->success($data);
+        }else{
+            $this->error("No data found");
         }
     }
 }

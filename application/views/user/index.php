@@ -10,11 +10,11 @@
               <div class="dashboard-top-nav">
                 <nav id="dashboard-nav" class="main-nav">
                         <ul class="menu">
-                            <li class="menu-item current-menu-item"><a href="dashboard.html">Dashboard</a></li>
+                            <li class="menu-item current-menu-item"><a href="<?php echo base_url('dashboard'); ?>">Dashboard</a></li>
                             <li class="menu-item menu-item-has-children">
                                 <a href="#">My Account <i class="fa fa-angle-down"></i></a>
                                 <ul class="sub-menu">
-                                    <li class="menu-item"><a href="profile.html">Profile</a></li>
+                                    <li class="menu-item"><a href="<?php echo base_url('dashboard/profile/').$user['id']?>">Profile</a></li>
                                     <li class="menu-item"><a href="profile-contact.html">Contact</a></li>
                                     <li class="menu-item"><a href="password.html">Password</a></li>
                                     <li class="menu-item"><a href="rewards.html">Rewards</a></li>
@@ -81,7 +81,7 @@
                      			</ul>
                      		</div>
                      		<div class="col-md-12 chart">
-                     			<img src="assets/images/new/chart.png" alt="project-chart" class="img-responsive">
+                     			<img src="<?php echo base_url()?>assets/images/new/chart.png" alt="project-chart" class="img-responsive">
                      		</div>
                      	</div>
           		</div>
@@ -93,7 +93,19 @@
           			<div class="all-form row">
           				<h3 class="reward-option">Profile Picture</h3>
           				<div class="col-md-2" style="padding: 0;">
-          					<img class="profile-form-img img-responsive" src="assets/images/new/client.jpg" alt="Profile Image" style="width: 100%;">
+                    <?php
+              if( !empty($user['img'])){
+                ?>
+          					<img class="profile-form-img img-responsive" src="<?php echo base_url() . 'uploads/users/' . $user['img']; ?>" alt="Profile Image" style="width: 100%;">
+
+                    <?php
+                  }else{
+                    ?>
+
+                    <img class="profile-form-img img-responsive" src="<?php echo base_url()?>/assets/images/user.png" alt="Profile Image" style="width: 100%;">
+                    <?php
+          }
+          ?>
           				</div>
           				<div class="campaign-right dashboard-cam-rgt col-md-10" style="padding-right:0;">
           					<a href="#">Test</a>
@@ -112,7 +124,7 @@
                      		<h3 class="reward-option">My Information</h3>
 						<div class="form-group">
 							<label>Username:</label>
-						    <input type="text" name="first_name" value="<?php echo $user['name']?>" class="form-control">
+						    <input type="text" name="first_name" value="<?php echo $user['email']?>" class="form-control">
 						</div>
 						<div class="form-group">
 						    <label>Email:</label>
@@ -120,19 +132,19 @@
 						</div>
 						<div class="form-group">
 							<label>First Name:</label>
-					    	<input type="text" name="first_name" value="John" class="form-control">
+					    	<input type="text" name="first_name" value="<?php echo $user['first_name']?>" class="form-control">
 						</div>
 						<div class="form-group">
 					    	<label>Last Name:</label>
-					    	<input type="text" name="last_name" value="Doe" class="form-control">
+					    	<input type="text" name="last_name" value="<?php echo $user['last_name']?>" class="form-control">
 						</div>
 						<div class="form-group">
 					    	<label>Website:</label>
-					    	<input type="text" name="Website_name" value="" class="form-control">
+					    	<input type="text" name="Website_name" value="<?php echo $user['website']?>" class="form-control">
 						</div>
 						<div class="form-group">
 						    <label>Bio:</label>
-						    <textarea name="profile_portfolio" rows="3" disabled="" class="form-control"></textarea>
+						    <textarea name="profile_portfolio" rows="3" disabled="" class="form-control"><?php echo $user['bio']?></textarea>
 						</div>
 						<h3 class="reward-option">Payment Info</h3>
 						<button class="submit">Edit</button>

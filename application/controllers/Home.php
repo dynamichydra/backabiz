@@ -58,15 +58,17 @@ class Home extends Base {
    {
           $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email');
           if ($this->form_validation->run() == TRUE) {
+            $generated_pass=random_string('alnum',5);
 
               $registration_data = array(
                   'email' => $this->input->post('email'),
-                  'password' =>md5(random_string('alnum',5)),
+                  'password' =>md5($generated_pass),
                   'user_type' => 'user',
-                 'hash' => md5(rand(0, 1000))
+                  'status'=>'pending',
+                 'hash' => md5(rand(0, 10))
               );
               $config['protocol'] = 'smtp';
-              $config['smtp_host'] = 'ssl://smtp.gmail.com';
+              $config['smtp_host'] = 'ssl://smtp.googlemail.com';
               $config['smtp_port'] = '465';
               $config['smtp_user'] = 'nirajs.official@gmail.com';
               $config['smtp_pass'] = 'nir@j7580';
@@ -83,7 +85,7 @@ class Home extends Base {
           	$User_hash=$value['hash'];
           }
          $this->load->library('email');     //load email library
-        $this->email->from('sampleemail', 'Site'); //sender's email
+        $this->email->from('nirajs.official@gmail.com', 'nir@j7580'); //sender's email
         $subject="Welcome!";    //subject
         $message= /*-----------email body starts-----------*/
           'Thanks for signing up,
@@ -91,22 +93,28 @@ class Home extends Base {
           Your account has been created.
           Here are your login details.
           -------------------------------------------------
-          Email   : ' . $_POST['email'] . '
-          Password: ' . $user_pass . '
+          Username/Email   : ' . $_POST['email'] . '
+          Password: ' . $generated_pass . '
           -------------------------------------------------
 
           Please click this link to activate your account:
 
-          ' . base_url() . 'user/verify?' .
-          'email=' . $_POST['email'] . '&hash=' . 'hash';
+          ' . base_url() . 'home/verify/' . $_POST['email'] . '/' . $User_hash;
 
         /*-----------email body ends-----------*/
+
+        echo $message;
+        die;
         $this->email->to($address);
         $this->email->subject($subject);
         $this->email->message($message);
-        $this->email->send();
-				$this->session->set_flashdata(['msg'=> 'An email varification link send to your email','type'=>'success']);
+        if($this->email->send()){
+				$this->session->set_flashdata(['msg'=> 'An email verification link send to your email','type'=>'success']);
 				redirect('home/message');
+      }else
+      {
+        echo "sorry Mail sending failed, pls try again";
+      }
 
       }
   }
@@ -119,4 +127,20 @@ class Home extends Base {
 		else
 			redirect('/');
 	}
+
+  public function verify($email=null,$hash=null)
+  {
+    $data = array('status' => 'active');
+    $where=array('email'=>$email,'hash'=>$hash);
+    $verified=$this->AdminModel->doupdate($where,'user',$data);
+    if($verified){
+    $this->session->set_flashdata(['msg'=> 'Email verified succesfully,please login to continue','type'=>'success']);
+        redirect('home/login');
+      }else{
+        $this->session->set_flashdata(['msg'=> 'Email verification Failed,please register again','type'=>'error']);
+        redirect('home/login');
+      }
+  }
+
+
 }
