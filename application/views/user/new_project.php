@@ -6,68 +6,82 @@
         <div class="row">
           <div class="col-md-10 col-md-offset-1">
             <div class="project-form-content">
-                <form type="post" method="post" action="dashboard/save_project" id="project-form1" enctype="multipart/form-data">
+              <?php if(isset($project[0]["id"])){?>
+                <form type="post" method="post" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy'); return false; }" action="<?php echo base_url('dashboard/update_project/').$project[0]['id']?>" id="project-form1" enctype="multipart/form-data">
+                  <?php}else{?>
+                    <form type="post" method="post" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy'); return false; }" action="dashboard/save_project" id="project-form1" enctype="multipart/form-data">
+                      <?php
+                    }
+                    ?>
                   <div class="form-group">
           <label>Title</label>
-          <input type="text" name="title" id="title" value="" class="form-control">
+          <input type="text" name="title" id="title" value="<?php if (!empty($project[0]["title"])) { echo $project[0]["title"];} ?>" class="form-control">
           <small>Put the project title here</small>
       </div>
       <div class="form-group">
           <label>Description</label>
-          <textarea id="description" name="description" rows="10" cols="80"></textarea>
+          <textarea id="description" name="description" rows="10" cols="80"><?php if (!empty($project[0]["description"])) { echo $project[0]["description"];} ?></textarea>
       </div>
       <div class="form-group">
           <label>Short Description</label>
-          <textarea id="short_description" name="short_description" rows="10" cols="80"></textarea>
+          <textarea id="short_description" name="short_description" rows="10" cols="80"><?php if (!empty($project[0]["short_description"])) { echo $project[0]["short_description"];} ?></textarea>
       </div>
       <div class="form-group">
           <label>Category</label>
-          <select name="category[]" multiple>
-            <option value="uncategorized">Uncategorized</option>
+          <select name="category[]" style="height:500px;" multiple>
+            <!-- <option value="uncategorized">Uncategorized</option> -->
+
+
             <?php
-              foreach($category as $k=>$v){
-                ?>
-                <option value="<?php echo $v['cat_name']?>"><?php echo $v['cat_name']?></option>
-                <?php
-              }
-            ?>
+                          foreach ($category as $key=>$value) {?>
+                            <option value="<?php echo $value['cat_name']; ?>" <?php  if(isset($project[0]["category"]) && $project[0]["category"] == $value['cat_name'])  echo 'selected'; ?>>
+<?php echo $value['cat_name']; ?>
+</option><?php
+                          }
+                          ?>
           </select>
           <small>Select your project category</small>
       </div>
       <div class="form-group">
           <label>Tag</label>
-          <input type="text" name="tag" id="tag"  placeholder="Tag" value="" class="form-control">
+          <input type="text" name="tag" id="tag"  placeholder="Tag" value="<?php if (!empty($project[0]["tag"])) { echo $project[0]["tag"];} ?>" class="form-control">
           <small>Separate tags with commas eg: tag1,tag2</small>
       </div>
         <div class="form-group">
           <label>Feature Image</label>
           <input type="file" name="feature_img" id="feature_img" class="form-control">
           <small>Upload a project feature image</small>
+          <?php if(!empty($project[0]['feature_img'])){?>
+          <small>Last uploaded image:- <a target="_blank" href="<?php echo base_url() . 'uploads/project/' . $project[0]['feature_img']; ?>">Click here to see</a></small>
+          <?php
+        }
+        ?>
       </div>
       <div class="form-group">
           <label>Video</label>
-          <input type="text" name="video" id="video" placeholder="https://" value="" class="form-control">
+          <input type="text" name="video" id="video" placeholder="https://" value="<?php if (!empty($project[0]["video"])) { echo $project[0]["video"];} ?>" class="form-control">
           <small>Put the project video URL here</small>
       </div>
       <div class="form-group">
           <label>Project End Method</label>
-          <select name="form-type" name="emethod">
-            <option value="target_goal">Target Goal</option>
-            <option value="target_date">Target Date</option>
-            <option value="target_goal_and_date">Target Goal &amp; Date</option>
-            <option value="never_end">Project Never Ends</option>
+          <select name="emethod">
+            <option selected="selected" value="">- Select -</option>
+            <option value="target_goal" <?php if (isset($project[0]["project_end_method"]) && $project[0]["project_end_method"]=='target_goal') {echo "selected";}?>>Target Goal</option>
+            <option value="target_date" <?php if (isset($project[0]["project_end_method"]) && $project[0]["project_end_method"]=='target_date') {echo "selected";}?>>Target Date</option>
+            <option value="target_goal_and_date" <?php if (isset($project[0]["project_end_method"]) && $project[0]["project_end_method"]=='target_goal_and_date') {echo "selected";}?>>Target Goal &amp; Date</option>
+            <option value="never_end" <?php if (isset($project[0]["project_end_method"]) && $project[0]["project_end_method"]=='never_end') {echo "selected";}?>>Project Never Ends</option>
           </select>
           <small>Choose the stage when project will end</small>
       </div>
       <div class="form-group row">
         <div class="col-md-6">
           <label>Start Date</label>
-            <input type="date" name="start_date" id="start_date" placeholder="" value="" class="form-control">
+            <input type="date" name="start_date" id="start_date" placeholder="" value="<?php if (!empty($project[0]["start_date"])) { echo $project[0]["start_date"];} ?>" class="form-control">
             <small>Project start date (dd-mm-yy)</small>
         </div>
         <div class="col-md-6">
           <label>End Date</label>
-            <input type="date" name="end_date" id="end_date" placeholder="" value="" class="form-control">
+            <input type="date" name="end_date" id="end_date" placeholder="" value="<?php if (!empty($project[0]["end_date"])) { echo $project[0]["end_date"];} ?>" class="form-control">
             <small>Project end date (dd-mm-yy)</small>
         </div>
 
@@ -75,74 +89,81 @@
       <div class="form-group row">
         <div class="col-md-6">
           <label>Minimum Amount</label>
-            <input type="number" name="min_amount" id="min_amount" value="" class="form-control">
+            <input type="number" name="min_amount" id="min_amount" value="<?php if (!empty($project[0]["min_amount"])) { echo $project[0]["min_amount"];} ?>" class="form-control">
             <small>Minimum project funding amount</small>
         </div>
         <div class="col-md-6">
           <label>Maximum Amount</label>
-            <input type="number" name="max_amount" id="max_amount" value="" class="form-control">
+            <input type="number" name="max_amount" id="max_amount" value="<?php if (!empty($project[0]["max_amount"])) { echo $project[0]["max_amount"];} ?>" class="form-control">
             <small>Maximum project funding amount</small>
         </div>
       </div>
       <div class="form-group">
           <label>Funding Goal</label>
-          <input type="number" name="funding_goal" id="funding_goal" value="" class="form-control">
+          <input type="number" name="funding_goal" id="funding_goal" value="<?php if (!empty($project[0]["funding_goal"])) { echo $project[0]["funding_goal"];} ?>" class="form-control">
           <small>Project funding goal</small>
       </div>
       <div class="form-group row">
         <div class="col-md-6">
           <label>Recommended Amount</label>
-            <input type="number" name="rec_amount" id="rec_amount" value="" class="form-control">
+            <input type="number" name="rec_amount" id="rec_amount" value="<?php if (!empty($project[0]["rec_amount"])) { echo $project[0]["rec_amount"];} ?>" class="form-control">
             <small>Recommended project funding amount</small>
         </div>
         <div class="col-md-6">
           <label>Predefined Pledge Amount</label>
-            <input type="text" name="pledge_amount" id="pledge_amount" value="" class="form-control">
+            <input type="text" name="pledge_amount" id="pledge_amount" value="<?php if (!empty($project[0]["pledge_amount"])) { echo $project[0]["pledge_amount"];} ?>" class="form-control">
             <small>Predefined amount allow you to place the amount in donate box by click, price should separated by comma (,), example: <code>10,20,30,40</code></small>
         </div>
       </div>
       <div class="form-group">
           <label>Contributor Table</label>
-          <div class="checkbox-wrap"><input type="checkbox" name="contributor_table" value="1">Show contributor table on project single page</div>
+          <div class="checkbox-wrap"><input type="checkbox" name="contributor_table" value="1" <?php if (isset($project[0]["contributor_table"]) && $project[0]["contributor_table"]=='1') {echo "checked";}?>>Show contributor table on project single page</div>
 
       </div>
       <div class="form-group">
           <label>Contributor Anonymity</label>
-          <div class="checkbox-wrap"><input type="checkbox" name="contributor_anonymity" value="1">Make contributors anonymous on the contributor table</div>
+          <div class="checkbox-wrap"><input type="checkbox" name="contributor_anonymity" value="1" <?php if (isset($project[0]["contributor_anonymity"]) && $project[0]["contributor_anonymity"]=='1') {echo "checked";}?>>Make contributors anonymous on the contributor table</div>
 
       </div>
       <div class="form-group">
           <label>Country</label>
-          <select name="country">
+          <select name="country" required>
             <option selected="selected" value="0">Select a country</option>
             <?php
-              foreach ($country as $k=>$v) {
-                  echo "<option value='" . $v['id'] . "'>" . $v['country_name'] . "</option>";
-              }
-              ?>
+                          foreach ($country as $key=>$value) {?>
+                            <option value="<?php echo $value['id']; ?>" <?php  if(isset($project[0]["country"]) && $project[0]["country"] == $value['id'])  echo 'selected'; ?>>
+  <?php echo $value['country_name']; ?>
+  </option><?php
+                          }
+                          ?>
             </select>
           <small>Select your country</small>
       </div>
       <div class="form-group">
           <label>Location</label>
-          <input type="text" name="location" id="location" value="" class="form-control">
+          <input type="text" name="location" id="location" value="<?php if (!empty($project[0]["location"])) { echo $project[0]["location"];} ?>" class="form-control">
           <small>Put the project location here</small>
       </div>
       <br>
       <h3 class="reward-option">Reward Option</h3>
       <div class="form-group">
           <label>Pledge Amount</label>
-          <input type="text" name="reward_p_amount" id="reward_p_amount" value="" class="form-control">
+          <input type="text" name="reward_p_amount" id="reward_p_amount" value="<?php if (!empty($project[0]["reward_p_amount"])) { echo $project[0]["reward_p_amount"];} ?>" class="form-control">
           <small>Pledge Amount</small>
       </div>
       <div class="form-group">
           <label>Reward Image</label>
           <input type="file" name="reward_img" id="reward_img" class="form-control">
           <small>Upload a reward image</small>
+          <?php if(!empty($project[0]['reward_img'])){?>
+          <small>Last uploaded image:- <a target="_blank" href="<?php echo base_url() . 'uploads/project/' . $project[0]['reward_img']; ?>">Click here to see</a></small>
+          <?php
+        }
+        ?>
       </div>
       <div class="form-group">
           <label>Reward</label>
-          <textarea cols="20" rows="2" name="reward_desc" id="reward_desc" class="form-control"></textarea>
+          <textarea cols="20" rows="2" name="reward_desc" id="reward_desc" class="form-control"><?php if (!empty($project[0]["reward_desc"])) { echo $project[0]["reward_desc"];} ?></textarea>
           <small>Reward Description</small>
       </div>
       <div class="form-group row">
@@ -150,13 +171,13 @@
           <label>Estimated Delivery Month</label>
             <select class="form-control" name="del_month">
               <option selected="selected" value="">- Select -</option>
-              <option value="jan">January</option>
-              <option value="feb">February</option>
-              <option value="mar">March</option><option value="apr">April</option>
-              <option value="may">May</option><option value="jun">June</option>
-              <option value="jul">July</option><option value="aug">August</option>
-              <option value="sep">September</option><option value="oct">October</option>
-              <option value="nov">November</option><option value="dec">December</option></select>
+              <option value="jan"<?php if ( isset($project[0]["del_month"]) && $project[0]["del_month"]=='jan') {echo "selected";}?>>January</option>
+              <option value="feb"<?php if (isset($project[0]["del_month"]) && $project[0]["del_month"]=='feb') {echo "selected";}?>>February</option>
+              <option value="march"<?php if (isset($project[0]["del_month"]) && $project[0]["del_month"]=='march') {echo "selected";}?>>March</option><option value="april"<?php if (isset($project[0]["del_month"]) && $project[0]["del_month"]=='april') {echo "selected";}?>>April</option>
+              <option value="may"<?php if (isset($project[0]["del_month"]) && $project[0]["del_month"]=='may') {echo "selected";}?>>May</option><option value="june"<?php if (isset($project[0]["del_month"]) && $project[0]["del_month"]=='june') {echo "selected";}?>>June</option>
+              <option value="july"<?php if (isset($project[0]["del_month"]) && $project[0]["del_month"]=='july') {echo "selected";}?>>July</option><option value="aug"<?php if (isset($project[0]["del_month"]) && $project[0]["del_month"]=='aug') {echo "selected";}?>>August</option>
+              <option value="sep"<?php if (isset($project[0]["del_month"]) && $project[0]["del_month"]=='sep') {echo "selected";}?>>September</option><option value="oct"<?php if (isset($project[0]["del_month"]) && $project[0]["del_month"]=='oct') {echo "selected";}?>>October</option>
+              <option value="nov"<?php if (isset($project[0]["del_month"]) && $project[0]["del_month"]=='nov') {echo "selected";}?>>November</option><option value="dec"<?php if (isset($project[0]["del_month"]) && $project[0]["del_month"]=='dec') {echo "selected";}?>>December</option></select>
             <small>Estimated Delivery Month of the Reward</small>
         </div>
         <div class="col-md-6">
@@ -165,7 +186,7 @@
               <?php
               for($i= date('Y');$i<date('Y')+30;$i++){
                 ?>
-                <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                <option value="<?php echo $i;?>" <?php  if($project[0]["del_year"] == $i)  echo 'selected'; ?>><?php echo $i;?></option>
                 <?php
               }
               ?>
@@ -175,12 +196,12 @@
       </div>
       <div class="form-group">
           <label>Quantity</label>
-          <input type="text" name="quantity" id="quantity" class="form-control">
+          <input type="text" name="quantity" id="quantity" value="<?php if (!empty($project[0]["quantity"])) { echo $project[0]["quantity"];} ?>" class="form-control">
           <small>Quantity of physical products</small>
       </div>
       <span class="border-line"></span>
       <div class="form-group">
-          <div class="checkbox-wrap"><input type="checkbox" name="agree" value="agree">I agree with the terms and conditions.</div>
+          <div class="checkbox-wrap"><input type="checkbox" id="agree" name="agree" value="1" <?php if (isset($project[0]["t&c"]) && $project[0]["t&c"]=='1') {echo "checked";}?>>I agree with the terms and conditions.</div>
       </div>
       <div class="form-group submit-wrap">
           <input type="submit" class="submit" value="Submit Project">

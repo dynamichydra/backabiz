@@ -33,6 +33,10 @@
               <label for="exampleInputEmail1">Icon Name</label>
               <input type="text" class="form-control" name="icon_name" id="exampleInputEmail1" placeholder="Enter email">
             </div>
+            <div class="form-group">
+              <label for="cat_description">Categrory Description</label>
+              <input type="text" class="form-control" name="cat_description" id="cat_description" placeholder="Enter Description">
+            </div>
             <button type="submit"  class="btn white m-b">Submit</button>
           </form>
         </div>
@@ -46,7 +50,7 @@
     </div>
   </div>
   <!-- / -->
-  
+
 
 <!-- ############ PAGE END-->
 

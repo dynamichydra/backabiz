@@ -17,7 +17,7 @@
     <?php } ?>
     <?php if ($this->session->flashdata('error')) { ?>
     <div class="alert alert-danger"> <?= $this->session->flashdata('error') ?> </div>
-    <?php } ?> 
+    <?php } ?>
       <!-- <small>Make HTML tables on smaller devices look awesome</small> -->
     </div>
     <div class="box-body">
@@ -55,7 +55,7 @@
           <!-- <?php print_r('$data'); ?> -->
           <?php
                                 if (!empty($users)) {
-                                    foreach ($users as $key=>$vn) { 
+                                    foreach ($users as $key=>$vn) {
                                       if($vn['user_type']=="user"){
                                         ?>
           <tr>
@@ -66,16 +66,27 @@
               <?php
               if($vn['status']=="active"){
                 ?>
-              <td data-value="1"><span class="label success" title="Active">Active</span></td>
+              <td data-value="1"><a href="<?php echo base_url('admin/user_inactive/').$vn['id']?>" class="btn btn-outline b-info text-info"  >Active</a></td>
               <?php
             }else{
               ?>
-            <td data-value="3"><span class="label warning" title="Disabled">Suspended</span></td>
+            <td data-value="1"><a href="<?php echo base_url('admin/user_active/').$vn['id']?>" class="btn btn-outline b-black text-black"  ><?php echo $vn['status'];?></a></td>
             <?php
           }
           ?>
+
+          <?php
+          if($vn['status']=="Pending"){
+            ?>
+            <td><p style="color:red">*Pending Email Verification<p></td>
+            <?php
+          }else{
+            ?>
           <td><div class="w3-bar"><a href="<?php echo base_url('admin/edit_user/').$vn['id']?>" class="md-btn md-raised m-b-sm w-xs blue"  >Edit</a>
             <a href="<?php echo base_url('admin/delete_user/').$vn['id']?>" onclick="return confirm('Are you sure?');" class="md-btn md-raised m-b-sm w-xs red">delete</a></div></td>
+            <?php
+          }
+          ?>
           </tr>
           <?php
         }

@@ -18,7 +18,7 @@ class Base extends CI_Controller {
 
 	public function get_default()
 	{
-		$this->data["category"]=$this->AdminModel->getdata(["status"=>"active"],'category');
+		$this->data["category"]=$this->AdminModel->getdataCategory(["status"=>"active"],'category');
 		$this->data['session_user']	= $this->session->userdata('user');
 	}
 

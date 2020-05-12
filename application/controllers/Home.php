@@ -12,21 +12,39 @@ class Home extends Base {
 	public function index()
 	{
 		$this->data["banner"]=$this->AdminModel->getdata(["status"=>"active"],'banner');
-		$this->data["project"]=$this->AdminModel->getdata(["status"=>"active"],'project');
-		$this->data["testimonial"] = $this->baseModel->_get('cmspages',['page_title'=>'testimonials']);
+		$this->data["feature"]=$this->AdminModel->getdata(["status"=>"active"],'footer_feature');
+		$this->data["title"]=$this->AdminModel->getdata(["status"=>"active"],'title_management');
+		$this->data["testimonial"]=$this->AdminModel->getdata(["status!="=>"delete"],'testimonial');
+		$this->data["footer_question"]=$this->AdminModel->getdata(["status="=>"active"],'footer_question');
+		$this->data["project"]=$this->AdminModel->getAllProjectDetails();
 		$this->data["home_market"] = $this->baseModel->_get('cmspages',['page_title'=>'home_market']);
 		$this->data["home_number"] = $this->baseModel->_get('cmspages',['page_title'=>'home_number']);
+		$this->data["total_projects"]=$this->AdminModel->get_total_projects();
+		$this->data["f_projects"]=$this->AdminModel->getFeaturedprojects();
+		$this->data["cat_desc"]=$this->AdminModel->get_description();
+		$this->data["page_title"]="Backabiz";
 		$this->render_front('index');
+	}
+	public function about()
+	{
+		$this->data["testimonial"]=$this->AdminModel->getdata(["status!="=>"delete"],'testimonial');
+		$this->data["team"]=$this->AdminModel->getdata(["status!="=>"delete"],'funding_team');
+		$this->data["about"] = $this->baseModel->_get('about',['status'=>'active']);
+		$this->data["about_bottom"] = $this->baseModel->_get('about_bottom',['status'=>'active']);
+		$this->data["page_title"]="About Us - Backabiz";
+		$this->render_front('about');
 	}
 
 	public function faqs()
 	{
 		$this->data["faq"]=$this->AdminModel->getdata(["status"=>"active"],'faq');
+		$this->data["page_title"]="FAQ's - Backabiz";
 		$this->render_front('faqs');
 	}
 
 	public function login()
 	{
+		$this->data["page_title"]="login - Backabiz";
 		$this->render_front('login');
 	}
 
@@ -40,7 +58,7 @@ class Home extends Base {
         $verify = $this->BaseModel->_get('user',['email'=>$email,'password'=>$pass,'status'=>'active'] );
 
         if (empty($verify)) {
-            $this->session->set_flashdata(['msg'=> 'Username/Password is incorrect','type'=>'error']);
+            $this->session->set_flashdata(['error'=> 'Username/Password is incorrect','type'=>'error']);
             redirect('home/login');
         } else {
 					$this->session->set_userdata(['user'=>$verify[0]]);
@@ -56,10 +74,10 @@ class Home extends Base {
 
    public function register()
    {
-          $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email');
+          $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email|is_unique[user.email]');
           if ($this->form_validation->run() == TRUE) {
             $generated_pass=random_string('alnum',5);
-
+            $address = $this->input->post('email');
               $registration_data = array(
                   'email' => $this->input->post('email'),
                   'password' =>md5($generated_pass),
@@ -67,25 +85,24 @@ class Home extends Base {
                   'status'=>'pending',
                  'hash' => md5(rand(0, 10))
               );
-              $config['protocol'] = 'smtp';
-              $config['smtp_host'] = 'ssl://smtp.googlemail.com';
-              $config['smtp_port'] = '465';
-              $config['smtp_user'] = 'nirajs.official@gmail.com';
-              $config['smtp_pass'] = 'nir@j7580';
-              $config['mailtype'] = 'html';
-              $config['charset'] = 'iso-8859-1';
-              $config['wordwrap'] = TRUE;
-              $config['newline'] = "\r\n"; //use double quotes
-              $this->email->initialize($config);
-       $address = $this->input->post('email');
-          $id=$this->AdminModel->insert('user',$registration_data);
-          $user_data=$this->AdminModel->getdata(['id'=>$id],'user');
-          foreach ($user_data as $key => $value) {
-          	$user_pass=$value['password'];
-          	$User_hash=$value['hash'];
-          }
-         $this->load->library('email');     //load email library
-        $this->email->from('nirajs.official@gmail.com', 'nir@j7580'); //sender's email
+							$id=$this->AdminModel->insert('user',$registration_data);
+              $user_data=$this->AdminModel->getdata(['id'=>$id],'user');
+                foreach ($user_data as $key => $value) {
+           	    $User_hash=$value['hash'];
+           }
+										 $config = Array(
+									 'protocol'  => 'smtp',
+									 'smtp_host' => 'ssl://smtp.googlemail.com',
+									 'smtp_port' => '465',
+									 'smtp_user' => 'nirajs.official@gmail.com',
+									 'smtp_pass' => 'nir@j7580',
+									 'mailtype'  => 'html',
+									 'starttls'  => true,
+									 'newline'   => "\r\n"
+							 );
+
+
+
         $subject="Welcome!";    //subject
         $message= /*-----------email body starts-----------*/
           'Thanks for signing up,
@@ -103,20 +120,24 @@ class Home extends Base {
 
         /*-----------email body ends-----------*/
 
-        echo $message;
-        die;
+        $this->load->library('email', $config);
+
+        $this->email->from('nirajs.official@gmail.com', 'welcome');
         $this->email->to($address);
         $this->email->subject($subject);
         $this->email->message($message);
         if($this->email->send()){
-				$this->session->set_flashdata(['msg'=> 'An email verification link send to your email','type'=>'success']);
+				$this->session->set_flashdata(['msg'=> 'Registration Successful. Please Check Your Email for Login Instructions.','type'=>'success']);
 				redirect('home/message');
       }else
       {
         echo "sorry Mail sending failed, pls try again";
       }
 
-      }
+		}else{
+			$this->session->set_flashdata(['error'=> 'Email already registered,pls try with another email address','type'=>'success']);
+			redirect('home/login');
+		}
   }
 
 	function message(){
@@ -134,10 +155,10 @@ class Home extends Base {
     $where=array('email'=>$email,'hash'=>$hash);
     $verified=$this->AdminModel->doupdate($where,'user',$data);
     if($verified){
-    $this->session->set_flashdata(['msg'=> 'Email verified succesfully,please login to continue','type'=>'success']);
+    $this->session->set_flashdata(['success'=> 'Email verified succesfully,please login to continue','type'=>'success']);
         redirect('home/login');
       }else{
-        $this->session->set_flashdata(['msg'=> 'Email verification Failed,please register again','type'=>'error']);
+        $this->session->set_flashdata(['error'=> 'Email verification Failed,please register again','type'=>'error']);
         redirect('home/login');
       }
   }

@@ -42,12 +42,12 @@
               <!-- <div class="col-sm-10"> -->
                 <select name="category[]" class="form-control c-select" required multiple>
                   <option value="uncategorized">Uncategorized</option>
-                  <option value="design">Design</option>
-                  <option value="education">Education</option>
-                  <option value="film-video">Film & Video</option>
-                  <option value="food">Food</option>
-                  <option value="games">Games</option>
-                  <option value="tech">Tech</option>
+                  <option value="Design">Design</option>
+                  <option value="Education">Education</option>
+                  <option value="Film & Video">Film & Video</option>
+                  <option value="Food">Food</option>
+                  <option value="Games">Games</option>
+                  <option value="Technology">Tech</option>
                 </select>
               <!-- </div> -->
             </div>
@@ -158,10 +158,16 @@
               <input type="file" name="reward_img" id="reward_img" class="form-control" required>
               <p class="help-block">Upload a reward image.</p>
             </div>
-            <div class="form-group">
+
+            <!-- <div class="form-group">
               <label for="reward_desc">Reward Description</label>
               <input type="text" class="form-control" name="reward_desc" id="reward_desc" placeholder="Put the reward description here" required>
-            </div>
+            </div> -->
+
+            <div class="form-group">
+                            <label for="reward_desc">Reward Description</label>
+                            <textarea id="editor1" name="reward_desc" rows="10" cols="80"></textarea></div>
+
             <div class="form-group">
                 <div class="formwrapper d-flex">
                     <div class="col-md-6">
@@ -199,6 +205,20 @@
                         <option value="2029">2029</option>
                         <option value="2030">2030</option>
                         <option value="2031">2031</option>
+                        <option value="2032">2032</option>
+                        <option value="2033">2033</option>
+                        <option value="2034">2034</option>
+                        <option value="2035">2035</option>
+                        <option value="2036">2036</option>
+                        <option value="2037">2037</option>
+                        <option value="2038">2038</option>
+                        <option value="2039">2039</option>
+                        <option value="2040">2040</option>
+                        <option value="2041">2041</option><option value="2042">2042</option>
+                        <option value="2043">2043</option><option value="2044">2044</option>
+                        <option value="2045">2045</option><option value="2046">2046</option>
+                        <option value="2047">2047</option><option value="2048">2048</option>
+                        <option value="2049">2049</option>
                       </select>
               </div>
                 </div>

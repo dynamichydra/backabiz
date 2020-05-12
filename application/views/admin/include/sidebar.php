@@ -70,6 +70,26 @@
                       <span class="nav-text">Banner List </span>
                     </a>
                   </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/footer_feature'); ?>" >
+                      <span class="nav-text">Footer Feature</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/title_manage'); ?>" >
+                      <span class="nav-text">Title Management</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/footer_question'); ?>" >
+                      <span class="nav-text">Footer Question</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/footer_question_list'); ?>" >
+                      <span class="nav-text">Footer Question List</span>
+                    </a>
+                  </li>
                 </ul>
               </li>
 
@@ -115,7 +135,81 @@
                 </ul>
               </li>
 
+              <li>
+                <a>
+                  <span class="nav-caret">
+                    <i class="fa fa-caret-down"></i>
+                  </span>
 
+                  <span class="nav-text">Testimonials</span>
+                </a>
+                <ul class="nav-sub">
+                  <li>
+                    <a href="<?php echo base_url('admin/add_test'); ?>" >
+                      <span class="nav-text">Add Testimonial </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/test_list'); ?>" >
+                      <span class="nav-text">Testimonials List </span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <a>
+                  <span class="nav-caret">
+                    <i class="fa fa-caret-down"></i>
+                  </span>
+
+                  <span class="nav-text">About</span>
+                </a>
+                <ul class="nav-sub">
+                  <li>
+                    <a href="<?php echo base_url('admin/about'); ?>" >
+                      <span class="nav-text">About Us </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/about_bottom'); ?>" >
+                      <span class="nav-text">Bottom Section </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/funding_team'); ?>" >
+                      <span class="nav-text">Add Funding Team </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/funding_team_list'); ?>" >
+                      <span class="nav-text">Funding Team List </span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <a>
+                  <span class="nav-caret">
+                    <i class="fa fa-caret-down"></i>
+                  </span>
+
+                  <span class="nav-text">FAQ</span>
+                </a>
+                <ul class="nav-sub">
+                  <li>
+                    <a href="<?php echo base_url('admin/faq'); ?>" >
+                      <span class="nav-text">Add FAQ</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/faq_list'); ?>" >
+                      <span class="nav-text">FAQ List</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
 
               <li>
                 <a>
@@ -193,3 +287,10 @@ function iterateLinks(liItem) {
     }
 }
   </script>
+  <script>
+    $(document).ready(function () {
+        $(".nav li").removeClass("active");
+        var currentUrl = "<?php  echo current_url();  ?>";
+        $('a[href="' + currentUrl + '"]').parents('li,ul').addClass('active');
+    });
+</script>

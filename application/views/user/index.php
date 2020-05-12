@@ -1,12 +1,18 @@
   <!-- body content start -->
   <main>
     <?php $this->load->view('include/small_banner');?>
-    
+
       <section class="project-form-wrapper section-padding">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
               <div class="dashboard-wrap clearfix">
+                <?php if ($this->session->flashdata('success')) { ?>
+                <div class="alert alert-success"> <?= $this->session->flashdata('success') ?> </div>
+            <?php } ?>
+            <?php if ($this->session->flashdata('error')) { ?>
+            <div class="alert alert-danger"> <?= $this->session->flashdata('error') ?> </div>
+            <?php } ?>
               <div class="dashboard-top-nav">
                 <nav id="dashboard-nav" class="main-nav">
                         <ul class="menu">
@@ -14,9 +20,9 @@
                             <li class="menu-item menu-item-has-children">
                                 <a href="#">My Account <i class="fa fa-angle-down"></i></a>
                                 <ul class="sub-menu">
-                                    <li class="menu-item"><a href="<?php echo base_url('dashboard/profile/').$user['id']?>">Profile</a></li>
+                                    <li class="menu-item"><a href="<?php echo base_url('dashboard/profile/').$user[0]['id']?>">Profile</a></li>
                                     <li class="menu-item"><a href="profile-contact.html">Contact</a></li>
-                                    <li class="menu-item"><a href="password.html">Password</a></li>
+                                    <li class="menu-item"><a href="<?php echo base_url('dashboard/password/').$user[0]['id']?>">Password</a></li>
                                     <li class="menu-item"><a href="rewards.html">Rewards</a></li>
                                     <li class="menu-item"><a href="<?php echo base_url();?>home/logout">Logout</a></li>
                                 </ul>
@@ -24,7 +30,7 @@
                             <li class="menu-item menu-item-has-children">
                                 <a href="#">Projects <i class="fa fa-angle-down"></i></a>
                                 <ul class="sub-menu">
-                                   <li class="menu-item"><a href="campaign.html">My Projects</a></li>
+                                   <li class="menu-item"><a href="<?php echo base_url('dashboard/my_projects/').$user[0]['id']?>">My Projects</a></li>
                                    <li class="menu-item"><a href="backed_campaigns.html">My Invested Projects</a></li>
                                    <li class="menu-item"><a href="pledges_received.html">Pledges Received</a></li>
                                    <li class="menu-item"><a href="bookmark.html">Bookmarks</a></li>
@@ -33,7 +39,7 @@
                         </ul>
                     </nav><!-- /#main-nav -->
               </div>
-              <div class="dashboard-right"><a href="start-a-project.html" class="submit">Add New Project</a></div>
+              <div class="dashboard-right"><a href="<?php echo base_url('new-project')?>" class="submit">Add New Project</a></div>
              </div>
             </div>
           </div>
@@ -94,9 +100,9 @@
           				<h3 class="reward-option">Profile Picture</h3>
           				<div class="col-md-2" style="padding: 0;">
                     <?php
-              if( !empty($user['img'])){
+              if( !empty($user[0]['img'])){
                 ?>
-          					<img class="profile-form-img img-responsive" src="<?php echo base_url() . 'uploads/users/' . $user['img']; ?>" alt="Profile Image" style="width: 100%;">
+          					<img class="profile-form-img img-responsive" src="<?php echo base_url() . 'uploads/users/' . $user[0]['img']; ?>" alt="Profile Image" style="width: 100%;">
 
                     <?php
                   }else{
@@ -119,35 +125,37 @@
           			</div>
           		</div>
           		<div class="col-md-6">
-          			<form type="post" action="">
+          			<form method="post" action="<?php echo base_url('dashboard/update_dash')?>" enctype="multipart/form-data">
             			<div class="all-form">
                      		<h3 class="reward-option">My Information</h3>
 						<div class="form-group">
 							<label>Username:</label>
-						    <input type="text" name="first_name" value="<?php echo $user['email']?>" class="form-control">
+						    <input type="text" name="user_name" disabled value="<?php if(isset($user[0]['email'])){ echo $user[0]['email'];}?>" class="form-control">
 						</div>
 						<div class="form-group">
 						    <label>Email:</label>
-						    <input type="email" name="email" value="<?php echo $user['email']?>" class="form-control">
+						    <input type="email" name="email" value="<?php echo $user[0]['email']?>" class="form-control">
+                 <input type="hidden" name="id" value="<?php echo $user[0]['id']?>" class="form-control">
 						</div>
 						<div class="form-group">
 							<label>First Name:</label>
-					    	<input type="text" name="first_name" value="<?php echo $user['first_name']?>" class="form-control">
+					    	<input type="text" name="f_name" value="<?php if(isset($user[0]['first_name'])){ echo $user[0]['first_name'];}?>" class="form-control">
 						</div>
 						<div class="form-group">
 					    	<label>Last Name:</label>
-					    	<input type="text" name="last_name" value="<?php echo $user['last_name']?>" class="form-control">
+					    	<input type="text" name="l_name" value="<?php if(isset($user[0]['last_name'])){ echo $user[0]['last_name'];}?>" class="form-control">
 						</div>
 						<div class="form-group">
 					    	<label>Website:</label>
-					    	<input type="text" name="Website_name" value="<?php echo $user['website']?>" class="form-control">
+					    	<input type="text" name="web" value="<?php if(isset($user[0]['website'])){ echo $user[0]['website'];}?>" class="form-control">
 						</div>
 						<div class="form-group">
 						    <label>Bio:</label>
-						    <textarea name="profile_portfolio" rows="3" disabled="" class="form-control"><?php echo $user['bio']?></textarea>
+						    <textarea name="bio" rows="3"  class="form-control"><?php if(isset($user[0]['bio'])){ echo $user[0]['bio'];}?></textarea>
 						</div>
 						<h3 class="reward-option">Payment Info</h3>
-						<button class="submit">Edit</button>
+            <input type="submit" class="submit" name="Edit" value="Edit">
+						<!-- <button type="submit" class="submit">Edit</button> -->
 						<button class="cancel" style="display: none;">Cancel</button>
 						<button class="blue" style="display: none;">Save</button>
 					</div

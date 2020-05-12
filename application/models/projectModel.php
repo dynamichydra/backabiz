@@ -9,7 +9,7 @@ class ProjectModel extends BaseModel
     }
 
     function get_project_detail($data=[]){
-      $this->db->select('p.*,u.name uname,u.img uimg,u.address')
+      $this->db->select('p.*,u.first_name uname,u.img uimg,u.address')
          ->from('project p')
          ->join('user u', 'u.id = p.user_id','left')
          ->where($data);
@@ -18,7 +18,7 @@ class ProjectModel extends BaseModel
     }
 
     function get_project_backers($data=[]){
-      $this->db->select('b.amount,u.name name,b.date')
+      $this->db->select('b.amount,u.first_name name,b.date')
          ->from('backers b')
          ->join('user u', 'u.id = b.user_id')
          ->where($data);

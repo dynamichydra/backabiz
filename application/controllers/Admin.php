@@ -114,7 +114,7 @@ class Admin extends CI_Controller
             'twitter'=> $this->input->post("tw_link"),
             'pinterest'=> $this->input->post("pt_link"),
             'user_type'=>"user",
-            'status'=>"pending"
+            'status'=>"Pending"
         );
         $table="user";
         // print_r($data);
@@ -154,22 +154,51 @@ class Admin extends CI_Controller
     }
     public function update_user()
     {
-        $id=$this->input->post("id");
-        // echo $id;
-        // die;
-        $where=array('id'=>$id);
+        $id=$this->input->post('id');
+        if(!empty($id))
+        {
+          $where=array('status'=>"active",'id'=>$id);
+          $data = $this->AdminModel->getdata($where,"user");
+          $img=$data[0]['img'];
+          $config['upload_path'] = "uploads/users/";
+          $config['allowed_types'] = 'gif|jpg|png|jpeg';
+          $config['max_size'] = '409600';
+          // $config['file_name'] = $filename;
+          $config['create_thumb'] = TRUE;
+
+          $this->upload->initialize($config);
+
+          if ($this->upload->do_upload('user_image')) {
+              $imageDetailArray = $this->upload->data();
+
+              $image = $imageDetailArray['file_name'];
+          }else{
+              $image=$img;
+          }
         $data=array(
-            'name'=> $this->input->post("name"),
-            'email'=>$this->input->post("email"),
-            'phone'=>$this->input->post("phone"),
-            // 'password'=>md5($this->input->post("password")),
-            // 'user_type'=>"user",
-            // 'status'=>"active"
+          'first_name'=> $this->input->post("f_name"),
+          'last_name'=> $this->input->post("l_name"),
+          'about'=> $this->input->post("about"),
+          'bio'=> $this->input->post("bio"),
+          'img'=> $image,
+          'fax'=> $this->input->post("fax"),
+          'website'=> $this->input->post("web"),
+          'email'=>$this->input->post("email"),
+          'phone'=>$this->input->post("phone"),
+          'password'=>md5($this->input->post("psw")),
+          'address'=> $this->input->post("address"),
+          'address2'=> $this->input->post("address2"),
+          'country'=> $this->input->post("country"),
+          'state'=> $this->input->post("state"),
+          'city'=> $this->input->post("city"),
+          'facebook'=> $this->input->post("fb_link"),
+          'twitter'=> $this->input->post("tw_link"),
+          'pinterest'=> $this->input->post("pt_link")
         );
         $table="user";
         // print_r($data);
         // die;
-        $insert = $this->AdminModel->doupdate($where,$table,$data);;
+        $insert = $this->AdminModel->doupdate($where,$table,$data);
         if ($insert){
             $this->session->set_flashdata('success','user Updated successfully');
             redirect('admin/user_lists');
@@ -178,6 +207,7 @@ class Admin extends CI_Controller
             redirect('admin/user_lists');
         }
     }
+  }
     public function delete_user($id)
     {
         $user_id=$id;
@@ -187,6 +217,32 @@ class Admin extends CI_Controller
         $status=$this->AdminModel->doupdate($where,$table,$data);
         if ($status){
             $this->session->set_flashdata('success','deleted successfully');
+            redirect('admin/user_lists');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/user_lists');
+        }
+    }
+    public function user_inactive($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"Inactive");
+        $status=$this->AdminModel->doupdate($where,'user',$data);
+        if ($status){
+            $this->session->set_flashdata('success','User is Inactive');
+            redirect('admin/user_lists');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/user_lists');
+        }
+    }
+    public function user_active($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"active");
+        $status=$this->AdminModel->doupdate($where,'user',$data);
+        if ($status){
+            $this->session->set_flashdata('success','User is Active');
             redirect('admin/user_lists');
         }else{
             $this->session->set_flashdata('error','delete failed');
@@ -378,6 +434,7 @@ class Admin extends CI_Controller
             $cover_data = array(
                 'cat_name'=>$this->input->post('cat_name'),
                 'icon_name'=>$this->input->post('icon_name'),
+                'cat_description'=>$this->input->post('cat_description'),
                 'status'=>'active'
             );
             if(empty($id)){
@@ -449,7 +506,7 @@ class Admin extends CI_Controller
 
     public function project()
     {
-        $where=array("status"!="delete");
+        $where=array("status"=>"active");
         $table="project";
         $data2 = $this->AdminModel->getdata($where,$table);
         $data1=$this->AdminModel->get_countries();
@@ -514,7 +571,7 @@ class Admin extends CI_Controller
                 'del_month'=>$this->input->post('del_month'),
                 'del_year'=>$this->input->post('del_year'),
                 'quantity'=>$this->input->post('quantity'),
-                'status'=>'active'
+                'status'=>'Pending'
             );
             if(empty($id)){
             $this->AdminModel->insert($table,$data);
@@ -556,6 +613,32 @@ class Admin extends CI_Controller
             redirect('admin/project_list');
         }else{
             $this->session->set_flashdata('error','Deletion Failed');
+            redirect('admin/project_list');
+        }
+    }
+    public function project_inactive($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"Inactive");
+        $status=$this->AdminModel->doupdate($where,'project',$data);
+        if ($status){
+            $this->session->set_flashdata('success','Project is Inactive');
+            redirect('admin/project_list');
+        }else{
+            $this->session->set_flashdata('error','failed, pls try again');
+            redirect('admin/project_list');
+        }
+    }
+    public function projec_active($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"active");
+        $status=$this->AdminModel->doupdate($where,'project',$data);
+        if ($status){
+            $this->session->set_flashdata('success','Project is Active');
+            redirect('admin/project_list');
+        }else{
+            $this->session->set_flashdata('error',' failed,pls try again');
             redirect('admin/project_list');
         }
     }
@@ -643,8 +726,11 @@ class Admin extends CI_Controller
                 'del_month'=>$this->input->post('del_month'),
                 'del_year'=>$this->input->post('del_year'),
                 'quantity'=>$this->input->post('quantity'),
-                'status'=>'active'
+                'featured'=>$this->input->post('featured_project'),
+                // 'status'=>'active'
             );
+            // print_r($data);
+            // die;
             if(empty($id)){
             $this->AdminModel->insert($table,$data);
             $this->session->set_flashdata('success','New Project Added Successfully');
@@ -676,16 +762,16 @@ class Admin extends CI_Controller
         $table="faq";
         $insert = $this->AdminModel->insert($table,$data);
         if ($insert){
-            $this->session->set_flashdata('msg','Faq added successfully');
+            $this->session->set_flashdata('success','FAQ added successfully');
             redirect('admin/faq_list');
         }else{
-            $this->session->set_flashdata('msg','failed! pls try again');
+            $this->session->set_flashdata('error','FAQ! pls try again');
             redirect('admin/faq_list');
         }
     }
     public function faq_list()
     {
-        $where=array('status'=>'active');
+        $where=array('status!='=>'delete');
         $table="faq";
         $banner = $this->AdminModel->getdata($where,$table);
         $data=array('page_title'=>'FAQ List','layout_page'=>'faq_list','faq'=>$banner);
@@ -712,10 +798,10 @@ class Admin extends CI_Controller
         // die;
         $insert = $this->AdminModel->doupdate($where,$table,$data);;
         if ($insert){
-            $this->session->set_flashdata('msg','user Updated successfully');
+            $this->session->set_flashdata('success','FAQ Updated successfully');
             redirect('admin/faq_list');
         }else{
-            $this->session->set_flashdata('msg','user update failed');
+            $this->session->set_flashdata('error','FAQ update failed');
             redirect('admin/faq_list');
         }
     }
@@ -726,10 +812,36 @@ class Admin extends CI_Controller
         $table="faq";
         $status=$this->AdminModel->doupdate($where,$table,$data);
         if ($status){
-            $this->session->set_flashdata('msg','deleted successfully');
+            $this->session->set_flashdata('success','FAQ deleted successfully');
             redirect('admin/faq_list');
         }else{
-            $this->session->set_flashdata('msg','delete failed');
+            $this->session->set_flashdata('error','FAQ delete failed');
+            redirect('admin/faq_list');
+        }
+    }
+    public function faq_inactive($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"inactive");
+        $status=$this->AdminModel->doupdate($where,'faq',$data);
+        if ($status){
+            $this->session->set_flashdata('success','FAQ is Inactive');
+            redirect('admin/faq_list');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/faq_list');
+        }
+    }
+    public function faq_active($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"active");
+        $status=$this->AdminModel->doupdate($where,'faq',$data);
+        if ($status){
+            $this->session->set_flashdata('success','FAQ is Active');
+            redirect('admin/faq_list');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
             redirect('admin/faq_list');
         }
     }
@@ -771,6 +883,662 @@ class Admin extends CI_Controller
             $this->success($data);
         }else{
             $this->error("No data found");
+        }
+    }
+    public function footer_feature()
+    {
+        $user_id = $this->session->userdata('admin_id');
+        if (empty($user_id)) {
+            redirect('admin');
+        }
+        $where=array('status'=>'active');
+        $data = $this->AdminModel->getdata($where,"footer_feature");
+        $data=array('page_title'=>'Footer Feature','layout_page'=>'footer_feature','feature'=>$data);
+        $this->load->view('admin/layout',$data);
+    }
+    public function Insert_footer_feature()
+    {
+      $id=$this->input->post('id');
+      if(!empty($id)){
+     $where=array('status'=>"active",'id'=>$id);
+     $data = $this->AdminModel->getdata($where,"footer_feature");
+     $img=$data[0]['image'];
+     $img1=$data[0]['your_story_image'];
+     $config['upload_path'] = "uploads/banner/";
+     $config['allowed_types'] = 'gif|jpg|png|jpeg';
+     $config['max_size'] = '409600';
+     // $config['file_name'] = $filename;
+     $config['create_thumb'] = TRUE;
+
+     $this->upload->initialize($config);
+
+     if ($this->upload->do_upload('p_image')) {
+         $imageDetailArray = $this->upload->data();
+
+         $image = $imageDetailArray['file_name'];
+     }else{
+         $image=$img;
+     }
+     if ($this->upload->do_upload('ys_image')) {
+         $imageDetailArray = $this->upload->data();
+
+         $ys_image = $imageDetailArray['file_name'];
+     }else{
+         $ys_image=$img1;
+     }
+ }else{
+      $config['upload_path'] = "uploads/banner/";
+      $config['allowed_types'] = 'gif|jpg|png|jpeg';
+      $config['max_size'] = '409600';
+      // $config['file_name'] = $filename;
+      $config['create_thumb'] = TRUE;
+
+      $this->upload->initialize($config);
+
+      if ($this->upload->do_upload('p_image')) {
+          $imageDetailArray = $this->upload->data();
+
+          $image = $imageDetailArray['file_name'];
+      }else{
+          $image="N/A";
+      }
+      if ($this->upload->do_upload('ys_image')) {
+          $imageDetailArray = $this->upload->data();
+
+          $ys_image = $imageDetailArray['file_name'];
+      }else{
+          $ys_image="N/A";
+      }
+    }
+         $data=array(
+            'title'=> $this->input->post("title"),
+            'subtitle'=>$this->input->post("s_title"),
+            'your_story_image'=>$ys_image,
+            'image'=>$image,
+            'p_1'=>$this->input->post("p_1"),
+            'p_2'=>$this->input->post("p_2"),
+            'p_3'=>$this->input->post("p_3"),
+            'p_4'=>$this->input->post("p_4"),
+            'p_5'=>$this->input->post("p_5"),
+            'title2'=>$this->input->post("title_2"),
+            'status'=>"active"
+        );
+        if(!empty($id)){
+          $where=array('id'=>$id,'status'=>'active');
+          $insert=$this->AdminModel->doupdate($where,'footer_feature',$data);
+        }else{
+        $insert = $this->AdminModel->insert("footer_feature",$data);
+      }
+        if ($insert){
+            $this->session->set_flashdata('success','Feature added successfully');
+            redirect('admin/footer_feature');
+        }else{
+            $this->session->set_flashdata('error','failed! pls try again');
+            redirect('admin/footer_feature');
+        }
+    }
+
+    public function add_test()
+    {
+      $user_id = $this->session->userdata('admin_id');
+      if (empty($user_id)) {
+          redirect('admin');
+      }
+      $data=array('page_title'=>'Add Testimonial','layout_page'=>'testimonial');
+      $this->load->view('admin/layout',$data);
+    }
+    public function insert_test()
+    {
+      $config['upload_path'] = "uploads/banner/";
+      $config['allowed_types'] = 'gif|jpg|png|jpeg';
+      $config['max_size'] = '409600';
+      $config['create_thumb'] = TRUE;
+
+      $this->upload->initialize($config);
+
+      if ($this->upload->do_upload('test_image')) {
+          $imageDetailArray = $this->upload->data();
+
+          $image = $imageDetailArray['file_name'];
+      }else{
+          $image="N/A";
+      }
+      $data=array(
+         'detail'=> $this->input->post("test_detail"),
+         'name'=>$this->input->post("c_name"),
+         'designation'=>$this->input->post("desig"),
+         'image'=>$image,
+         'status'=>"active"
+     );
+     $insert = $this->AdminModel->insert("testimonial",$data);
+     if ($insert){
+         $this->session->set_flashdata('success','Testimonial added successfully');
+         redirect('admin/test_list');
+     }else{
+         $this->session->set_flashdata('error','failed! pls try again');
+         redirect('admin/test_list');
+     }
+    }
+    public function test_list()
+    {
+        $user_id = $this->session->userdata('admin_id');
+        if (empty($user_id)) {
+            redirect('admin');
+        }
+        $where=array("status!="=>"delete");
+       $data=$this->AdminModel->getdata($where,"testimonial");
+       $data=array('page_title'=>'Testimonials List','layout_page'=>'test_list','testimonials'=>$data);
+        $this->load->view('admin/layout', $data);
+    }
+    public function edit_test($id)
+    {
+      $where=array('status!='=>'delete','id'=>$id);
+      $data = $this->AdminModel->getdata($where,"testimonial");
+      $data=array('page_title'=>'Edit Testimonial','layout_page'=>'edit_test','test'=>$data);
+      $this->load->view('admin/layout', $data);
+    }
+    public function update_test()
+    {
+      $id=$this->input->post('id');
+      if(!empty($id))
+      {
+        $where=array('status'=>"active",'id'=>$id);
+        $data = $this->AdminModel->getdata($where,"testimonial");
+        $img=$data[0]['image'];
+        $config['upload_path'] = "uploads/banner/";
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '409600';
+        // $config['file_name'] = $filename;
+        $config['create_thumb'] = TRUE;
+
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_upload('test_image')) {
+            $imageDetailArray = $this->upload->data();
+
+            $image = $imageDetailArray['file_name'];
+        }else{
+            $image=$img;
+        }
+      }
+      $data=array(
+         'detail'=> $this->input->post("test_detail"),
+         'name'=>$this->input->post("c_name"),
+         'designation'=>$this->input->post("desig"),
+         'image'=>$image,
+         'status'=>"active"
+     );
+       $update=$this->AdminModel->doupdate($where,'testimonial',$data);
+       if ($update){
+           $this->session->set_flashdata('success','Testimonial Updated successfully');
+           redirect('admin/test_list');
+       }else{
+           $this->session->set_flashdata('error','failed! pls try again');
+           redirect('admin/test_list');
+       }
+    }
+
+    public function delete_test($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"delete");
+        $status=$this->AdminModel->doupdate($where,'testimonial',$data);
+        if ($status){
+            $this->session->set_flashdata('success','deleted successfully');
+            redirect('admin/test_list');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/test_list');
+        }
+    }
+    public function test_inactive($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"inactive");
+        $status=$this->AdminModel->doupdate($where,'testimonial',$data);
+        if ($status){
+            $this->session->set_flashdata('success','Testimonial is Inactive');
+            redirect('admin/test_list');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/test_list');
+        }
+    }
+    public function test_active($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"active");
+        $status=$this->AdminModel->doupdate($where,'testimonial',$data);
+        if ($status){
+            $this->session->set_flashdata('success','Testimonial is Active');
+            redirect('admin/test_list');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/test_list');
+        }
+    }
+    public function about()
+    {
+        $user_id = $this->session->userdata('admin_id');
+        if (empty($user_id)) {
+            redirect('admin');
+        }
+        $where=array('status'=>'active');
+        $data = $this->AdminModel->getdata($where,"about");
+        $data=array('page_title'=>'About Us','layout_page'=>'about','feature'=>$data);
+        $this->load->view('admin/layout',$data);
+    }
+    public function Insert_about()
+    {
+      $id=$this->input->post('id');
+      if(!empty($id)){
+     $where=array('status'=>"active",'id'=>$id);
+     $data = $this->AdminModel->getdata($where,"about");
+     $img=$data[0]['image'];
+     $config['upload_path'] = "uploads/banner/";
+     $config['allowed_types'] = 'gif|jpg|png|jpeg';
+     $config['max_size'] = '409600';
+     // $config['file_name'] = $filename;
+     $config['create_thumb'] = TRUE;
+
+     $this->upload->initialize($config);
+
+     if ($this->upload->do_upload('p_image')) {
+         $imageDetailArray = $this->upload->data();
+
+         $image = $imageDetailArray['file_name'];
+     }else{
+         $image=$img;
+     }
+ }else{
+      $config['upload_path'] = "uploads/banner/";
+      $config['allowed_types'] = 'gif|jpg|png|jpeg';
+      $config['max_size'] = '409600';
+      // $config['file_name'] = $filename;
+      $config['create_thumb'] = TRUE;
+
+      $this->upload->initialize($config);
+
+      if ($this->upload->do_upload('p_image')) {
+          $imageDetailArray = $this->upload->data();
+
+          $image = $imageDetailArray['file_name'];
+      }else{
+          $image="N/A";
+      }
+    }
+         $data=array(
+            'title'=> $this->input->post("title"),
+            'subtitle'=>$this->input->post("s_title"),
+            'image'=>$image,
+            'p_1'=>$this->input->post("p_1"),
+            'p_2'=>$this->input->post("p_2"),
+            'p_3'=>$this->input->post("p_3"),
+            'p_4'=>$this->input->post("p_4"),
+            'p_5'=>$this->input->post("p_5"),
+            'title2'=>$this->input->post("title_2"),
+            'status'=>"active"
+        );
+        if(!empty($id)){
+          $where=array('id'=>$id,'status'=>'active');
+          $insert=$this->AdminModel->doupdate($where,'about',$data);
+        }else{
+        $insert = $this->AdminModel->insert("about",$data);
+      }
+        if ($insert){
+            $this->session->set_flashdata('success','About us Updated successfully');
+            redirect('admin/about');
+        }else{
+            $this->session->set_flashdata('error','failed! pls try again');
+            redirect('admin/about');
+        }
+    }
+    public function funding_team()
+    {
+      $user_id = $this->session->userdata('admin_id');
+      if (empty($user_id)) {
+          redirect('admin');
+      }
+      $data=array('page_title'=>'Funding Team','layout_page'=>'funding_team');
+      $this->load->view('admin/layout',$data);
+    }
+    public function insert_funding_team()
+    {
+      $config['upload_path'] = "uploads/banner/";
+      $config['allowed_types'] = 'gif|jpg|png|jpeg';
+      $config['max_size'] = '409600';
+      $config['create_thumb'] = TRUE;
+
+      $this->upload->initialize($config);
+
+      if ($this->upload->do_upload('team_image')) {
+          $imageDetailArray = $this->upload->data();
+
+          $image = $imageDetailArray['file_name'];
+      }else{
+          $image="N/A";
+      }
+      $data=array(
+         'name'=> $this->input->post("name"),
+         'designation'=>$this->input->post("desig"),
+         'fb_link'=>$this->input->post("fb_link"),
+         'tw_link'=>$this->input->post("tw_link"),
+         'ln_link'=>$this->input->post("ln_link"),
+         'image'=>$image,
+         'status'=>"active"
+     );
+     $insert = $this->AdminModel->insert("funding_team",$data);
+     if ($insert){
+         $this->session->set_flashdata('success','Team added successfully');
+         redirect('admin/funding_team_list');
+     }else{
+         $this->session->set_flashdata('error','failed! pls try again');
+         redirect('admin/funding_team_list');
+     }
+    }
+    public function funding_team_list()
+    {
+      $user_id = $this->session->userdata('admin_id');
+      if (empty($user_id)) {
+          redirect('admin');
+      }
+      $where=array("status!="=>"delete");
+     $data=$this->AdminModel->getdata($where,"funding_team");
+     $data=array('page_title'=>'Funding Team List','layout_page'=>'funding_team_list','team'=>$data);
+      $this->load->view('admin/layout', $data);
+    }
+    public function edit_team($id)
+    {
+      $where=array('status!='=>'delete','id'=>$id);
+      $data = $this->AdminModel->getdata($where,"funding_team");
+      $data=array('page_title'=>'Edit Team Profile','layout_page'=>'edit_team','team'=>$data);
+      $this->load->view('admin/layout', $data);
+    }
+    public function update_funding_team()
+    {
+      $id=$this->input->post('id');
+      if(!empty($id))
+      {
+        $where=array('status'=>"active",'id'=>$id);
+        $data = $this->AdminModel->getdata($where,"funding_team");
+        $img=$data[0]['image'];
+        $config['upload_path'] = "uploads/banner/";
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '409600';
+        // $config['file_name'] = $filename;
+        $config['create_thumb'] = TRUE;
+
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_upload('team_image')) {
+            $imageDetailArray = $this->upload->data();
+
+            $image = $imageDetailArray['file_name'];
+        }else{
+            $image=$img;
+        }
+      }
+      $data=array(
+        'name'=> $this->input->post("name"),
+        'designation'=>$this->input->post("desig"),
+        'fb_link'=>$this->input->post("fb_link"),
+        'tw_link'=>$this->input->post("tw_link"),
+        'ln_link'=>$this->input->post("ln_link"),
+        'image'=>$image,
+        'status'=>"active"
+     );
+       $update=$this->AdminModel->doupdate($where,'funding_team',$data);
+       if ($update){
+           $this->session->set_flashdata('success','Team Profile Updated successfully');
+           redirect('admin/funding_team_list');
+       }else{
+           $this->session->set_flashdata('error','failed! pls try again');
+           redirect('admin/funding_team_list');
+       }
+    }
+    public function delete_team($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"delete");
+        $status=$this->AdminModel->doupdate($where,'funding_team',$data);
+        if ($status){
+            $this->session->set_flashdata('success','deleted successfully');
+            redirect('admin/funding_team_list');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/funding_team_list');
+        }
+    }
+    public function team_inactive($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"inactive");
+        $status=$this->AdminModel->doupdate($where,'funding_team',$data);
+        if ($status){
+            $this->session->set_flashdata('success','Profile is Inactive');
+            redirect('admin/funding_team_list');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/funding_team_list');
+        }
+    }
+    public function team_active($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"active");
+        $status=$this->AdminModel->doupdate($where,'funding_team',$data);
+        if ($status){
+            $this->session->set_flashdata('success','Profile is Active');
+            redirect('admin/funding_team_list');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/funding_team_list');
+        }
+    }
+    public function title_manage()
+    {
+      $user_id = $this->session->userdata('admin_id');
+      if (empty($user_id)) {
+          redirect('admin');
+      }
+      $where=array('status'=>'active');
+      $data = $this->AdminModel->getdata($where,"title_management");
+      $data=array('page_title'=>'Home Page Title Management','layout_page'=>'title_management','feature'=>$data);
+      $this->load->view('admin/layout',$data);
+    }
+    public function Insert_title_manage()
+    {
+      $id=$this->input->post('id');
+         $data=array(
+            't_1'=> $this->input->post("t_1"),
+            'des_1'=>$this->input->post("des_1"),
+            't_2'=>$this->input->post("t_2"),
+            'des_2'=>$this->input->post("des_2"),
+            't_3'=>$this->input->post("t_3"),
+            'des_3'=>$this->input->post("des_3"),
+            't_4'=>$this->input->post("t_4"),
+            'des_4'=>$this->input->post("des_4"),
+            't_5'=>$this->input->post("t_5"),
+            'des_5'=>$this->input->post("des_5"),
+            'footer_b_title'=>$this->input->post("footer_b_title"),
+            'footer_b_des'=>$this->input->post("footer_b_des"),
+            'footer_b_link'=>$this->input->post("footer_b_link"),
+            'footer_b_button'=>$this->input->post("footer_b_button"),
+            'status'=>"active"
+        );
+        if(!empty($id)){
+          $where=array('id'=>$id,'status'=>'active');
+          $insert=$this->AdminModel->doupdate($where,'title_management',$data);
+        }else{
+        $insert = $this->AdminModel->insert("title_management",$data);
+      }
+        if ($insert){
+            $this->session->set_flashdata('success','Updated successfully');
+            redirect('admin/title_manage');
+        }else{
+            $this->session->set_flashdata('error','Update failed! pls try again');
+            redirect('admin/title_manage');
+        }
+    }
+
+    public function footer_question($id=null)
+    {
+        $user_id = $this->session->userdata('admin_id');
+        if (empty($user_id)) {
+            redirect('admin');
+        }
+        $where=array('status'=>'active','id'=>$id);
+        $data = $this->AdminModel->getdata($where,"footer_question");
+        $data=array('page_title'=>'Footer Question','layout_page'=>'footer_question','feature'=>$data);
+        $this->load->view('admin/layout',$data);
+    }
+    public function footer_question_list()
+    {
+      $user_id = $this->session->userdata('admin_id');
+      if (empty($user_id)) {
+          redirect('admin');
+      }
+      $where=array('status!='=>'delete');
+      $data = $this->AdminModel->getdata($where,"footer_question");
+      $data=array('page_title'=>'Footer Question','layout_page'=>'footer_question_list','question'=>$data);
+      $this->load->view('admin/layout',$data);
+    }
+    public function Insert_footer_question()
+    {
+      $id=$this->input->post('id');
+         $data=array(
+            'title'=> $this->input->post("title"),
+            'description'=>$this->input->post("desc"),
+            'status'=>'active',
+        );
+        if(!empty($id)){
+          $where=array('id'=>$id,'status'=>'active');
+          $insert=$this->AdminModel->doupdate($where,'footer_question',$data);
+        }else{
+        $insert = $this->AdminModel->insert("footer_question",$data);
+      }
+        if ($insert){
+            $this->session->set_flashdata('success','Submitted successfully');
+            redirect('admin/footer_question_list');
+        }else{
+            $this->session->set_flashdata('error','failed! pls try again');
+            redirect('admin/footer_question_list');
+        }
+    }
+    public function delete_quest($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"delete");
+        $status=$this->AdminModel->doupdate($where,'footer_question',$data);
+        if ($status){
+            $this->session->set_flashdata('success','deleted successfully');
+            redirect('admin/footer_question_list');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/footer_question_list');
+        }
+    }
+    public function quest_inactive($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"inactive");
+        $status=$this->AdminModel->doupdate($where,'footer_question',$data);
+        if ($status){
+            $this->session->set_flashdata('success','Question is Inactive');
+            redirect('admin/footer_question_list');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/footer_question_list');
+        }
+    }
+    public function quest_active($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"active");
+        $status=$this->AdminModel->doupdate($where,'footer_question',$data);
+        if ($status){
+            $this->session->set_flashdata('success','Question is Active');
+            redirect('admin/footer_question_list');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/footer_question_list');
+        }
+    }
+
+    public function about_bottom()
+    {
+        $user_id = $this->session->userdata('admin_id');
+        if (empty($user_id)) {
+            redirect('admin');
+        }
+        $where=array('status'=>'active');
+        $data = $this->AdminModel->getdata($where,"about_bottom");
+        $data=array('page_title'=>'About Us Bottom Section','layout_page'=>'about_bottom','feature'=>$data);
+        $this->load->view('admin/layout',$data);
+    }
+    public function Insert_about_bottom()
+    {
+      $id=$this->input->post('id');
+      if(!empty($id)){
+     $where=array('status'=>"active",'id'=>$id);
+     $data = $this->AdminModel->getdata($where,"about_bottom");
+     $img=$data[0]['image'];
+     $config['upload_path'] = "uploads/banner/";
+     $config['allowed_types'] = 'gif|jpg|png|jpeg';
+     $config['max_size'] = '409600';
+     // $config['file_name'] = $filename;
+     $config['create_thumb'] = TRUE;
+
+     $this->upload->initialize($config);
+
+     if ($this->upload->do_upload('p_image')) {
+         $imageDetailArray = $this->upload->data();
+
+         $image = $imageDetailArray['file_name'];
+     }else{
+         $image=$img;
+     }
+ }else{
+      $config['upload_path'] = "uploads/banner/";
+      $config['allowed_types'] = 'gif|jpg|png|jpeg';
+      $config['max_size'] = '409600';
+      // $config['file_name'] = $filename;
+      $config['create_thumb'] = TRUE;
+
+      $this->upload->initialize($config);
+
+      if ($this->upload->do_upload('p_image')) {
+          $imageDetailArray = $this->upload->data();
+
+          $image = $imageDetailArray['file_name'];
+      }else{
+          $image="N/A";
+      }
+    }
+         $data=array(
+            'title'=> $this->input->post("title"),
+            'subtitle'=>$this->input->post("s_title"),
+            'image'=>$image,
+            'p_1'=>$this->input->post("p_1"),
+            'p_2'=>$this->input->post("p_2"),
+            'p_3'=>$this->input->post("p_3"),
+            'p_4'=>$this->input->post("p_4"),
+            'p_5'=>$this->input->post("p_5"),
+            'title2'=>$this->input->post("title_2"),
+            'status'=>"active"
+        );
+        if(!empty($id)){
+          $where=array('id'=>$id,'status'=>'active');
+          $insert=$this->AdminModel->doupdate($where,'about_bottom',$data);
+        }else{
+        $insert = $this->AdminModel->insert("about_bottom",$data);
+      }
+        if ($insert){
+            $this->session->set_flashdata('success','Updated successfully');
+            redirect('admin/about_bottom');
+        }else{
+            $this->session->set_flashdata('error','failed! pls try again');
+            redirect('admin/about_bottom');
         }
     }
 }

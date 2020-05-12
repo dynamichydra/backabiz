@@ -1,7 +1,6 @@
   <!-- body content start -->
   <main>
     <?php $this->load->view('include/small_banner');?>
-
     <section id="project-wrapper" class="section-padding">
         <div class="container">
             <div class="row">
@@ -21,7 +20,7 @@
                   <div class="author-single-container">
                     <div class="author-avatar"><a href="<?php echo base_url('profile/'.$project->user_id);?>">
                       <?php
-                      if($project->uimg && file_exist('uploads/user/'.$project->uimg)){
+                      if($project->uimg && file_exists('uploads/user/'.$project->uimg)){
                         ?>
                         <img src="<?php echo base_url('uploads/user/'.$project->uimg);?>" alt="<?php echo $project->uname;?>"> </a>
                         <?php
@@ -40,10 +39,10 @@
                     <div class="clearfix"></div>
                   </div>
                     <div class="raised-bar">
-                      <div class="neo-progressbar"><div style="width:<?php echo ($project->c_amount/$project->funding_goal)*100;?>%"></div></div>
+                      <div class="neo-progressbar"><div style="width:<?php echo ($project->rec_amount/$project->funding_goal)*100;?>%"></div></div>
                     </div>
-                    <div class="progression-studios-raised-percent"><?php echo number_format(($project->c_amount/$project->funding_goal)*100,2)?>%</div>
-                    <div class="progression-studios-fund-raised">$<?php echo number_format($project->c_amount);?></div>
+                    <div class="progression-studios-raised-percent"><?php echo number_format(($project->rec_amount/$project->funding_goal)*100,2)?>%</div>
+                    <div class="progression-studios-fund-raised">$<?php echo number_format($project->rec_amount);?></div>
                     <div class="progression-studios-funding-goal">raised of $<?php echo number_format($project->funding_goal);?> goal</div>
                     <div class="progression-studios-index-time-remaining">
                       <ul>

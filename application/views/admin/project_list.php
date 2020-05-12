@@ -63,11 +63,11 @@
               <?php
               if($vn['status']=="active"){
                 ?>
-              <td data-value="1"><span class="label success" title="Active">Active</span></td>
+              <td data-value="1"><a href="<?php echo base_url('admin/project_inactive/').$vn['id']?>" class="btn btn-outline b-info text-info"  >Active</a></td>
               <?php
             }else{
               ?>
-            <td data-value="3"><span class="label warning" title="Disabled">Suspended</span></td>
+            <td data-value="1"><a href="<?php echo base_url('admin/projec_active/').$vn['id']?>" onclick="return confirm('Are you sure?');" class="btn btn-outline b-black text-black"  ><?php echo $vn['status'];?></a></td>
             <?php
           }
           ?>
@@ -94,4 +94,3 @@
 <!-- ############ PAGE END-->
 
     </div>
-  

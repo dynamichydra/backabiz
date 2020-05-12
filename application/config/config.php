@@ -23,11 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-//     $domainName = $_SERVER['HTTP_HOST'] . '/';
-// $config['base_url'] = 'https://newsystem.xyz/backabiz';
-$config['base_url'] = 'http://localhost/backabiz';
-$config['base_url'] = $protocol.$_SERVER['HTTP_HOST'].'/pankaj/backabiz';
+$config['base_url'] = 'https://bb.wsdev.in';
 //echo($protocol.$config['base_url'] );
 
 /*
@@ -163,7 +159,7 @@ $config['composer_autoload'] = FALSE;
 | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
 |
 */
-$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-=@';
+$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-=@&';
 $config['enable_query_strings'] = TRUE;
 
 /*

@@ -16,7 +16,12 @@
                 </div>
               </div><!-- end container -->
             </section><!-- end breadcrumbs-sec -->
-
+            <?php if ($this->session->flashdata('success')) { ?>
+            <div class="alert alert-success"> <?= $this->session->flashdata('success') ?> </div>
+            <?php } ?>
+            <?php if ($this->session->flashdata('error')) { ?>
+            <div class="alert alert-danger"> <?= $this->session->flashdata('error') ?> </div>
+            <?php } ?>
           <!-- Form Section start-->
             <section class="project-form-wrapper section-padding">
               <div class="container">
@@ -26,13 +31,6 @@
                 		<form type="post" method="post" action="<?php echo base_url('home/login_check')?>">
                   		<div class="col-md-6 col-sm-6">
                         <h3 class="reward-option" style="font-size: 26px; border-bottom: none;margin-top: 0;">Login</h3>
-                        <?php
-    $msg=$this->session->flashdata('msg');
-    if($msg != "")
-    {
-      echo "<div class='alert alert-success'>".$msg."</div>";
-    }
-  ?>
                   			<div class="all-form">
                           <div class="form-group">
                               <label>Username or email address *</label>

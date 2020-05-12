@@ -14,7 +14,7 @@
     <?php } ?>
     <?php if ($this->session->flashdata('error')) { ?>
     <div class="alert alert-danger"> <?= $this->session->flashdata('error') ?> </div>
-    <?php } ?> 
+    <?php } ?>
       <!-- <small>Make HTML tables on smaller devices look awesome</small> -->
     </div>
     <div class="box-body">
@@ -26,6 +26,9 @@
           <tr>
               <th data-toggle="true">
                   Category Name
+              </th>
+              <th data-toggle="true">
+                  Category description
               </th>
               <th data-hide="phone,tablet">
                   Icon Name
@@ -42,11 +45,12 @@
           <!-- <?php print_r('$data'); ?> -->
           <?php
                                 if (!empty($category)) {
-                                    foreach ($category as $key=>$vn) { 
-                          
+                                    foreach ($category as $key=>$vn) {
+
                                         ?>
           <tr>
               <td><?php echo $vn['cat_name'];?></td>
+              <td><?php echo $vn['cat_description'];?></td>
               <td><a href><?php echo $vn['icon_name'];?></a></td>
                <!-- <td><?php echo $vn['icon_image'];?></td> -->
               <?php
@@ -66,7 +70,7 @@
           <?php
         }
            }
-                                
+
                                 ?>
         </tbody>
         <tfoot class="hide-if-no-paging">

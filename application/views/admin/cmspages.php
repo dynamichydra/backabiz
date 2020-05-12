@@ -17,15 +17,18 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Page</label>
                             <select name="page_title" class="form-control" >
-                              <option <?php echo ($content && $content["page_title"]=='about-us')?'selected':''; ?> value="about-us">About Us Page</option>
+                              <!-- <option <?php echo ($content && $content["page_title"]=='about-us')?'selected':''; ?> value="about-us">About Us Page</option> -->
                               <option <?php echo ($content && $content["page_title"]=='contact-us')?'selected':''; ?> value="contact-us">Contact Us Page</option>
                               <option <?php echo ($content && $content["page_title"]=='faq')?'selected':''; ?> value="faq">FAQ Page</option>
                               <option <?php echo ($content && $content["page_title"]=='privacy-policy')?'selected':''; ?> value="privacy-policy">Privacy Policy Page</option>
                               <option <?php echo ($content && $content["page_title"]=='terms-of-use')?'selected':''; ?> value="terms-of-use">Terms & Conditions Page</option>
                               <option <?php echo ($content && $content["page_title"]=='refund')?'selected':''; ?> value="refund">Refunds Page</option>
-                              <option <?php echo ($content && $content["page_title"]=='testimonials')?'selected':''; ?> value="testimonials">Testimonials</option>
-                              <option <?php echo ($content && $content["page_title"]=='home_market')?'selected':''; ?> value="home_market">Home Market Concept</option>
+                              <!-- <option <?php echo ($content && $content["page_title"]=='testimonials')?'selected':''; ?> value="testimonials">Testimonials</option> -->
+                              <!-- <option <?php echo ($content && $content["page_title"]=='home_market')?'selected':''; ?> value="home_market">Home Market Concept</option> -->
                               <option <?php echo ($content && $content["page_title"]=='home_number')?'selected':''; ?> value="home_number">Home Number</option>
+                              <!-- <option <?php echo ($content && $content["page_title"]=='home_page_project_we_love')?'selected':''; ?> value="home_page_project_we_love">Home Page Project We Love</option> -->
+                              <!-- <option <?php echo ($content && $content["page_title"]=='home_popular_projects')?'selected':''; ?> value="home_popular_projects">Home Popular Projects</option> -->
+                              <!-- <option <?php echo ($content && $content["page_title"]=='home_advertisment')?'selected':''; ?> value="home_advertisment">Home Advertisment</option> -->
                             </select>
 
                         </div>

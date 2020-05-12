@@ -12,14 +12,14 @@
     <div class="col-md-12">
       <div class="box">
         <div class="box-header">
-          <h2>New User Form</h2>
+          <h2>Update User Form</h2>
                     <?php
-                    foreach ($user_data as $key=>$vn) { 
+                    foreach ($user_data as $key=>$vn) {
                         ?>
         </div>
         <div class="box-divider m-0"></div>
         <div class="box-body">
-          <form role="form" method="post" action="<?php echo base_url('admin/update_user')?>">
+          <form role="form" method="post" action="<?php echo base_url('admin/update_user')?>" enctype="multipart/form-data">
             <div class="form-group">
               <label for="f_name">First Name</label>
               <input type="text" class="form-control" name="f_name" id="f_name" placeholder="Enter name" value="<?php echo $vn['first_name'];?>">
@@ -52,11 +52,11 @@
               <label for="c_password">Confirm Password</label>
               <input type="password" class="form-control" name="c_password" id="c_password" onfocusout="Validate()" placeholder="Password">
             </div> -->
-            <div class="form-group">
+            <!-- <div class="form-group">
             <label for="pic">Profile Photo</label>
             <input type="file" id="pic" name="pic" multiple>
             <p class="help-block">Upload a profile pic</p>
-            </div>
+            </div> -->
             <h6><b>Address</b></h6>
             <hr>
 
@@ -72,7 +72,7 @@
                 <input class="form-control" value="<?php echo $vn['address2'];?>" name="address2" type="text">
               </div>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <div class="input-group">
                 <div class="input-group-addon">Country</div>
                 <select name="country" id="country" class="form-control c-select" onchange= "get_state(this.value)" required>
@@ -101,7 +101,7 @@
                 </select>
               </div>
             </div>
-
+ -->
             <div class="form-group">
               <label for="about">About Us</label>
               <input type="text" class="form-control" value="<?php echo $vn['about'];?>" name="about" id="about" placeholder="about us">

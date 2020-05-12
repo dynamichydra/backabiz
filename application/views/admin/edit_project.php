@@ -24,7 +24,7 @@
         <div class="box-body">
           <?php
                                 if (!empty($project)) {
-                                    foreach ($project as $key=>$vn) { 
+                                    foreach ($project as $key=>$vn) {
                                         ?>
           <form role="form" method="post" action="<?php echo base_url('admin/update_project')?>" enctype="multipart/form-data" >
             <div class="form-group">
@@ -51,12 +51,12 @@
               <!-- <div class="col-sm-10"> -->
                 <select name="category" class="form-control c-select" required>
                   <option value="uncategorized" <?php if ($vn["category"]=='uncategorized') {echo "selected";}?>>Uncategorized</option>
-                  <option value="design" <?php if ($vn["category"]=='design') {echo "selected";}?>>Design</option>
-                  <option value="education" <?php if ($vn["category"]=='education') {echo "selected";}?>>Education</option>
-                  <option value="film-video" <?php if ($vn["category"]=='film-video') {echo "selected";}?>>Film & Video</option>
-                  <option value="food" <?php if ($vn["category"]=='food') {echo "selected";}?>>Food</option>
-                  <option value="games" <?php if ($vn["category"]=='games') {echo "selected";}?>>Games</option>
-                  <option value="tech" <?php if ($vn["category"]=='tech') {echo "selected";}?>>Tech</option>
+                  <option value="Design" <?php if ($vn["category"]=='Design') {echo "selected";}?>>Design</option>
+                  <option value="Education" <?php if ($vn["category"]=='Education') {echo "selected";}?>>Education</option>
+                  <option value="Film & Video" <?php if ($vn["category"]=='Film & Video') {echo "selected";}?>>Film & Video</option>
+                  <option value="Food" <?php if ($vn["category"]=='Food') {echo "selected";}?>>Food</option>
+                  <option value="Games" <?php if ($vn["category"]=='Games') {echo "selected";}?>>Games</option>
+                  <option value="Technology" <?php if ($vn["category"]=='Technology') {echo "selected";}?>>Tech</option>
                 </select>
               <!-- </div> -->
             </div>
@@ -66,7 +66,7 @@
               <input type="text" class="form-control" name="tag" id="tag" placeholder="Enter tag" value="<?php if (!empty($vn["tag"])) {
     echo $vn["tag"];
 } ?>" required>
-            </div> 
+            </div>
             <div class="form-group">
               <label for="exampleInputFile">Feature Image</label>
               <input type="file" name=" feature_img" id="exampleInputFile" class="form-control">
@@ -146,17 +146,19 @@
               </div>
                 </div>
             </div>
-<!--             <div class="form-group">
+            <div class="form-group">
               <label for="country">country</label>
                 <select name="country" class="form-control c-select" required>
-                  <option value="">Select Country</option> -->
-<!--                   <?php
-                                foreach ($countries as $key=>$city) {
-                                    echo "<option value='" . $city['id'] . "'>" . $city['country_name'] . "</option>";
+                  <!-- <option value="">Select Country</option> -->
+                  <?php
+                                foreach ($countries as $key=>$value) {?>
+                                  <option value="<?php echo $value['id']; ?>" <?php  if($vn["country"] == $value['id'])  echo 'selected'; ?>>
+<?php echo $value['country_name']; ?>
+</option><?php
                                 }
-                                ?> -->
-<!--                 </select>
-            </div> -->
+                                ?>
+                </select>
+            </div>
             <div class="form-group">
               <label for="location">Location</label>
               <input type="text" class="form-control" name="location" id="location" placeholder="Put the project location here" value="<?php if (!empty($vn["location"])) {
@@ -177,12 +179,21 @@
               <input type="file" name=" reward_img" id="reward_img" class="form-control">
               <p class="help-block">Upload a reward image.</p>
             </div>
-            <div class="form-group">
+
+            <!-- <div class="form-group">
               <label for="reward_desc">Reward Description</label>
               <input type="text" class="form-control" name="reward_desc" id="reward_desc" placeholder="Put the reward description here" value="<?php if (!empty($vn["reward_desc"])) {
     echo $vn["reward_desc"];
 } ?>" required>
-            </div>
+            </div> -->
+
+            <div class="form-group">
+                            <label for="reward_desc">Reward Description</label>
+                            <textarea id="editor1" name="reward_desc" rows="10" placeholder="Put the reward description here" cols="80"><?php if (!empty($vn["reward_desc"])) {
+    echo $vn["reward_desc"];
+} ?></textarea>
+<div class="form-group">
+
             <div class="form-group">
                 <div class="formwrapper d-flex">
                     <div class="col-md-6">
@@ -190,7 +201,7 @@
                       <select name="del_month" class="form-control c-select" required>
                         <option value="">Select month</option>
                         <option value="jan"  <?php if ($vn["del_month"]=='jan') {echo "selected";}?>>January</option>
-                        <option value="feb"  <?php if ($vn["del_month"]=='febl') {echo "selected";}?>>February</option>
+                        <option value="feb"  <?php if ($vn["del_month"]=='feb') {echo "selected";}?>>February</option>
                         <option value="march"  <?php if ($vn["del_month"]=='march') {echo "selected";}?>>March</option>
                         <option value="april"  <?php if ($vn["del_month"]=='april') {echo "selected";}?>>April</option>
                         <option value="may"  <?php if ($vn["del_month"]=='may') {echo "selected";}?>>May</option>
@@ -211,7 +222,7 @@
                         <option value="2020" <?php if ($vn["del_year"]=='2020') {echo "selected";}?>>2020</option>
                         <option value="2021" <?php if ($vn["del_year"]=='2021') {echo "selected";}?>>2021</option>
                         <option value="2022" <?php if ($vn["del_year"]=='2022') {echo "selected";}?>>2022</option>
-                        
+
                         <option value="2023" <?php if ($vn["del_year"]=='2023') {echo "selected";}?>>2023</option>
                         <option value="2024" <?php if ($vn["del_year"]=='2024') {echo "selected";}?>>2024</option>
                         <option value="2025" <?php if ($vn["del_year"]=='2025') {echo "selected";}?>>2025</option>
@@ -221,7 +232,20 @@
                         <option value="2029" <?php if ($vn["del_year"]=='2029') {echo "selected";}?>>2029</option>
                         <option value="2030" <?php if ($vn["del_year"]=='2030') {echo "selected";}?>>2030</option>
                         <option value="2031" <?php if ($vn["del_year"]=='2031') {echo "selected";}?>>2031</option>
-                        <option value="2032" <?php if ($vn["del_year"]=='2032') {echo "selected";}?> >2022</option>
+                        <option value="2032" <?php if ($vn["del_year"]=='2032') {echo "selected";}?> >2032</option>
+                        <option value="2033" <?php if ($vn["del_year"]=='2033') {echo "selected";}?>>2033</option>
+                        <option value="2034" <?php if ($vn["del_year"]=='2034') {echo "selected";}?>>2034</option>
+                        <option value="2035" <?php if ($vn["del_year"]=='2035') {echo "selected";}?>>2035</option>
+                        <option value="2036" <?php if ($vn["del_year"]=='2036') {echo "selected";}?>>2036</option>
+                        <option value="2037" <?php if ($vn["del_year"]=='2037') {echo "selected";}?>>2037</option>
+                        <option value="2038" <?php if ($vn["del_year"]=='2038') {echo "selected";}?>>2038</option>
+                        <option value="2039" <?php if ($vn["del_year"]=='2039') {echo "selected";}?>>2039</option>
+                        <option value="2040" <?php if ($vn["del_year"]=='2040') {echo "selected";}?>>2040</option>
+                        <option value="2041" <?php if ($vn["del_year"]=='2041') {echo "selected";}?>>2041</option><option value="2042" <?php if ($vn["del_year"]=='2042') {echo "selected";}?>>2042</option>
+                        <option value="2043" <?php if ($vn["del_year"]=='2043') {echo "selected";}?>>2043</option><option value="2044" <?php if ($vn["del_year"]=='2044') {echo "selected";}?>>2044</option>
+                        <option value="2045" <?php if ($vn["del_year"]=='2045') {echo "selected";}?>>2045</option><option value="2046" <?php if ($vn["del_year"]=='2046') {echo "selected";}?>>2046</option>
+                        <option value="2047" <?php if ($vn["del_year"]=='2047') {echo "selected";}?>>2047</option><option value="2048" <?php if ($vn["del_year"]=='2048') {echo "selected";}?>>2048</option>
+                        <option value="2049" <?php if ($vn["del_year"]=='2049') {echo "selected";}?>>2049</option>
                       </select>
               </div>
                 </div>
@@ -232,6 +256,11 @@
               <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Quantity of physical products"  value="<?php if (!empty($vn["quantity"])) {
     echo $vn["quantity"];
 } ?>" required>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="yes" name="featured_project" <?php if ($vn["featured"]=='yes') {echo "checked";}?>> Featured
+              </label>
             </div>
             <?php
         }

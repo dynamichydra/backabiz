@@ -19,19 +19,15 @@
     {
       echo "<div class='alert alert-success'>".$msg."</div>";
     }
-  ?>  
+  ?>
 
-  <?php
-                    foreach ($faq_data as $key=>$vn) { 
-                        ?>
-        </div>
         <div class="box-divider m-0"></div>
         <div class="box-body">
           <form role="form" method="post" action="<?php echo base_url('admin/update_faq')?>">
             <div class="form-group">
               <label for="exampleInputEmail1">Question:-</label>
-              <input type="text" class="form-control" name="question" id="exampleInputEmail1" placeholder="Enter name" value="<?php echo $vn['ques'];?>">
-              <input type="hidden" class="form-control" name="id" id="exampleInputEmail1" placeholder="Enter name" value="<?php echo $vn['id'];?>">
+              <input type="text" class="form-control" name="question" id="exampleInputEmail1" placeholder="Enter name" value="<?php echo $faq_data[0]['ques'];?>">
+              <input type="hidden" class="form-control" name="id" id="exampleInputEmail1" placeholder="Enter name" value="<?php echo $faq_data[0]['id'];?>">
             </div>
 <!--             <div class="form-group">
               <label for="exampleInputEmail1">Answer:-</label>
@@ -39,11 +35,11 @@
             </div> -->
             <div class="form-group">
                             <label for="exampleInputEmail1">Answer:-</label>
-                            <textarea id="editor1" name="answer" rows="10" cols="80"><?php if (!empty($vn["ans"])) {
-    echo $vn["ans"];
+                            <textarea id="editor1" name="answer" rows="10" cols="80"><?php if (!empty($faq_data[0]["ans"])) {
+    echo $faq_data[0]["ans"];
 } ?></textarea>
                         </div>
-    
+
             <!-- <div class="form-group">
               <label for="exampleInputFile">File input</label>
               <input type="file" id="exampleInputFile" class="form-control">
@@ -55,10 +51,7 @@
               </label>
             </div> -->
             <button type="submit"  class="btn white m-b">Submit</button>
-             <?php
 
-                    }
-                    ?>
           </form>
         </div>
       </div>
