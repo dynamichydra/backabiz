@@ -19,6 +19,7 @@ class Home extends Base {
 		$this->data["project"]=$this->AdminModel->getAllProjectDetails();
 		$this->data["home_market"] = $this->baseModel->_get('cmspages',['page_title'=>'home_market']);
 		$this->data["home_number"] = $this->baseModel->_get('cmspages',['page_title'=>'home_number']);
+		$this->data["ending_project"] = $this->AdminModel->get_ending_projects();
 		$this->data["total_projects"]=$this->AdminModel->get_total_projects();
 		$this->data["f_projects"]=$this->AdminModel->getFeaturedprojects();
 		$this->data["cat_desc"]=$this->AdminModel->get_description();
@@ -141,6 +142,7 @@ class Home extends Base {
   }
 
 	function message(){
+		$this->data["page_title"]="Backabiz";
 		$this->data["msg"] = $this->session->flashdata('msg');
 		$this->data["type"] = $this->session->flashdata('type');
 		if($this->data["msg"]!='')
@@ -162,6 +164,109 @@ class Home extends Base {
         redirect('home/login');
       }
   }
+
+	public function contact()
+	{
+		$this->data["contact"]=$this->AdminModel->getdata(["status"=>"active"],'contact_us');
+		$this->data['title']	= 'Contact';
+		$this->data["page_title"]="Contact - Backabiz";
+		$this->render_front('contact');
+	}
+
+	public function contact_mail()
+	{
+				 $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email');
+				 if ($this->form_validation->run() == TRUE) {
+					 $mess = $this->input->post('message');
+					 $name = $this->input->post('name');
+						 $mail_data = array(
+								 'email' => $this->input->post('email'),
+								 'name' => $this->input->post('name'),
+								 'subject' => $this->input->post('subject'),
+								 'phone' => $this->input->post('phone'),
+								 'message' => $this->input->post('message'),
+								 'user_id' => $this->input->post('id'),
+						 );
+						 $id=$this->AdminModel->insert('contact_mail',$mail_data);
+										$config = Array(
+									'protocol'  => 'smtp',
+									'smtp_host' => 'ssl://smtp.googlemail.com',
+									'smtp_port' => '465',
+									'smtp_user' => 'nirajs.official@gmail.com',
+									'smtp_pass' => 'nir@j7580',
+									'mailtype'  => 'html',
+									'starttls'  => true,
+									'newline'   => "\r\n"
+							);
+
+
+
+			 $subject=$this->input->post('subject');    //subject
+			 $message= /*-----------email body starts-----------*/
+				 'Message from '.$name.' ,
+
+				 User Details:-
+				 -------------------------------------------------
+				 Name   : ' . $name . '
+				 Email: ' . $this->input->post('email') . '
+				 Phone: ' . $this->input->post('phone') . '
+				 -------------------------------------------------
+
+				 User Message:-
+
+				 ' . $mess;
+
+			 /*-----------email body ends-----------*/
+
+			 $this->load->library('email', $config);
+
+			 $this->email->from('nirajs.official@gmail.com', 'Contact-Backabiz');
+			 $this->email->to('niraj@sibyltech.co');
+			 $this->email->subject($subject);
+			 $this->email->message($message);
+			 if($this->email->send()){
+			 $this->session->set_flashdata(['msg'=> 'Thank You For Contacting Us.','type'=>'success']);
+			 redirect('home/message');
+		 }else
+		 {
+			 echo "sorry Mail sending failed, pls try again";
+		 }
+
+	 }else{
+		 $this->session->set_flashdata(['error'=> 'Please Enter A valid Mail','type'=>'success']);
+		 redirect('home/contact');
+	 }
+ }
+
+ public function news()
+ {
+	 // $this->data["contact"]=$this->AdminModel->getdata(["status"=>"active"],'contact_us');
+	 $this->data['title']	= 'News';
+	 $this->data["page_title"]="News";
+	 $this->render_front('news');
+ }
+
+ public function terms()
+ {
+	 $this->data["terms"]=$this->AdminModel->getdata(["status="=>"active"],'terms');
+	 $this->data['title']	= 'Terms';
+	 $this->data["page_title"]="Terms";
+	 $this->render_front('terms');
+ }
+ public function privacy()
+ {
+	 $this->data["terms"]=$this->AdminModel->getdata(["status="=>"active"],'privacy');
+	 $this->data['title']	= 'Privacy';
+	 $this->data["page_title"]="Privacy";
+	 $this->render_front('privacy');
+ }
+ public function legal()
+ {
+	 $this->data["terms"]=$this->AdminModel->getdata(["status="=>"active"],'legal');
+	 $this->data['title']	= 'Legal';
+	 $this->data["page_title"]="Legal";
+	 $this->render_front('legal');
+ }
 
 
 }

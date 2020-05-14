@@ -27,80 +27,187 @@
 
                       <?php
                                 if (!empty($faq)) {
-                                    foreach ($faq as $key=>$vn) {
 
                                         ?>
                       <div class="panel panel-default">
                         <div class="panel-heading">
                           <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="faq-links"><?php echo $vn['ques'];?> </a>  
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="faq-links"><?php echo $faq[0]['ques'];?> </a>
                           </h4>
                         </div>
                         <div id="collapse1" class="panel-collapse collapse">
-                          <div class="panel-body"><?php echo $vn['ans'];?>
+                          <div class="panel-body"><?php echo $faq[0]['ans'];?>
                         </div>
                         </div>
                       </div>
+                      <?php if(!empty($faq[1]['ques'])){?>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="faq-links"><?php echo $faq[1]['ques'];?></a>
+                            </h4>
+                          </div>
+                          <div id="collapse2" class="panel-collapse collapse">
+                            <div class="panel-body">
+                              <?php echo $faq[1]['ans'];?>
+                          </div>
+                          </div>
+                        </div>
+                        <?php
+                      }
+                        ?>
+                        <?php if(!empty($faq[2]['ques'])){?>
+                          <div class="panel panel-default">
+                            <div class="panel-heading">
+                              <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="faq-links"><?php echo $faq[2]['ques'];?></a>
+                              </h4>
+                            </div>
+                            <div id="collapse3" class="panel-collapse collapse">
+                              <div class="panel-body">
+                                <?php echo $faq[2]['ans'];?>
+                            </div>
+                            </div>
+                          </div>
+                          <?php
+                        }
+                          ?>
+                          <?php if(!empty($faq[3]['ques'])){?>
+                            <div class="panel panel-default">
+                              <div class="panel-heading">
+                                <h4 class="panel-title">
+                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse4" class="faq-links"><?php echo $faq[3]['ques'];?></a>
+                                </h4>
+                              </div>
+                              <div id="collapse4" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                  <?php echo $faq[3]['ans'];?>
+                              </div>
+                              </div>
+                            </div>
+                            <?php
+                          }
+                            ?>
+                            <?php if(!empty($faq[4]['ques'])){?>
+                              <div class="panel panel-default">
+                                <div class="panel-heading">
+                                  <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse5" class="faq-links"><?php echo $faq[4]['ques'];?></a>
+                                  </h4>
+                                </div>
+                                <div id="collapse5" class="panel-collapse collapse">
+                                  <div class="panel-body">
+                                    <?php echo $faq[4]['ans'];?>
+                                </div>
+                                </div>
+                              </div>
+                              <?php
+                            }
+                              ?>
+
+                              <?php if(!empty($faq[5]['ques'])){?>
+                                <div class="panel panel-default">
+                                  <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse6" class="faq-links"><?php echo $faq[5]['ques'];?></a>
+                                    </h4>
+                                  </div>
+                                  <div id="collapse6" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                      <?php echo $faq[5]['ans'];?>
+                                  </div>
+                                  </div>
+                                </div>
+                                <?php
+                              }
+                                ?>
+
+                                <?php if(!empty($faq[6]['ques'])){?>
+                                  <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                      <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse7" class="faq-links"><?php echo $faq[6]['ques'];?></a>
+                                      </h4>
+                                    </div>
+                                    <div id="collapse7" class="panel-collapse collapse">
+                                      <div class="panel-body">
+                                        <?php echo $faq[6]['ans'];?>
+                                    </div>
+                                    </div>
+                                  </div>
+                                  <?php
+                                }
+                                  ?>
+
+                                  <?php if(!empty($faq[7]['ques'])){?>
+                                    <div class="panel panel-default">
+                                      <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse8" class="faq-links"><?php echo $faq[7]['ques'];?></a>
+                                        </h4>
+                                      </div>
+                                      <div id="collapse8" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                          <?php echo $faq[7]['ans'];?>
+                                      </div>
+                                      </div>
+                                    </div>
+                                    <?php
+                                  }
+                                    ?>
+                                    <?php if(!empty($faq[8]['ques'])){?>
+                                      <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                          <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse9" class="faq-links"><?php echo $faq[8]['ques'];?></a>
+                                          </h4>
+                                        </div>
+                                        <div id="collapse9" class="panel-collapse collapse">
+                                          <div class="panel-body">
+                                            <?php echo $faq[8]['ans'];?>
+                                        </div>
+                                        </div>
+                                      </div>
+                                      <?php
+                                    }
+                                      ?>
+                                      <?php if(!empty($faq[9]['ques'])){?>
+                                        <div class="panel panel-default">
+                                          <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapse10" class="faq-links"><?php echo $faq[9]['ques'];?></a>
+                                            </h4>
+                                          </div>
+                                          <div id="collapse10" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                              <?php echo $faq[9]['ans'];?>
+                                          </div>
+                                          </div>
+                                        </div>
+                                        <?php
+                                      }
+                                        ?>
+                                        <?php if(!empty($faq[10]['ques'])){?>
+                                          <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                              <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse11" class="faq-links"><?php echo $faq[10]['ques'];?></a>
+                                              </h4>
+                                            </div>
+                                            <div id="collapse11" class="panel-collapse collapse">
+                                              <div class="panel-body">
+                                                <?php echo $faq[10]['ans'];?>
+                                            </div>
+                                            </div>
+                                          </div>
+                                          <?php
+                                        }
+                                          ?>
                       <?php
-                    }
                   }
                       ?>
-<!--                       <div class="panel panel-default">
-                        <div class="panel-heading">
-                          <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="faq-links">Can I pay for my order by credit card?</a>
-                          </h4>
-                        </div>
-                        <div id="collapse2" class="panel-collapse collapse">
-                          <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                          There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing hidden in the middle of text.
-                        </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading">
-                          <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="faq-links">Can I pay for my order by credit card? </a>
-                          </h4>
-                        </div>
-                        <div id="collapse3" class="panel-collapse collapse">
-                          <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                          There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing hidden in the middle of text.
-                        </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading">
-                          <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4" class="faq-links">Can I pay for my order by credit card?</a>
-                          </h4>
-                        </div>
-                        <div id="collapse4" class="panel-collapse collapse">
-                          <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                          There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing hidden in the middle of text.
-                        </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading">
-                          <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5" class="faq-links">Can I pay for my order by credit card?</a>
-                          </h4>
-                        </div>
-                        <div id="collapse5" class="panel-collapse collapse">
-                          <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                          There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing hidden in the middle of text.
-                        </div>
-                        </div>
-                      </div> -->
+
+
 
                       <div class="faq-fot">
                         <h2>Still have a question?</h2>
@@ -113,3 +220,21 @@
               </div>
             </section>
         </main>
+        <!-- jquery/js -->
+
+<script>
+var acc = document.getElementsByClassName("faq-links");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+acc[i].addEventListener("click", function() {
+this.classList.toggle("active");
+var panel = this.nextElementSibling;
+if (panel.style.maxHeight) {
+panel.style.maxHeight = null;
+} else {
+panel.style.maxHeight = panel.scrollHeight + "px";
+}
+});
+}
+</script>

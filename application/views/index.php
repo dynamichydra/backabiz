@@ -107,12 +107,12 @@
                     <div class="row">
                       <div class="col-md-12" id="project-view">
                         <ul class="nav nav-pills new-nav-pills">
-                          <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#spcl-project-tab1">Education</a></li>
-                          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#spcl-project-tab2">Design</a></li>
-                          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#spcl-project-tab3">Film & Video</a></li>
-                          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#spcl-project-tab4">Food</a></li>
-                          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#spcl-project-tab5">Games</a></li>
-                          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#spcl-project-tab6">Technology</a></li>
+                          <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#spcl-project-tab1">Food & Beverage</a></li>
+                          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#spcl-project-tab2">Retail</a></li>
+                          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#spcl-project-tab3">Health & Wellness</a></li>
+                          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#spcl-project-tab4">Photography</a></li>
+                          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#spcl-project-tab5">Trades</a></li>
+                          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#spcl-project-tab6">Consumer Goods</a></li>
                         </ul>
                         <div class="tab-content new-tab-content">
 
@@ -121,10 +121,10 @@
                               <div class="col-md-4">
                                   <div class="spcl-story-right">
                                     <img src="<?php echo base_url(); ?>assets/images/new/ico1a.svg">
-                                    <h2><a href="#">Education</a></h2>
+                                    <h2><a href="<?php echo base_url('project/category/Food & Beverage')?>">Food & Beverage</a></h2>
                                     <?php
                                     foreach ($total_projects as $key=>$vn) {
-                                      if($vn['category']=="Education"){
+                                      if($vn['category']=="Food & Beverage"){
                                         ?>
                                     <h3><?php echo $vn['total'];?> Popular Project</h3>
                                     <?php
@@ -133,27 +133,27 @@
                                   ?>
                                   <?php
                                   foreach ($cat_desc as $key=>$vn) {
-                                    if($vn['cat_name']=="Education"){
+                                    if($vn['cat_name']=="Food & Beverage"){
                                       ?>
                                     <p><?php echo $vn['cat_description']?></p>
                                     <?php
                                   }
                                 }
                                   ?>
-                                    <a type="submit" class="submit color1 yellow" href="#">See all project</a>
+                                    <a type="submit" class="submit color1 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE BACKABIZ CAMPAIGNS</center></a>
                                   </div>
                               </div>
 
                               <?php
                               foreach ($f_projects as $key=>$vn) {
-                                if($vn['category']=="Education" && $vn['featured']=="yes"){
+                                if($vn['category']=="Food & Beverage" && $vn['featured']=="yes"){
                               ?>
                               <div class="col-md-8">
                                 <div id="tab-project-wrapper">
                                   <div class="row">
                                     <div class="col-sm-6">
                                   <div class="project-details">
-                                    <h2 class="productauthor__title"><a href="#"><?php echo $vn['title']?></a></h2>
+                                    <h2 class="productauthor__title"><a href="<?php echo base_url('project/' . $vn['p_id']); ?>"><?php echo $vn['title']?></a></h2>
                                     <div class="text"><?php echo $vn['short_description']?></div><br>
                                     <div class="progression-studios-raised-percent">raised of $<?php echo number_format($vn['funding_goal']);?> <span>goal</span></div>
                                       <div class="progression-studios-fund-raised">$<?php echo number_format($vn['rec_amount']);?> <span>raised</span></div>
@@ -190,7 +190,7 @@
                                   </div>
                                   <div class="col-sm-6">
                                     <div class="project-image-container">
-                                        <a href="#">
+                                        <a href="<?php echo base_url('project/' . $vn['p_id']); ?>">
                                           <img src="<?php echo base_url('uploads/project/' . $vn['feature_img']); ?>" alt="project-one" class="img-responsive">
                                         </a>
                                       </div>
@@ -213,10 +213,10 @@
                              <div class="col-md-4">
                                   <div class="spcl-story-right">
                                     <img src="<?php echo base_url(); ?>assets/images/new/ico2a.svg">
-                                    <h2><a href="#">Design</a></h2>
+                                    <h2><a href="<?php echo base_url('project/category/Retail')?>">Retail</a></h2>
                                     <?php
                                     foreach ($total_projects as $key=>$vn) {
-                                      if($vn['category']=="Design"){
+                                      if($vn['category']=="Retail"){
                                         ?>
                                     <h3><?php echo $vn['total'];?> Popular Project</h3>
                                     <?php
@@ -225,28 +225,28 @@
                                   ?>
                                   <?php
                                   foreach ($cat_desc as $key=>$vn) {
-                                    if($vn['cat_name']=="Design"){
+                                    if($vn['cat_name']=="Retail"){
                                       ?>
                                     <p><?php echo $vn['cat_description']?></p>
                                     <?php
                                   }
                                 }
                                   ?>
-                                    <a type="submit" class="submit color2 yellow" href="#">See all project</a>
+                                    <a type="submit" class="submit color2 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE BACKABIZ CAMPAIGNS</center></a>
                                   </div>
                               </div>
 
 
                               <?php
                               foreach ($f_projects as $key=>$vn) {
-                                if($vn['category']=="Design" && $vn['featured']=="yes"){
+                                if($vn['category']=="Retail" && $vn['featured']=="yes"){
                               ?>
                               <div class="col-md-8">
                                 <div id="tab-project-wrapper">
                                   <div class="row">
                                     <div class="col-sm-6">
                                   <div class="project-details">
-                                    <h2 class="productauthor__title"><a href="#"><?php echo $vn['title']?></a></h2>
+                                    <h2 class="productauthor__title"><a href="<?php echo base_url('project/' . $vn['p_id']); ?>"><?php echo $vn['title']?></a></h2>
                                     <div class="text"><?php echo $vn['short_description']?></div><br>
                                     <div class="progression-studios-raised-percent">raised of $<?php echo number_format($vn['funding_goal']);?> <span>goal</span></div>
                                       <div class="progression-studios-fund-raised">$<?php echo number_format($vn['rec_amount']);?> <span>raised</span></div>
@@ -283,7 +283,7 @@
                                   </div>
                                   <div class="col-sm-6">
                                     <div class="project-image-container">
-                                        <a href="#">
+                                        <a href="<?php echo base_url('project/' . $vn['p_id']); ?>">
                                           <img src="<?php echo base_url('uploads/project/' . $vn['feature_img']); ?>" alt="project-one" class="img-responsive">
                                         </a>
                                       </div>
@@ -302,10 +302,10 @@
                               <div class="col-md-4">
                                   <div class="spcl-story-right">
                                   <img src="<?php echo base_url(); ?>assets/images/new/ico3a.svg">
-                                    <h2><a href="#">Film & Video</a></h2>
+                                    <h2><a href="<?php echo base_url('project/category/Health & Wellness')?>">Health & Wellness</a></h2>
                                     <?php
                                     foreach ($total_projects as $key=>$vn) {
-                                      if($vn['category']=="Film & Video"){
+                                      if($vn['category']=="Health & Wellness"){
                                         ?>
                                     <h3><?php echo $vn['total'];?> Popular Project</h3>
                                     <?php
@@ -314,28 +314,28 @@
                                   ?>
                                   <?php
                                   foreach ($cat_desc as $key=>$vn) {
-                                    if($vn['cat_name']=="Film & Video"){
+                                    if($vn['cat_name']=="Health & Wellness"){
                                       ?>
                                     <p><?php echo $vn['cat_description']?></p>
                                     <?php
                                   }
                                 }
                                   ?>
-                                    <a type="submit" class="submit color3 yellow" href="#">See all project</a>
+                                    <a type="submit" class="submit color3 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE BACKABIZ CAMPAIGNS</center></a>
                                   </div>
                               </div>
 
 
                               <?php
                               foreach ($f_projects as $key=>$vn) {
-                                if($vn['category']=="Film & Video" && $vn['featured']=="yes"){
+                                if($vn['category']=="Health & Wellness" && $vn['featured']=="yes"){
                               ?>
                               <div class="col-md-8">
                                 <div id="tab-project-wrapper">
                                   <div class="row">
                                     <div class="col-sm-6">
                                   <div class="project-details">
-                                    <h2 class="productauthor__title"><a href="#"><?php echo $vn['title']?></a></h2>
+                                    <h2 class="productauthor__title"><a href="<?php echo base_url('project/' . $vn['p_id']); ?>"><?php echo $vn['title']?></a></h2>
                                     <div class="text"><?php echo $vn['short_description']?></div><br>
                                     <div class="progression-studios-raised-percent">raised of $<?php echo number_format($vn['funding_goal']);?> <span>goal</span></div>
                                       <div class="progression-studios-fund-raised">$<?php echo number_format($vn['rec_amount']);?> <span>raised</span></div>
@@ -372,7 +372,7 @@
                                   </div>
                                   <div class="col-sm-6">
                                     <div class="project-image-container">
-                                        <a href="#">
+                                        <a href="<?php echo base_url('project/' . $vn['p_id']); ?>">
                                           <img src="<?php echo base_url('uploads/project/' . $vn['feature_img']); ?>" alt="project-one" class="img-responsive">
                                         </a>
                                       </div>
@@ -391,10 +391,10 @@
                             <div class="col-md-4">
                                   <div class="spcl-story-right">
                                     <img src="<?php echo base_url(); ?>assets/images/new/ico4a.svg">
-                                    <h2><a href="#">Food</a></h2>
+                                    <h2><a href="<?php echo base_url('project/category/Photography')?>">Photography</a></h2>
                                     <?php
                                     foreach ($total_projects as $key=>$vn) {
-                                      if($vn['category']=="Food"){
+                                      if($vn['category']=="Photography"){
                                         ?>
                                     <h3><?php echo $vn['total'];?> Popular Project</h3>
                                     <?php
@@ -403,28 +403,28 @@
                                   ?>
                                   <?php
                                   foreach ($cat_desc as $key=>$vn) {
-                                    if($vn['cat_name']=="Food"){
+                                    if($vn['cat_name']=="Photography"){
                                       ?>
                                     <p><?php echo $vn['cat_description']?></p>
                                     <?php
                                   }
                                 }
                                   ?>
-                                    <a type="submit" class="submit color4 yellow" href="#">See all project</a>
+                                    <a type="submit" class="submit color4 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE BACKABIZ CAMPAIGNS</center></a>
                                   </div>
                               </div>
 
 
                               <?php
                               foreach ($f_projects as $key=>$vn) {
-                                if($vn['category']=="Food" && $vn['featured']=="yes"){
+                                if($vn['category']=="Photography" && $vn['featured']=="yes"){
                               ?>
                               <div class="col-md-8">
                                 <div id="tab-project-wrapper">
                                   <div class="row">
                                     <div class="col-sm-6">
                                   <div class="project-details">
-                                    <h2 class="productauthor__title"><a href="#"><?php echo $vn['title']?></a></h2>
+                                    <h2 class="productauthor__title"><a href="<?php echo base_url('project/' . $vn['p_id']); ?>"><?php echo $vn['title']?></a></h2>
                                     <div class="text"><?php echo $vn['short_description']?></div><br>
                                     <div class="progression-studios-raised-percent">raised of $<?php echo number_format($vn['funding_goal']);?> <span>goal</span></div>
                                       <div class="progression-studios-fund-raised">$<?php echo number_format($vn['rec_amount']);?> <span>raised</span></div>
@@ -461,7 +461,7 @@
                                   </div>
                                   <div class="col-sm-6">
                                     <div class="project-image-container">
-                                        <a href="#">
+                                        <a href="<?php echo base_url('project/' . $vn['p_id']); ?>">
                                           <img src="<?php echo base_url('uploads/project/' . $vn['feature_img']); ?>" alt="project-one" class="img-responsive">
                                         </a>
                                       </div>
@@ -480,10 +480,10 @@
                               <div class="col-md-4">
                                   <div class="spcl-story-right">
                                     <img src="<?php echo base_url(); ?>assets/images/new/ico5a.svg">
-                                    <h2><a href="#">Games</a></h2>
+                                    <h2><a href="<?php echo base_url('project/category/Trades')?>">Trades</a></h2>
                                     <?php
                                     foreach ($total_projects as $key=>$vn) {
-                                      if($vn['category']=="Games"){
+                                      if($vn['category']=="Trades"){
                                         ?>
                                     <h3><?php echo $vn['total'];?> Popular Project</h3>
                                     <?php
@@ -492,14 +492,14 @@
                                   ?>
                                   <?php
                                   foreach ($cat_desc as $key=>$vn) {
-                                    if($vn['cat_name']=="Games"){
+                                    if($vn['cat_name']=="Trades"){
                                       ?>
                                     <p><?php echo $vn['cat_description']?></p>
                                     <?php
                                   }
                                 }
                                   ?>
-                                    <a type="submit" class="submit color5 yellow" href="#">See all project</a>
+                                    <a type="submit" class="submit color5 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE BACKABIZ CAMPAIGNS</center></a>
                                   </div>
                               </div>
 
@@ -513,7 +513,7 @@
                                   <div class="row">
                                     <div class="col-sm-6">
                                   <div class="project-details">
-                                    <h2 class="productauthor__title"><a href="#"><?php echo $vn['title']?></a></h2>
+                                    <h2 class="productauthor__title"><a href="<?php echo base_url('project/' . $vn['p_id']); ?>"><?php echo $vn['title']?></a></h2>
                                     <div class="text"><?php echo $vn['short_description']?></div><br>
                                     <div class="progression-studios-raised-percent">raised of $<?php echo number_format($vn['funding_goal']);?> <span>goal</span></div>
                                       <div class="progression-studios-fund-raised">$<?php echo number_format($vn['rec_amount']);?> <span>raised</span></div>
@@ -550,7 +550,7 @@
                                   </div>
                                   <div class="col-sm-6">
                                     <div class="project-image-container">
-                                        <a href="#">
+                                        <a href="<?php echo base_url('project/' . $vn['p_id']); ?>">
                                           <img src="<?php echo base_url('uploads/project/' . $vn['feature_img']); ?>" alt="project-one" class="img-responsive">
                                         </a>
                                       </div>
@@ -569,10 +569,10 @@
                             <div class="col-md-4">
                                   <div class="spcl-story-right">
                                     <img src="<?php echo base_url(); ?>assets/images/new/ico6a.svg">
-                                    <h2><a href="#">Technology</a></h2>
+                                    <h2><a href="<?php echo base_url('project/category/Consumer Goods')?>">Consumer Goods</a></h2>
                                     <?php
                                     foreach ($total_projects as $key=>$vn) {
-                                      if($vn['category']=="Technology"){
+                                      if($vn['category']=="Consumer Goods"){
                                         ?>
                                     <h3><?php echo $vn['total'];?> Popular Project</h3>
                                     <?php
@@ -581,28 +581,28 @@
                                   ?>
                                   <?php
                                   foreach ($cat_desc as $key=>$vn) {
-                                    if($vn['cat_name']=="Technology"){
+                                    if($vn['cat_name']=="Consumer Goods"){
                                       ?>
                                     <p><?php echo $vn['cat_description']?></p>
                                     <?php
                                   }
                                 }
                                   ?>
-                                    <a type="submit" class="submit color6 yellow" href="#">See all project</a>
+                                    <a type="submit" class="submit color6 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE BACKABIZ CAMPAIGNS</center></a>
                                   </div>
                               </div>
 
 
                               <?php
                               foreach ($f_projects as $key=>$vn) {
-                                if($vn['category']=="Technology" && $vn['featured']=="yes"){
+                                if($vn['category']=="Consumer Goods" && $vn['featured']=="yes"){
                               ?>
                               <div class="col-md-8">
                                 <div id="tab-project-wrapper">
                                   <div class="row">
                                     <div class="col-sm-6">
                                   <div class="project-details">
-                                    <h2 class="productauthor__title"><a href="#"><?php echo $vn['title']?></a></h2>
+                                    <h2 class="productauthor__title"><a href="<?php echo base_url('project/' . $vn['p_id']); ?>"><?php echo $vn['title']?></a></h2>
                                     <div class="text"><?php echo $vn['short_description']?></div><br>
                                     <div class="progression-studios-raised-percent">raised of $<?php echo number_format($vn['funding_goal']);?> <span>goal</span></div>
                                       <div class="progression-studios-fund-raised">$<?php echo number_format($vn['rec_amount']);?> <span>raised</span></div>
@@ -639,7 +639,7 @@
                                   </div>
                                   <div class="col-sm-6">
                                     <div class="project-image-container">
-                                        <a href="#">
+                                        <a href="<?php echo base_url('project/' . $vn['p_id']); ?>">
                                           <img src="<?php echo base_url('uploads/project/' . $vn['feature_img']); ?>" alt="project-one" class="img-responsive">
                                         </a>
                                       </div>
@@ -691,7 +691,7 @@
 	                      		</a>
 	                      		<ul class="project-link">
                                     <li>
-                                      <a href="#"><?php echo $value['category']?></a>
+                                      <a href="<?php echo base_url('project/category/').$value['category']?>"><?php echo $value['category']?></a>
                                     </li>
                                 </ul>
 	                      		<!--<a href="#" class="project-link">Film &amp; Video</a>-->
@@ -734,7 +734,7 @@
               }
                       ?><!--project-item end -->
 
-                      <div class="col-sm-12 text-center"><a href="#" class="yellow">MORE PROJECTS <i class="fa fa-arrow-circle-o-down"></i></a></div>
+                      <div class="col-sm-12 text-center"><a href="#" class="yellow">SEE MORE BACKABIZ CAMPAIGNS <i class="fa fa-arrow-circle-o-down"></i></a></div>
                   </div>
               </div>
             </section>

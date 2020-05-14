@@ -52,7 +52,10 @@
          <section id="footer-bottom">
             <div class="container">
               <div class="row">
-                 <div class="col-sm-6"><p>© <?php $year = date("Y"); echo $year; ?> by Backabiz.  All rights reserved.</p></div>
+                 <div class="col-sm-6"><p>© <?php $year = date("Y"); echo $year; ?> by Backabiz.  All rights reserved.<span> &nbsp;<a href='<?php echo base_url('home/terms')?>' style="color:#f2f2f2;"> Terms</a>
+                 &nbsp;<span><a href='<?php echo base_url('home/privacy')?>' style="color:#f2f2f2;"> Privacy</a>&nbsp;<span><a href='<?php echo base_url('home/legal')?>' style="color:#f2f2f2;"> Legal</a></div>
+                   <!-- <div class="col-sm-2"><p> Terms.</div> -->
+                 <!-- <p>Terms.</p> -->
                  <div class="col-sm-6">
                      <ul class="bottom-menu-left">
                          <li><a href='#'><i class="fa fa-facebook"></i></a></li>
@@ -106,84 +109,6 @@
       <!-- bootstrap js -->
 		<script src="<?php echo base_url(); ?>assets/frontend/assets/js/bootstrap.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/frontend/assets/js/main.js"></script>
-    <script type="text/javascript">
-      function get_states(id)
-    {
-        $.ajax({
-            url:"<?php echo base_url('admin/get_state_by_country_id') ?>",
-            method:"POST",
-            data:{"country_id":id},
-            success:function(response)
-            {
-                //console.log(response);
-                var json=JSON.parse(response);
-                if(json.status=="success")
-                {
-                    var data=json.data;
-                    var optionfield='';
-                    optionfield+='<option value="" selected disabled>-----Select state-----</option>';
-                    for(i=0;i<data.length;i++)
-                    {
-                        <?php if(isset($user) && $user!=""){?>
-                            var district=<?php echo $user->district ?>;
-                            if(data[i].slno==district)
-                            {
-                                optionfield+='<option value="'+data[i].id+'" selected>'+data[i].name+'</option>';
-                            }else{
-                                optionfield+='<option value="'+data[i].id+'">'+data[i].name+'</option>';
-                            }
-                        <?php }else{ ?>
-                        optionfield+='<option value="'+data[i].id+'">'+data[i].name+'</option>';
-                        <?php } ?>
-                    }
-                    $("#state").html(optionfield);
 
-                }else{
-    //                alert(json.data);
-    //                return false;
-                }
-            }
-        });
-    }
-
-    function get_city(id)
-    {
-        $.ajax({
-            url:"<?php echo base_url('admin/get_city_by_state_id') ?>",
-            method:"POST",
-            data:{"state_id":id},
-            success:function(response)
-            {
-                //console.log(response);
-                var json=JSON.parse(response);
-                if(json.status=="success")
-                {
-                    var data=json.data;
-                    var optionfield='';
-                    optionfield+='<option value="" selected disabled>-----Select city-----</option>';
-                    for(i=0;i<data.length;i++)
-                    {
-                        <?php if(isset($user) && $user!=""){?>
-                            var district=<?php echo $user->district ?>;
-                            if(data[i].slno==district)
-                            {
-                                optionfield+='<option value="'+data[i].id+'" selected>'+data[i].name+'</option>';
-                            }else{
-                                optionfield+='<option value="'+data[i].id+'">'+data[i].name+'</option>';
-                            }
-                        <?php }else{ ?>
-                        optionfield+='<option value="'+data[i].id+'">'+data[i].name+'</option>';
-                        <?php } ?>
-                    }
-                    $("#city").html(optionfield);
-
-                }else{
-    //                alert(json.data);
-    //                return false;
-                }
-            }
-        });
-    }
-    </script>
      </body>
      </html>

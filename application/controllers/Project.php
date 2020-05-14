@@ -17,7 +17,7 @@ class Project extends Base {
       if(count($this->data['project'])>0){
         $this->data['project']   = $this->data['project'][0];
         $this->data['title']	= $this->data['project']->title;
-				$this->data["page_title"]="All Projects";
+				$this->data["page_title"]=$this->data['project']->title;
         $this->data['pcount']   = $this->ProjectModel->_get('project',['user_id'=>$this->data['project']->user_id],[],"count(id) tot");
         $this->data['backers']   = $this->ProjectModel->get_project_backers(['project_id'=>$this->data['project']->id]);
 

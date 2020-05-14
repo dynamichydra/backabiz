@@ -19,7 +19,7 @@
     {
       echo "<div class='alert alert-success'>".$msg."</div>";
     }
-  ?>  
+  ?>
         </div>
         <div class="box-divider m-0"></div>
         <div class="box-body">
@@ -38,7 +38,7 @@
     echo $pagecontent["page_content"];
 } ?></textarea>
                         </div>
-    
+
             <!-- <div class="form-group">
               <label for="exampleInputFile">File input</label>
               <input type="file" id="exampleInputFile" class="form-control">

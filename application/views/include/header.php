@@ -36,6 +36,12 @@
       <link rel="stylesheet" href="<?php echo base_url(); ?>assets/style.css">
       <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <!-- <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script> -->
+      <!-- jquery.flexslider.js -->
+      <script src="<?php echo base_url(); ?>assets/js/flexslider-min.js"></script>
+      <!-- bootstrap js -->
+      <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+      <script src="<?php echo base_url(); ?>assets/js/main.js"></script>
      </head>
      <body class="header-fixed page no-sidebar header-style-2 topbar-style-2">
       <div class="wrapper">
@@ -117,9 +123,9 @@
                      ?>
                                     </ul>
                                 </li>
-                                <li class="menu-item"><a href="news.html">News</a></li>
+                                <li class="menu-item"><a href="<?php echo base_url('home/news') ?>">News</a></li>
                                 <li class="menu-item"><a href="<?php echo base_url('home/faqs') ?>">Faqs</a></li>
-                                <li class="menu-item"><a href="contact.html">Contact</a></li>
+                                <li class="menu-item"><a href="<?php echo base_url('home/contact') ?>">Contact</a></li>
                             </ul>
                         </nav><!-- /#main-nav -->
 

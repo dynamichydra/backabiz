@@ -109,7 +109,7 @@
 								</div>
                 <div class="form-group">
                   <label for="country">country</label>
-                    <select name="country" id="country" class="form-control c-select" onchange= "get_states(this.value)" required>
+                    <select name="country" id="country" class="form-control c-select" onchange= "get_state(this.value)" required>
                       <option value="">Select Country</option>
                       <?php
                                     foreach ($countries as $key=>$value) {?>
@@ -181,3 +181,83 @@
 
             </section>
         </main>
+        <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+        <script type="text/javascript">
+          function get_state(id)
+        {
+            $.ajax({
+                url:"<?php echo base_url('admin/get_state_by_country_id') ?>",
+                method:"POST",
+                data:{"country_id":id},
+                success:function(response)
+                {
+                    //console.log(response);
+                    var json=JSON.parse(response);
+                    if(json.status=="success")
+                    {
+                        var data=json.data;
+                        var optionfield='';
+                        optionfield+='<option value="" selected disabled>-----Select state-----</option>';
+                        for(i=0;i<data.length;i++)
+                        {
+                            <?php if(isset($user) && $user!=""){?>
+                                var district=<?php echo $user->district ?>;
+                                if(data[i].slno==district)
+                                {
+                                    optionfield+='<option value="'+data[i].id+'" selected>'+data[i].name+'</option>';
+                                }else{
+                                    optionfield+='<option value="'+data[i].id+'">'+data[i].name+'</option>';
+                                }
+                            <?php }else{ ?>
+                            optionfield+='<option value="'+data[i].id+'">'+data[i].name+'</option>';
+                            <?php } ?>
+                        }
+                        $("#state").html(optionfield);
+
+                    }else{
+        //                alert(json.data);
+        //                return false;
+                    }
+                }
+            });
+        }
+
+        function get_city(id)
+        {
+            $.ajax({
+                url:"<?php echo base_url('admin/get_city_by_state_id') ?>",
+                method:"POST",
+                data:{"state_id":id},
+                success:function(response)
+                {
+                    //console.log(response);
+                    var json=JSON.parse(response);
+                    if(json.status=="success")
+                    {
+                        var data=json.data;
+                        var optionfield='';
+                        optionfield+='<option value="" selected disabled>-----Select city-----</option>';
+                        for(i=0;i<data.length;i++)
+                        {
+                            <?php if(isset($user) && $user!=""){?>
+                                var district=<?php echo $user->district ?>;
+                                if(data[i].slno==district)
+                                {
+                                    optionfield+='<option value="'+data[i].id+'" selected>'+data[i].name+'</option>';
+                                }else{
+                                    optionfield+='<option value="'+data[i].id+'">'+data[i].name+'</option>';
+                                }
+                            <?php }else{ ?>
+                            optionfield+='<option value="'+data[i].id+'">'+data[i].name+'</option>';
+                            <?php } ?>
+                        }
+                        $("#city").html(optionfield);
+
+                    }else{
+        //                alert(json.data);
+        //                return false;
+                    }
+                }
+            });
+        }
+        </script>

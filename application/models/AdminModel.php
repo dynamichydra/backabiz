@@ -142,7 +142,7 @@ INNER JOIN countries on project.country=countries.id WHERE project.status='activ
       $query = $this->db->query("SELECT user.last_name,user.first_name,user.img as user_img, project.title, project.category, project.id, project.end_date, project.start_date, project.status, project.funding_goal, project.feature_img, project.rec_amount, project.location, countries.country_name
 FROM user
 INNER JOIN project ON user.id=project.user_id
-INNER JOIN countries on project.country=countries.id WHERE project.status!='delete' LIMIT 3");
+INNER JOIN countries on project.country=countries.id WHERE project.status='active' AND project.featured= 'yes' LIMIT 3");
       if($query){
       return $query->result_array();
     }else{
@@ -151,7 +151,7 @@ INNER JOIN countries on project.country=countries.id WHERE project.status!='dele
     }
     public function getFeaturedprojects()
     {
-      $query = $this->db->query("SELECT user.last_name,user.first_name,user.img as user_img, project.title, project.short_description, project.category, project.end_date, project.start_date, project.status, project.funding_goal, project.feature_img, project.rec_amount, project.location, countries.country_name,project.featured
+      $query = $this->db->query("SELECT user.last_name,user.first_name,user.img as user_img, project.title, project.id as p_id, project.short_description, project.category, project.end_date, project.start_date, project.status, project.funding_goal, project.feature_img, project.rec_amount, project.location, countries.country_name,project.featured
 FROM user
 INNER JOIN project ON user.id=project.user_id
 INNER JOIN countries on project.country=countries.id WHERE project.status='active' and project.featured='yes'");
@@ -179,6 +179,16 @@ INNER JOIN countries on project.country=countries.id WHERE project.status='activ
 FROM user
 INNER JOIN project ON user.id=project.user_id
 INNER JOIN countries on project.country=countries.id WHERE project.user_id=$id AND project.status!='delete'");
+      if($query){
+      return $query->result_array();
+    }else{
+      return false;
+    }
+    }
+
+    public function get_ending_projects()
+    {
+      $query = $this->db->query("SELECT * FROM `project` WHERE end_date >= CURRENT_DATE LIMIT 3");
       if($query){
       return $query->result_array();
     }else{

@@ -217,6 +217,55 @@
                     <i class="fa fa-caret-down"></i>
                   </span>
 
+                  <span class="nav-text">Contact</span>
+                </a>
+                <ul class="nav-sub">
+                  <li>
+                    <a href="<?php echo base_url('admin/contact_us'); ?>" >
+                      <span class="nav-text">Contact Us</span>
+                    </a>
+                  </li>
+                  <!-- <li>
+                    <a href="<?php echo base_url('admin/faq_list'); ?>" >
+                      <span class="nav-text">FAQ List</span>
+                    </a>
+                  </li> -->
+                </ul>
+              </li>
+
+              <li>
+                <a>
+                  <span class="nav-caret">
+                    <i class="fa fa-caret-down"></i>
+                  </span>
+
+                  <span class="nav-text">Footer</span>
+                </a>
+                <ul class="nav-sub">
+                  <li>
+                    <a href="<?php echo base_url('admin/terms'); ?>" >
+                      <span class="nav-text">Terms</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/privacy'); ?>" >
+                      <span class="nav-text">Privacy</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/legal'); ?>" >
+                      <span class="nav-text">Legal</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <a>
+                  <span class="nav-caret">
+                    <i class="fa fa-caret-down"></i>
+                  </span>
+
                   <span class="nav-text">CMS Management</span>
                 </a>
                 <ul class="nav-sub">

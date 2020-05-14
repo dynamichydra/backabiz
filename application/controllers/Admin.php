@@ -1541,4 +1541,146 @@ class Admin extends CI_Controller
             redirect('admin/about_bottom');
         }
     }
+
+    public function contact_us()
+    {
+        $user_id = $this->session->userdata('admin_id');
+        if (empty($user_id)) {
+            redirect('admin');
+        }
+        $where=array('status'=>'active');
+        $data = $this->AdminModel->getdata($where,"contact_us");
+        $data=array('page_title'=>'Contact','layout_page'=>'contact','feature'=>$data);
+        $this->load->view('admin/layout',$data);
+    }
+    public function Insert_contact_us()
+    {
+      $id=$this->input->post('id');
+         $data=array(
+            'title'=> $this->input->post("title"),
+            'subtitle'=>$this->input->post("s_title"),
+            'ph_title'=>$this->input->post("ph_title"),
+            'p_1'=>$this->input->post("p_1"),
+            'p_2'=>$this->input->post("p_2"),
+            'p_3'=>$this->input->post("p_3"),
+            'p_4'=>$this->input->post("p_4"),
+            'email_title'=>$this->input->post("email_title"),
+            'e_address_1'=>$this->input->post("e_address_1"),
+            'e_address_2'=>$this->input->post("e_address_2"),
+            'status'=>"active"
+        );
+        if(!empty($id)){
+          $where=array('id'=>$id,'status'=>'active');
+          $insert=$this->AdminModel->doupdate($where,'contact_us',$data);
+        }else{
+        $insert = $this->AdminModel->insert("contact_us",$data);
+      }
+        if ($insert){
+            $this->session->set_flashdata('success','Updated successfully');
+            redirect('admin/contact_us');
+        }else{
+            $this->session->set_flashdata('error','failed! pls try again');
+            redirect('admin/contact_us');
+        }
+    }
+    public function terms()
+    {
+        $user_id = $this->session->userdata('admin_id');
+        if (empty($user_id)) {
+            redirect('admin');
+        }
+        $where=array('status'=>'active');
+        $data = $this->AdminModel->getdata($where,"terms");
+        $data=array('page_title'=>'Terms','layout_page'=>'terms','feature'=>$data);
+        $this->load->view('admin/layout',$data);
+    }
+    public function insert_terms()
+    {
+      $id=$this->input->post('id');
+         $data=array(
+            'title'=> $this->input->post("title"),
+            'description'=>$this->input->post("description"),
+            'status'=>"active"
+        );
+        if(!empty($id)){
+          $where=array('id'=>$id,'status'=>'active');
+          $insert=$this->AdminModel->doupdate($where,'terms',$data);
+        }else{
+        $insert = $this->AdminModel->insert("terms",$data);
+      }
+        if ($insert){
+            $this->session->set_flashdata('success','Updated successfully');
+            redirect('admin/terms');
+        }else{
+            $this->session->set_flashdata('error','failed! pls try again');
+            redirect('admin/terms');
+        }
+    }
+
+    public function privacy()
+    {
+        $user_id = $this->session->userdata('admin_id');
+        if (empty($user_id)) {
+            redirect('admin');
+        }
+        $where=array('status'=>'active');
+        $data = $this->AdminModel->getdata($where,"privacy");
+        $data=array('page_title'=>'Privacy','layout_page'=>'privacy','feature'=>$data);
+        $this->load->view('admin/layout',$data);
+    }
+    public function insert_privacy()
+    {
+      $id=$this->input->post('id');
+         $data=array(
+            'title'=> $this->input->post("title"),
+            'description'=>$this->input->post("description"),
+            'status'=>"active"
+        );
+        if(!empty($id)){
+          $where=array('id'=>$id,'status'=>'active');
+          $insert=$this->AdminModel->doupdate($where,'privacy',$data);
+        }else{
+        $insert = $this->AdminModel->insert("privacy",$data);
+      }
+        if ($insert){
+            $this->session->set_flashdata('success','Updated successfully');
+            redirect('admin/privacy');
+        }else{
+            $this->session->set_flashdata('error','failed! pls try again');
+            redirect('admin/privacy');
+        }
+    }
+    public function legal()
+    {
+        $user_id = $this->session->userdata('admin_id');
+        if (empty($user_id)) {
+            redirect('admin');
+        }
+        $where=array('status'=>'active');
+        $data = $this->AdminModel->getdata($where,"legal");
+        $data=array('page_title'=>'Legal','layout_page'=>'legal','feature'=>$data);
+        $this->load->view('admin/layout',$data);
+    }
+    public function insert_legal()
+    {
+      $id=$this->input->post('id');
+         $data=array(
+            'title'=> $this->input->post("title"),
+            'description'=>$this->input->post("description"),
+            'status'=>"active"
+        );
+        if(!empty($id)){
+          $where=array('id'=>$id,'status'=>'active');
+          $insert=$this->AdminModel->doupdate($where,'legal',$data);
+        }else{
+        $insert = $this->AdminModel->insert("legal",$data);
+      }
+        if ($insert){
+            $this->session->set_flashdata('success','Updated successfully');
+            redirect('admin/legal');
+        }else{
+            $this->session->set_flashdata('error','failed! pls try again');
+            redirect('admin/legal');
+        }
+    }
 }

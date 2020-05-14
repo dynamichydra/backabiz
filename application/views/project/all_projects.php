@@ -5,6 +5,7 @@
                 <div class="container">
                    <div class="row">
                      <?php
+                     if(!empty($project_details)){
                      foreach ($project_details as $key=>$vn) {
                        ?>
 
@@ -57,16 +58,21 @@
                       </div><!--project-item end -->
                       <?php
                     }
+                  }else{
+                    ?>
+                    <h2 class="productauthor__title"><center>No Projects Found in this Category</center></h2>
+                    <?php
+                  }
                     ?>
 
                   </div>
-                  <div class="pagination-div">
+                  <!-- <div class="pagination-div">
                    <ul class="pagination">
                       <li class="active"><a href="#">1</a></li>
                       <li><a href="#">2</a></li>
                       <li><a href="#">Next</a></li>
                     </ul>
-                </div>
+                </div> -->
               </div>
             </section>
         </main>
