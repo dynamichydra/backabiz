@@ -186,6 +186,11 @@
                       <span class="nav-text">Funding Team List </span>
                     </a>
                   </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/about_banner'); ?>" >
+                      <span class="nav-text">About Banner </span>
+                    </a>
+                  </li>
                 </ul>
               </li>
 
@@ -228,6 +233,37 @@
                   <!-- <li>
                     <a href="<?php echo base_url('admin/faq_list'); ?>" >
                       <span class="nav-text">FAQ List</span>
+                    </a>
+                  </li> -->
+                </ul>
+              </li>
+
+              <li>
+                <a>
+                  <span class="nav-caret">
+                    <i class="fa fa-caret-down"></i>
+                  </span>
+                  <span class="nav-text">How it Works</span>
+                </a>
+                <ul class="nav-sub">
+                  <li>
+                    <a href="<?php echo base_url('admin/how_title'); ?>" >
+                      <span class="nav-text">How it Works?</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/how_backabiz'); ?>" >
+                      <span class="nav-text">How Backabiz Works</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/why_backabiz'); ?>" >
+                      <span class="nav-text">Why Backabiz</span>
+                    </a>
+                  </li>
+                  <!-- <li>
+                    <a href="<?php echo base_url('admin/help_center'); ?>" >
+                      <span class="nav-text">Help Centre</span>
                     </a>
                   </li> -->
                 </ul>

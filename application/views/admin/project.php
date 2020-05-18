@@ -42,12 +42,13 @@
               <!-- <div class="col-sm-10"> -->
                 <select name="category[]" class="form-control c-select" required multiple>
                   <option value="uncategorized">Uncategorized</option>
-                  <option value="Design">Design</option>
-                  <option value="Education">Education</option>
-                  <option value="Film & Video">Film & Video</option>
-                  <option value="Food">Food</option>
-                  <option value="Games">Games</option>
-                  <option value="Technology">Tech</option>
+                  <?php
+                                foreach ($category as $key=>$value) {?>
+                                  <option value="<?php echo $value['cat_name']; ?>" <?php  if(isset($project[0]["category"]) && $project[0]["category"] == $value['cat_name'])  echo 'selected'; ?>>
+      <?php echo $value['cat_name']; ?>
+      </option><?php
+                                }
+                                ?>
                 </select>
               <!-- </div> -->
             </div>
@@ -58,7 +59,7 @@
             </div>
             <div class="form-group">
               <label for="exampleInputFile">Feature Image</label>
-              <input type="file" name="feature_img" id="exampleInputFile" class="form-control" required>
+              <input type="file" name="files[]" id="exampleInputFile" class="form-control" multiple required>
               <p class="help-block">Upload a project feature image.</p>
             </div>
             <div class="form-group">

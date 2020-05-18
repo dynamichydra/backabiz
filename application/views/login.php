@@ -45,7 +45,7 @@
                               <div style="display: inline-block;margin-left: 30px;"><input class="" name="rememberme" type="checkbox" id="rememberme" value="forever"> Remember me</div>
                           </div>
                           <div class="form-group">
-                             <a href="#" class="green">Lost your password?</a>
+                             <a href="<?php echo base_url('home/lost_password')?>" class="green">Lost your password?</a>
                           </div>
           							</div>
           						</div>
@@ -60,7 +60,7 @@
                               <input type="email" name="email" value="" class="form-control">
                           </div>
                          <p class="p17">A password will be sent to your email address.</p>
-                         <p style="font-size: 14px;">Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <a href="#" class="green" target="_blank">privacy policy</a>.</p>
+                         <p style="font-size: 14px;">Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <a href="<?php echo base_url('home/privacy')?>" class="green" target="_blank">privacy policy</a>.</p>
                          <button type="submit" class="submit" name="register" value="register">Register</button>
                         </div>
                       </div>

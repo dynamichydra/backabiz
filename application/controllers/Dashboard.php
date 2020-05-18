@@ -43,15 +43,15 @@ class Dashboard extends Base {
 	public function new_project($id=null)
 	{
 		if(!empty($id)){
-			$this->data["page_title"]="Edit Project";
-			$this->data['title']	= 'Edit Project';
+			$this->data["page_title"]="Edit Campaign";
+			$this->data['title']	= 'Edit Campaign';
 			$this->data['category']	= $this->baseModel->_get('category',['status'=>'active']);
 			$this->data['project']	= $this->baseModel->_get('project',['status'=>'Pending','id'=>$id]);
 			$this->data['country']	= $this->baseModel->_get('countries');
 			$this->render_front('user/new_project');
 		}else{
-		$this->data["page_title"]="New Project";
-		$this->data['title']	= 'Start a Project';
+		$this->data["page_title"]="New Campaign";
+		$this->data['title']	= 'Start a Campaign';
 		$this->data['category']	= $this->baseModel->_get('category',['status'=>'active']);
 		$this->data['country']	= $this->baseModel->_get('countries');
 		$this->render_front('user/new_project');
@@ -63,17 +63,51 @@ class Dashboard extends Base {
 		$cat = $this->input->post('category');
 		$cat = implode(",",$cat);
 
+		if(!empty($_FILES['files']['name']) && count(array_filter($_FILES['files']['name'])) > 0){
+				$filesCount = count($_FILES['files']['name']);
+				for($i = 0; $i < $filesCount; $i++){
+						$_FILES['file']['name']     = $_FILES['files']['name'][$i];
+						$_FILES['file']['type']     = $_FILES['files']['type'][$i];
+						$_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+						$_FILES['file']['error']     = $_FILES['files']['error'][$i];
+						$_FILES['file']['size']     = $_FILES['files']['size'][$i];
+
+						// File upload configuration
+						$uploadPath = 'uploads/project/';
+						$config['upload_path'] = $uploadPath;
+						$config['allowed_types'] = 'jpg|jpeg|png|gif';
+						//$config['max_size']    = '100';
+						//$config['max_width'] = '1024';
+						//$config['max_height'] = '768';
+
+						// Load and initialize upload library
+						$this->load->library('upload', $config);
+						$this->upload->initialize($config);
+
+						// Upload file to server
+						if($this->upload->do_upload('file')){
+								// Uploaded file data
+								$fileData = $this->upload->data();
+								$uploadData[$i] = $fileData['file_name'];
+						}else{
+								$errorUploadType .= $_FILES['file']['name'].' | ';
+						}
+				}
+			}
+
+				$errorUploadType = !empty($errorUploadType)?'<br/>File Type Error: '.trim($errorUploadType, ' | '):'';
+				if(!empty($uploadData)){
+						// Insert files data into the database
+						$image=implode(",", $uploadData);
+					}else{
+						$image= "N/A";
+					}
+
 		$config['upload_path'] = "uploads/project/";
 		$config['allowed_types'] = 'gif|jpg|png|jpeg';
 		$config['max_size'] = '409600';
 		$config['create_thumb'] = TRUE;
 		$this->upload->initialize($config);
-		if ($this->upload->do_upload('feature_img')) {
-				$imageDetailArray = $this->upload->data();
-				$image = $imageDetailArray['file_name'];
-		}else{
-				$image="N/A";
-		}
 		if ($this->upload->do_upload('reward_img')) {
 				$imageDetail = $this->upload->data();
 				$image1 = $imageDetail['file_name'];
@@ -131,6 +165,45 @@ class Dashboard extends Base {
 
 			}
 	}
+	if(!empty($_FILES['files']['name']) && count(array_filter($_FILES['files']['name'])) > 0){
+			$filesCount = count($_FILES['files']['name']);
+			for($i = 0; $i < $filesCount; $i++){
+					$_FILES['file']['name']     = $_FILES['files']['name'][$i];
+					$_FILES['file']['type']     = $_FILES['files']['type'][$i];
+					$_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+					$_FILES['file']['error']     = $_FILES['files']['error'][$i];
+					$_FILES['file']['size']     = $_FILES['files']['size'][$i];
+
+					// File upload configuration
+					$uploadPath = 'uploads/project/';
+					$config['upload_path'] = $uploadPath;
+					$config['allowed_types'] = 'jpg|jpeg|png|gif';
+					//$config['max_size']    = '100';
+					//$config['max_width'] = '1024';
+					//$config['max_height'] = '768';
+
+					// Load and initialize upload library
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
+
+					// Upload file to server
+					if($this->upload->do_upload('file')){
+							// Uploaded file data
+							$fileData = $this->upload->data();
+							$uploadData[$i] = $fileData['file_name'];
+					}else{
+							$errorUploadType .= $_FILES['file']['name'].' | ';
+					}
+			}
+		}
+
+			$errorUploadType = !empty($errorUploadType)?'<br/>File Type Error: '.trim($errorUploadType, ' | '):'';
+			if(!empty($uploadData)){
+					// Insert files data into the database
+					$image=implode(",", $uploadData);
+				}else{
+					$image= $image0;
+				}
 
 			$config['upload_path'] = "uploads/project/";
 			$config['allowed_types'] = 'gif|jpg|png|jpeg';
@@ -139,25 +212,6 @@ class Dashboard extends Base {
 			$config['create_thumb'] = TRUE;
 
 			$this->upload->initialize($config);
-
-			if ($this->upload->do_upload('feature_img')) {
-					$imageDetailArray = $this->upload->data();
-
-					// $configer = array(
-					//     'image_library' => 'gd2',
-					//     'source_image' => $imageDetailArray['full_path'],
-					//     'maintain_ratio' => TRUE,
-					//     'width' => 1920,
-					//     'height' => 1080,
-					// );
-					// $this->image_lib->clear();
-					// $this->image_lib->initialize($configer);
-					// $this->image_lib->resize();
-
-					$image = $imageDetailArray['file_name'];
-			}else{
-					$image=$image0;
-			}
 			if ($this->upload->do_upload('reward_img')) {
 					$imageDetail = $this->upload->data();
 
@@ -411,7 +465,7 @@ public function update_password()
 			'password'=>md5($this->input->post("psw")),
 		);
 		$where=array('id'=>$id,'status'=>'active');
-		$insert = $this->AdminModel->doupdate($where,"user",$data_array);;
+		$insert = $this->AdminModel->doupdate($where,"user",$data_array);
 		if ($insert){
 				$this->session->set_flashdata('success','Password Updated successfully');
 				redirect('dashboard/password');
@@ -431,11 +485,51 @@ public function my_projects($id=null)
 	if( !isset($_SESSION["user"]) ){
 redirect('home/login');
 }
-$this->data["page_title"]="My Project";
-$this->data['title']	= 'Projects';
+$this->data["page_title"]="My Campaigns";
+$this->data['title']	= 'Campaigns';
 // $project_details =$this->AdminModel->getProjectDetails($id);
 $this->data["user"]=$this->AdminModel->getdata(["id"=>$id],'user');
 $this->data["project_details"]=$this->AdminModel->getMyProjectDetails($id);
 $this->render_front('user/projects');
 }
+public function update($id=null)
+ {
+	 if( !isset($_SESSION["user"]) ){
+ redirect('home/login');
+ }
+ else
+ {
+	 $user_id=$_SESSION["user"]['id'];
+	 $this->data["page_title"]="Update";
+	 $this->data['title']	= 'Update';
+	 $this->data['user'] =$this->AdminModel->getdata(["id"=>$user_id],'user');
+	 $this->data["updates"]=$this->AdminModel->getdata(["status"=>'active',"project_id"=>$id],'project_update');
+	 $this->data["project"]=$this->AdminModel->getdata(["id"=>$id],'project');
+	 $this->render_front('user/update');
+}
+ }
+
+ public function p_update($id=null)
+{
+	$input_data=array(
+		'project_id'=>$id,
+		'update_title'=>$this->input->post('update_title'),
+		'update_details'=>$this->input->post('project_update_details'),
+		'status'=>'active',
+	);
+	$this->AdminModel->insert('project_update',$input_data);
+	 redirect('dashboard/update/'.$id);
+  }
+
+	public function remove_update($id)
+ {
+	 $input_data=array(
+		 'status'=>'delete',
+	 );
+	 $where=array('id'=>$id,'status'=>'active');
+	 $this->AdminModel->doupdate($where,"project_update",$input_data);
+	 $project_id=$this->AdminModel->getdata(["id"=>$id],'project_update');
+	 $p_id=$project_id[0]['project_id'];
+		redirect('dashboard/update/'.$p_id);
+	 }
 }

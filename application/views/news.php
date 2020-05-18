@@ -11,15 +11,15 @@
                   <div class="col-md-8">
                       <div class="news-wrap">
 	                      <div class="news-wrap-container">
-	                        <a href="#"><img src="assets/images/news-blog.jpg" alt="project-one" class="img-responsive"></a>
+	                        <a href="#"><img src="<?php echo base_url()?>assets/images/news-blog.jpg" alt="project-one" class="img-responsive"></a>
 	                      </div>
 
 	                      <div class="news-details">
 	                      	<div class="newscategory-list"><a href="#">design short film</a></div>
 	                      	<ul class="new-meta">
-								<li><a href="#"><i class="fa fa-user"></i> Jane Smith</a></li>
+								<!-- <li><a href="#"><i class="fa fa-user"></i> Jane Smith</a></li> -->
 								<li><a href="#"><i class="fa fa-calendar"></i> December 9, 2019</a></li>
-								<li><a href="#"><i class="fa fa-comments"></i> 0 comments</a></li>
+								<!-- <li><a href="#"><i class="fa fa-comments"></i> 0 comments</a></li> -->
 							</ul>
 	                        <h2 class="news__title"><a href="#">Sonoma County sell beautiful headphones in Wine Country</a></h2>
 	                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies.</p>
@@ -27,15 +27,15 @@
                     </div><!--end news-wrap-->
                      <div class="news-wrap">
 	                      <div class="news-wrap-container">
-	                        <a href="#"><img src="assets/images/news-blog.jpg" alt="project-one" class="img-responsive"></a>
+	                        <a href="#"><img src="<?php echo base_url()?>assets/images/news-blog.jpg" alt="project-one" class="img-responsive"></a>
 	                      </div>
 
 	                      <div class="news-details">
 	                      	<div class="newscategory-list"><a href="#">design short film</a></div>
 	                      	<ul class="new-meta">
-								<li><a href="#"><i class="fa fa-user"></i> Jane Smith</a></li>
+								<!-- <li><a href="#"><i class="fa fa-user"></i> Jane Smith</a></li> -->
 								<li><a href="#"><i class="fa fa-calendar"></i> December 9, 2019</a></li>
-								<li><a href="#"><i class="fa fa-comments"></i> 0 comments</a></li>
+								<!-- <li><a href="#"><i class="fa fa-comments"></i> 0 comments</a></li> -->
 							</ul>
 	                        <h2 class="news__title"><a href="#">Sonoma County sell beautiful headphones in Wine Country</a></h2>
 	                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies.</p>
@@ -43,15 +43,15 @@
                     </div><!--end news-wrap-->
                      <div class="news-wrap">
 	                      <div class="news-wrap-container">
-	                        <a href="#"><img src="assets/images/news-blog.jpg" alt="project-one" class="img-responsive"></a>
+	                        <a href="#"><img src="<?php echo base_url()?>assets/images/news-blog.jpg" alt="project-one" class="img-responsive"></a>
 	                      </div>
 
 	                      <div class="news-details">
 	                      	<div class="newscategory-list"><a href="#">design short film</a></div>
 	                      	<ul class="new-meta">
-								<li><a href="#"><i class="fa fa-user"></i> Jane Smith</a></li>
+								<!-- <li><a href="#"><i class="fa fa-user"></i> Jane Smith</a></li> -->
 								<li><a href="#"><i class="fa fa-calendar"></i> December 9, 2019</a></li>
-								<li><a href="#"><i class="fa fa-comments"></i> 0 comments</a></li>
+								<!-- <li><a href="#"><i class="fa fa-comments"></i> 0 comments</a></li> -->
 							</ul>
 	                        <h2 class="news__title"><a href="#">Sonoma County sell beautiful headphones in Wine Country</a></h2>
 	                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies.</p>
@@ -70,7 +70,7 @@
                         <div class="sidebar-divider-pro"></div>
                     </div><!--end recent-posts-->
 
-                    <div id="recent-comments" class="sidebar-item">
+                    <!-- <div id="recent-comments" class="sidebar-item">
                         <h4 class="sidebar-title">Recent Comments</h4>
                         <ul>
                           <li><a href="#" aria-current="page">Jane Smith on Important brands have given us their trust</a></li>
@@ -78,9 +78,9 @@
                           <li><a href="#">A WordPress Commenter on Hello world!</a></li>
                         </ul>
                         <div class="sidebar-divider-pro"></div>
-                    </div><!--end recent-comments-->
+                    </div><!--end recent-comments--> 
 
-                    <div id="archives" class="sidebar-item">
+                    <!-- <div id="archives" class="sidebar-item">
                         <h4 class="sidebar-title">Archives</h4>
                         <ul>
                           <li><a href="#" aria-current="page">January 2020</a></li>

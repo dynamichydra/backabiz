@@ -49,8 +49,28 @@
                           <i class="fa fa-check"></i>
                           <?php echo $about[0]['p_3'];?>
                         </li>
+                        <!-- <li>
+                          <i class="fa fa-check"></i>
+                          <?php echo $about[0]['p_4'];?>
+                        </li>
+                        <li>
+                          <i class="fa fa-check"></i>
+                          <?php echo $about[0]['p_5'];?>
+                        </li> -->
+                        <?php if (!empty($about[0]["p_4"])) {?>
+                        <li>
+                          <i class="fa fa-check"></i>
+                              <?php echo $about[0]["p_4"];?>
+                        </li>
+                      <?php  } ?>
+                      <?php if (!empty($about[0]["p_5"])) {?>
+                        <li>
+                          <i class="fa fa-check"></i>
+                              <?php echo $about[0]["p_5"];?>
+                        </li>
+                        <?php  } ?>
                       </ul>
-                      <a href="<?php echo base_url('new-project')?>" class="site-btn">start a project</a>
+                      <a href="<?php echo base_url('new-project')?>" class="site-btn">Start a Backabiz</a>
                     </div>
                   </div>
                 </div><!-- end row -->
@@ -102,13 +122,13 @@
               </div>
             </section> -->
           <!-- Joint Project Section -->
-            <section class="joint-projct-sec" style="background: url(../assets/images/joint-project-bg.jpg) no-repeat;background-size: cover;background-position: center;">
+            <section class="joint-projct-sec" style="background: url(<?php echo base_url('uploads/banner/'.$about_banner[0]['image']);?>) no-repeat;background-size: cover;background-position: center;">
               <div class="container">
                 <div class="row">
                   <div class="col-md-8 col-md-offset-2">
                     <div class="joint-pro-txt">
-                      <h2>Join <span>25,788 </span>Projects, Organisations and Campaigns on Funlin</h2>
-                      <a href="<?php echo base_url('new-project')?>" class="site-btn">start a project</a>
+                      <h2><?php echo $about_banner[0]['title'] ?></h2>
+                      <a href="<?php echo $about_banner[0]['b_link'] ?>" class="site-btn"><?php echo $about_banner[0]['b_title'] ?></a>
                     </div>
                   </div>
                 </div>
@@ -140,6 +160,18 @@
                           <i class="fa fa-check"></i>
                           <?php echo $about_bottom[0]['p_3'];?>
                         </li>
+                        <?php if (!empty($about_bottom[0]["p_4"])) {?>
+                        <li>
+                          <i class="fa fa-check"></i>
+                              <?php echo $about_bottom[0]["p_4"];?>
+                        </li>
+                      <?php  } ?>
+                      <?php if (!empty($about_bottom[0]["p_5"])) {?>
+                        <li>
+                          <i class="fa fa-check"></i>
+                              <?php echo $about_bottom[0]["p_5"];?>
+                        </li>
+                        <?php  } ?>
                       </ul>
                     </div>
                   </div>

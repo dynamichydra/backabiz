@@ -20,32 +20,44 @@
                          <li><a href='#'>Shopping Cart</a></li>
                       </ul>
                  </div>
-                 <?php
-                  if(!empty($_SESSION['user'])){
-                   ?>
-                 <div class="col-sm-3">
-                     <h3>Dashboard</h3>
-                     <ul>
-                         <li><a href='<?php echo base_url('dashboard'); ?>'>Dashboard</a></li>
-                         <!-- <li><a href='#'>Login</a></li> -->
-                         <li><a href='<?php echo base_url('dashboard/profile/').$_SESSION['user']['id']?>'>Edit Profile</a></li>
-                         <li><a href='<?php echo base_url('new-project')?>'>Start a Project</a></li>
-                         <li><a href='#'>Contact </a></li>
-                      </ul>
-                 </div>
-                 <?php
-               }
-                 ?>
+
                  <div class="col-sm-3">
                      <h3>Explore</h3>
                      <ul>
-                         <li><a href='<?php echo base_url('project/category/Education')?>'>Education</a></li>
-                         <li><a href='<?php echo base_url('project/category/Film & Video')?>'>Film & Video</a></li>
-                         <li><a href='<?php echo base_url('project/category/Food')?>'>Food</a></li>
-                         <li><a href='<?php echo base_url('project/category/Games')?>'>Games</a></li>
-                         <li><a href='<?php echo base_url('project/category/Technology')?>'>Technology</a></li>
+                       <?php
+                       $i=0;
+      if (isset($category)) {
+       foreach ($category as $key=>$value) {
+
+        ?>
+                         <li><a href='<?php echo base_url('project/category/').$value['cat_name']?>'><?php echo $value['cat_name']?></a></li><span>
+                         <?php
+                         $i++;
+if($i==7) break;
+                        }
+                        }
+                        ?>
                       </ul>
                  </div>
+                 <div class="col-sm-3">
+                     <ul>
+                       <?php
+                       $i=5;
+      if (isset($category)) {
+       foreach ($category as $key=>$value) {
+         if($key>9){
+
+        ?>
+        <li><a href='<?php echo base_url('project/category/').$value['cat_name']?>'><?php echo $value['cat_name']?></a></li><span>
+        <?php
+        $i++;
+if($i==18) break;
+}
+       }
+       }
+       ?>
+     </ul>
+</div>
               </div>
            </div>
          </section>

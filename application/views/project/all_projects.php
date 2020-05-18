@@ -12,12 +12,13 @@
                       <div class="col-sm-4">
 	                      <div class="project-item">
 	                      	<div class="project-image-container">
-	                      		<a href="<?php echo base_url('project/' . $vn['p_id']); ?>">
-	                      			<img src="<?php echo base_url('uploads/project/' . $vn['feature_img']); ?>" style="width:360px; height:250px;" alt="project-one">
+	                      		<a href="<?php echo base_url('campaigns/' . $vn['p_id']); ?>">
+                              <?php $cats = explode(",", $vn['feature_img']);?>
+	                      			<img src="<?php echo base_url('uploads/project/' . $cats[0]); ?>" style="width:360px; height:250px;" alt="project-one">
 	                      		</a>
 	                      		<ul class="project-link">
                                     <li>
-                                      <a href="#"><?php echo $vn['category'];?></a>
+                                      <a href="<?php echo base_url('project/category/').$vn['category']?>"><?php echo $vn['category'];?></a>
                                     </li>
                                 </ul>
 	                      		<!--<a href="#" class="project-link">Film &amp; Video</a>-->
@@ -35,7 +36,7 @@
 	                      	</div>
 	                      	<div class="project-details">
 	                      		<p class="author-byline">by <a href="#"><?php echo $vn['first_name'];?>  <?php echo $vn['last_name'];?></a></p>
-	                      		<h2 class="productauthor__title"><a href="<?php echo base_url('project/' . $vn['p_id']); ?>"><?php echo $vn['title'];?></a></h2>
+	                      		<h2 class="productauthor__title"><a href="<?php echo base_url('campaigns/' . $vn['p_id']); ?>"><?php echo $vn['title'];?></a></h2>
 
 
                             <div class="raised-bar">

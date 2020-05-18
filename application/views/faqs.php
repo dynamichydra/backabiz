@@ -1,21 +1,8 @@
          <!-- body content start -->
         <main>
           <!-- Breadcrumbs -->
-            <section class="breadcrumbs-sec" style="background: url(<?php echo base_url(); ?>assets/frontend/assets/images/breadcrumbs-bg.jpg) no-repeat;">
-              <div class="container">
-                <div class="breadcrumbs-text">
-                  <h3>FAQs</h3>
-                  <ul>
-                    <li>
-                      <a href="index.html">home</a>
-                    </li>
-                    <li>
-                      <span>FAQs</span>
-                    </li>
-                  </ul>
-                </div>
-              </div><!-- end container -->
-            </section><!-- end breadcrumbs-sec -->
+          <?php $this->load->view('include/small_banner');?>
+            <!-- end breadcrumbs-sec -->
 
           <!-- faq-sec Section -->
             <section id="faq-sec" class="section-padding">
@@ -71,6 +58,22 @@ $( document ).ready(function() {
       $(this).addClass('active');
       $(this).closest('.panel-default').find('.panel-collapse').show(500);
     }
+
+
   });
 });
+// var acc = document.getElementsByClassName("faq-links");
+// var i;
+//
+// for (i = 0; i < acc.length; i++) {
+// acc[i].addEventListener("click", function() {
+// this.classList.toggle("active");
+// var panel = this.nextElementSibling;
+// if (panel.style.maxHeight) {
+// panel.style.maxHeight = null;
+// } else {
+// panel.style.maxHeight = panel.scrollHeight + "px";
+// }
+// });
+// }
 </script>

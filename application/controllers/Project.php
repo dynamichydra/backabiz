@@ -18,8 +18,10 @@ class Project extends Base {
         $this->data['project']   = $this->data['project'][0];
         $this->data['title']	= $this->data['project']->title;
 				$this->data["page_title"]=$this->data['project']->title;
+				$this->data["similar_projects"]=$this->AdminModel->getCategorytProjects($this->data['project']->category);
         $this->data['pcount']   = $this->ProjectModel->_get('project',['user_id'=>$this->data['project']->user_id],[],"count(id) tot");
         $this->data['backers']   = $this->ProjectModel->get_project_backers(['project_id'=>$this->data['project']->id]);
+				$this->data['updates']   = $this->AdminModel->getdata(["status"=>"active","project_id"=>$this->data['project']->id],'project_update');
 
         $this->render_front('project/index');
       }else{
@@ -34,8 +36,8 @@ class Project extends Base {
 	// 	if( !isset($_SESSION["user"]) ){
 	// redirect('home/login');
 	// }
-	$this->data["page_title"]="All Projects";
-	$this->data['title']	= 'Projects';
+	$this->data["page_title"]="All Campaigns";
+	$this->data['title']	= 'Campaigns';
 	// $project_details =$this->AdminModel->getProjectDetails($id);
 	$this->data["user"]=$this->AdminModel->getdata(["status"=>"active"],'user');
 	$this->data["project_details"]=$this->AdminModel->getProjectDetails();

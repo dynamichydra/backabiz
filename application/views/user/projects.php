@@ -35,7 +35,7 @@
                               </ul>
                           </nav><!-- /#main-nav -->
                     </div>
-                    <div class="dashboard-right"><a href="<?php echo base_url('new-project')?>" class="submit">Add New Project</a></div>
+                    <div class="dashboard-right"><a href="<?php echo base_url('new-project')?>" class="submit">Add New Campaign</a></div>
                    </div>
                   </div>
                 </div>
@@ -48,7 +48,10 @@
                         foreach ($project_details as $key=>$vn) {
                           ?>
                        <div class="col-md-3 pln">
-                         <img class="profile-form-img img-responsive" style="height:160px; width:180px;" src="<?php echo base_url('uploads/project/' . $vn['feature_img']); ?>" alt="Profile Image">
+                         <?php
+                         $cats = explode(",", $vn['feature_img']);
+                         ?>
+                         <img class="profile-form-img img-responsive" style="height:160px; width:180px;" src="<?php echo base_url('uploads/project/' . $cats[0]); ?>" alt="Profile Image">
                        </div>
                         <div class="col-md-9">
                           <div class="campaign-right clearfix">
@@ -57,7 +60,7 @@
                               <p><?php echo $vn['location'];?>,<?php echo $vn['country_name'];?></p>
                             </div>
                             <div class="campaign-tr">
-                              <a href="#" class="submit">Update</a>
+                              <a href="<?php echo base_url('dashboard/update/').$vn['project_id']?>" class="submit">Update</a>
                               <?php if($vn['status']=='Pending')
                               {
                                 ?>

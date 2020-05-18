@@ -188,11 +188,25 @@ INNER JOIN countries on project.country=countries.id WHERE project.user_id=$id A
 
     public function get_ending_projects()
     {
-      $query = $this->db->query("SELECT * FROM `project` WHERE end_date >= CURRENT_DATE LIMIT 3");
+      $query = $this->db->query("SELECT project.*,user.img as user_img FROM user
+      INNER JOIN project ON user.id=project.user_id WHERE project.end_date >= CURRENT_DATE LIMIT 3");
       if($query){
       return $query->result_array();
     }else{
       return false;
     }
     }
+    public function CheckUserMail($eml)
+    {
+        $this->db->select('*');
+        $this->db->where('email', $eml);
+        $this->db->where('status', 'active');
+        $sql = $this->db->get('user');
+        if ($sql->num_rows() > 0) {
+            return $sql->row();
+        } else {
+            return FALSE;
+        }
+    }
+    
 }

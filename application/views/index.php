@@ -126,7 +126,7 @@
                                     foreach ($total_projects as $key=>$vn) {
                                       if($vn['category']=="Food & Beverage"){
                                         ?>
-                                    <h3><?php echo $vn['total'];?> Popular Project</h3>
+                                    <h3><?php echo $vn['total'];?> Popular Campaigns</h3>
                                     <?php
                                   }
                                 }
@@ -140,7 +140,7 @@
                                   }
                                 }
                                   ?>
-                                    <a type="submit" class="submit color1 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE BACKABIZ CAMPAIGNS</center></a>
+                                    <a type="submit" class="submit color1 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE CAMPAIGNS</center></a>
                                   </div>
                               </div>
 
@@ -191,7 +191,8 @@
                                   <div class="col-sm-6">
                                     <div class="project-image-container">
                                         <a href="<?php echo base_url('project/' . $vn['p_id']); ?>">
-                                          <img src="<?php echo base_url('uploads/project/' . $vn['feature_img']); ?>" alt="project-one" class="img-responsive">
+                                          <?php $cats = explode(",", $vn['feature_img']);?>
+                                          <img src="<?php echo base_url('uploads/project/' . $cats['0']); ?>" alt="project-one" class="img-responsive">
                                         </a>
                                       </div>
                                   </div>
@@ -218,7 +219,7 @@
                                     foreach ($total_projects as $key=>$vn) {
                                       if($vn['category']=="Retail"){
                                         ?>
-                                    <h3><?php echo $vn['total'];?> Popular Project</h3>
+                                    <h3><?php echo $vn['total'];?> Popular Campaigns</h3>
                                     <?php
                                   }
                                 }
@@ -232,7 +233,7 @@
                                   }
                                 }
                                   ?>
-                                    <a type="submit" class="submit color2 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE BACKABIZ CAMPAIGNS</center></a>
+                                    <a type="submit" class="submit color2 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE CAMPAIGNS</center></a>
                                   </div>
                               </div>
 
@@ -284,7 +285,8 @@
                                   <div class="col-sm-6">
                                     <div class="project-image-container">
                                         <a href="<?php echo base_url('project/' . $vn['p_id']); ?>">
-                                          <img src="<?php echo base_url('uploads/project/' . $vn['feature_img']); ?>" alt="project-one" class="img-responsive">
+                                          <?php $cats = explode(",", $vn['feature_img']);?>
+                                          <img src="<?php echo base_url('uploads/project/' . $cats[0]); ?>" alt="project-one" class="img-responsive">
                                         </a>
                                       </div>
                                   </div>
@@ -307,7 +309,7 @@
                                     foreach ($total_projects as $key=>$vn) {
                                       if($vn['category']=="Health & Wellness"){
                                         ?>
-                                    <h3><?php echo $vn['total'];?> Popular Project</h3>
+                                    <h3><?php echo $vn['total'];?> Popular Campaigns</h3>
                                     <?php
                                   }
                                 }
@@ -321,7 +323,7 @@
                                   }
                                 }
                                   ?>
-                                    <a type="submit" class="submit color3 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE BACKABIZ CAMPAIGNS</center></a>
+                                    <a type="submit" class="submit color3 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE CAMPAIGNS</center></a>
                                   </div>
                               </div>
 
@@ -373,7 +375,8 @@
                                   <div class="col-sm-6">
                                     <div class="project-image-container">
                                         <a href="<?php echo base_url('project/' . $vn['p_id']); ?>">
-                                          <img src="<?php echo base_url('uploads/project/' . $vn['feature_img']); ?>" alt="project-one" class="img-responsive">
+                                          <?php $cats = explode(",", $vn['feature_img']);?>
+                                          <img src="<?php echo base_url('uploads/project/' . $cats[0]); ?>" alt="project-one" class="img-responsive">
                                         </a>
                                       </div>
                                   </div>
@@ -396,7 +399,7 @@
                                     foreach ($total_projects as $key=>$vn) {
                                       if($vn['category']=="Photography"){
                                         ?>
-                                    <h3><?php echo $vn['total'];?> Popular Project</h3>
+                                    <h3><?php echo $vn['total'];?> Popular Campaigns</h3>
                                     <?php
                                   }
                                 }
@@ -410,7 +413,7 @@
                                   }
                                 }
                                   ?>
-                                    <a type="submit" class="submit color4 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE BACKABIZ CAMPAIGNS</center></a>
+                                    <a type="submit" class="submit color4 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE CAMPAIGNS</center></a>
                                   </div>
                               </div>
 
@@ -462,7 +465,8 @@
                                   <div class="col-sm-6">
                                     <div class="project-image-container">
                                         <a href="<?php echo base_url('project/' . $vn['p_id']); ?>">
-                                          <img src="<?php echo base_url('uploads/project/' . $vn['feature_img']); ?>" alt="project-one" class="img-responsive">
+                                          <?php $cats = explode(",", $vn['feature_img']);?>
+                                          <img src="<?php echo base_url('uploads/project/' . $cats[0]); ?>" alt="project-one" class="img-responsive">
                                         </a>
                                       </div>
                                   </div>
@@ -485,7 +489,7 @@
                                     foreach ($total_projects as $key=>$vn) {
                                       if($vn['category']=="Trades"){
                                         ?>
-                                    <h3><?php echo $vn['total'];?> Popular Project</h3>
+                                    <h3><?php echo $vn['total'];?> Popular Campaigns</h3>
                                     <?php
                                   }
                                 }
@@ -499,7 +503,7 @@
                                   }
                                 }
                                   ?>
-                                    <a type="submit" class="submit color5 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE BACKABIZ CAMPAIGNS</center></a>
+                                    <a type="submit" class="submit color5 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE CAMPAIGNS</center></a>
                                   </div>
                               </div>
 
@@ -551,7 +555,8 @@
                                   <div class="col-sm-6">
                                     <div class="project-image-container">
                                         <a href="<?php echo base_url('project/' . $vn['p_id']); ?>">
-                                          <img src="<?php echo base_url('uploads/project/' . $vn['feature_img']); ?>" alt="project-one" class="img-responsive">
+                                          <?php $cats = explode(",", $vn['feature_img']);?>
+                                          <img src="<?php echo base_url('uploads/project/' . $cats[0]); ?>" alt="project-one" class="img-responsive">
                                         </a>
                                       </div>
                                   </div>
@@ -574,7 +579,7 @@
                                     foreach ($total_projects as $key=>$vn) {
                                       if($vn['category']=="Consumer Goods"){
                                         ?>
-                                    <h3><?php echo $vn['total'];?> Popular Project</h3>
+                                    <h3><?php echo $vn['total'];?> Popular Campaigns</h3>
                                     <?php
                                   }
                                 }
@@ -588,7 +593,7 @@
                                   }
                                 }
                                   ?>
-                                    <a type="submit" class="submit color6 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE BACKABIZ CAMPAIGNS</center></a>
+                                    <a type="submit" class="submit color6 yellow" href="<?php echo base_url('project/projects') ?>"><center>SEE MORE CAMPAIGNS</center></a>
                                   </div>
                               </div>
 
@@ -640,7 +645,8 @@
                                   <div class="col-sm-6">
                                     <div class="project-image-container">
                                         <a href="<?php echo base_url('project/' . $vn['p_id']); ?>">
-                                          <img src="<?php echo base_url('uploads/project/' . $vn['feature_img']); ?>" alt="project-one" class="img-responsive">
+                                          <?php $cats = explode(",", $vn['feature_img']);?>
+                                          <img src="<?php echo base_url('uploads/project/' . $cats[0]); ?>" alt="project-one" class="img-responsive">
                                         </a>
                                       </div>
                                   </div>
@@ -687,7 +693,8 @@
 	                      <div class="project-item">
 	                      	<div class="project-image-container">
 	                      		<a href="<?php echo base_url('project/'.$value['id']);?>">
-	                      			<img src="<?php echo base_url('uploads/project/' . $value['feature_img']); ?>" style="width:360px; height:250px;" alt="project-one">
+                              <?php $cats = explode(",", $value['feature_img']);?>
+	                      			<img src="<?php echo base_url('uploads/project/' . $cats[0]); ?>" style="width:360px; height:250px;" alt="project-one">
 	                      		</a>
 	                      		<ul class="project-link">
                                     <li>
@@ -734,7 +741,7 @@
               }
                       ?><!--project-item end -->
 
-                      <div class="col-sm-12 text-center"><a href="#" class="yellow">SEE MORE BACKABIZ CAMPAIGNS <i class="fa fa-arrow-circle-o-down"></i></a></div>
+                      <div class="col-sm-12 text-center"><a href="<?php echo base_url('project/projects') ?>" class="yellow">SEE MORE CAMPAIGNS <i class="fa fa-arrow-circle-o-down"></i></a></div>
                   </div>
               </div>
             </section>
@@ -773,6 +780,8 @@
                       			<li><?php echo $feature[0]['p_1'];?></li>
                       			<li><?php echo $feature[0]['p_2'];?></li>
                       			<li><?php echo $feature[0]['p_3'];?></li>
+                            <li><?php echo $feature[0]['p_4'];?></li>
+                            <li><?php echo $feature[0]['p_5'];?></li>
                       		</ul>
                       	</div>
                       </div>
@@ -803,48 +812,44 @@
                         }
                           ?>
                       </div>
+                      <?php
+                     if (isset($ending_project)) {
+                     	 foreach ($ending_project as $key=>$value) {
+
+                        ?>
                       <div class="col-sm-4">
                         <div class="project-item">
                           <div class="project-image-container">
-                            <a href="#">
-                              <img src="<?php echo base_url(); ?>assets/images/new-bg.jpg" alt="project-one">
+                            <a href="<?php echo base_url('project/' . $value['id']); ?>">
+                              <?php $cats = explode(",", $value['feature_img']);?>
+                              <img src="<?php echo base_url('uploads/project/' . $cats[0]); ?>" style="width:360px; height:250px;" alt="project-one">
                             </a>
-                            <div class="author-avatar"><a href="#"> <img src="<?php echo base_url(); ?>assets/images/profile-image.jpg" alt="Avatar"> </a></div>
+
+
+
+                          <?php
+                          if( !empty($value['user_img'])){
+                          ?>
+                          <div class="author-avatar"><a href="#"><img src="<?php echo base_url('uploads/users/' . $value['user_img']); ?>" alt="Avatar"></a></div>
+                          <?php
+                        }else{
+                          ?>
+                          <div class="author-avatar"><a href="#"><img src="<?php echo base_url(); ?>assets/images/profile-image.jpg" alt="Avatar"></a></div>
+                          <?php
+                }
+                ?>
                           </div>
                           <div class="project-details">
-                            <p class="author-byline">November 21, 2017</p>
-                            <h2 class="productauthor__title"><a href="#">In Granada, Spain, the Tapas Bar Scene Gets Fresh Life </a></h2>
+                            <p class="author-byline"><?php echo $value['end_date'];?></p>
+                            <h2 class="productauthor__title"><a href="<?php echo base_url('project/' . $value['id']); ?>"><?php echo $value['title'];?> </a></h2>
                           </div>
                         </div>
                       </div><!--project-item end -->
-                     <div class="col-sm-4">
-                        <div class="project-item">
-                          <div class="project-image-container">
-                            <a href="#">
-                              <img src="<?php echo base_url(); ?>assets/images/new-bg.jpg" alt="project-one">
-                            </a>
-                            <div class="author-avatar"><a href="#"> <img src="<?php echo base_url(); ?>assets/images/profile-image.jpg" alt="Avatar"> </a></div>
-                          </div>
-                          <div class="project-details">
-                            <p class="author-byline">November 21, 2017</p>
-                            <h2 class="productauthor__title"><a href="#">In Granada, Spain, the Tapas Bar Scene Gets Fresh Life </a></h2>
-                          </div>
-                        </div>
-                      </div><!--project-item end -->
-                      <div class="col-sm-4">
-                        <div class="project-item">
-                          <div class="project-image-container">
-                            <a href="#">
-                              <img src="<?php echo base_url(); ?>assets/images/new-bg.jpg" alt="project-one">
-                            </a>
-                            <div class="author-avatar"><a href="#"> <img src="<?php echo base_url(); ?>assets/images/profile-image.jpg" alt="Avatar"> </a></div>
-                          </div>
-                          <div class="project-details">
-                            <p class="author-byline">November 21, 2017</p>
-                            <h2 class="productauthor__title"><a href="#">In Granada, Spain, the Tapas Bar Scene Gets Fresh Life </a></h2>
-                          </div>
-                        </div>
-                      </div><!--project-item end -->
+                      <?php
+                    }
+                  }
+                    ?>
+                     <!--project-item end -->
                   </div>
               </div>
             </section>

@@ -6,10 +6,13 @@
         <div class="row">
           <div class="col-md-10 col-md-offset-1">
             <div class="project-form-content">
-              <?php if(isset($project[0]["id"])){?>
+              <?php if( !empty($project[0]["id"])){
+                ?>
                 <form type="post" method="post" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy'); return false; }" action="<?php echo base_url('dashboard/update_project/').$project[0]['id']?>" id="project-form1" enctype="multipart/form-data">
-                  <?php}else{?>
-                    <form type="post" method="post" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy'); return false; }" action="dashboard/save_project" id="project-form1" enctype="multipart/form-data">
+                  <?php
+                }else{
+                  ?>
+                    <form type="post" method="post" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy'); return false; }" action="<?php echo base_url('dashboard/save_project')?>" id="project-form1" enctype="multipart/form-data">
                       <?php
                     }
                     ?>
@@ -28,8 +31,8 @@
       </div>
       <div class="form-group">
           <label>Category</label>
-          <select name="category[]" style="height:500px;" multiple>
-            <!-- <option value="uncategorized">Uncategorized</option> -->
+          <select name="category[]" style="height:500px;" required multiple>
+            <option value="uncategorized">Uncategorized</option>
 
 
             <?php
@@ -49,10 +52,15 @@
       </div>
         <div class="form-group">
           <label>Feature Image</label>
-          <input type="file" name="feature_img" id="feature_img" class="form-control">
+          <input type="file" name="files[]" id="feature_img" class="form-control" multiple>
           <small>Upload a project feature image</small>
-          <?php if(!empty($project[0]['feature_img'])){?>
-          <small>Last uploaded image:- <a target="_blank" href="<?php echo base_url() . 'uploads/project/' . $project[0]['feature_img']; ?>">Click here to see</a></small>
+          <?php
+          if(isset($project[0]['feature_img'])){
+          $cats = explode(",", $project[0]['feature_img']);
+        }
+          ?>
+          <?php if(!empty($cats[0])){?>
+          <small>Last uploaded image:- <a target="_blank" href="<?php echo base_url() . 'uploads/project/' . $cats[0]; ?>">Click here to see</a></small>
           <?php
         }
         ?>
@@ -186,7 +194,7 @@
               <?php
               for($i= date('Y');$i<date('Y')+30;$i++){
                 ?>
-                <option value="<?php echo $i;?>" <?php  if($project[0]["del_year"] == $i)  echo 'selected'; ?>><?php echo $i;?></option>
+                <option value="<?php echo $i;?>" <?php  if(isset($project[0]["del_year"]) && $project[0]["del_year"] == $i)  echo 'selected'; ?>><?php echo $i;?></option>
                 <?php
               }
               ?>

@@ -35,7 +35,7 @@
                               </ul>
                           </nav><!-- /#main-nav -->
                     </div>
-                    <div class="dashboard-right"><a href="<?php echo base_url('new-project')?>" class="submit">Add New Project</a></div>
+                    <div class="dashboard-right"><a href="<?php echo base_url('new-project')?>" class="submit">Add New Campaign</a></div>
                    </div>
                   </div>
                 </div>

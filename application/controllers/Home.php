@@ -28,6 +28,7 @@ class Home extends Base {
 	}
 	public function about()
 	{
+		$this->data["about_banner"]=$this->AdminModel->getdata(["status"=>"active"],'about_banner');
 		$this->data["testimonial"]=$this->AdminModel->getdata(["status!="=>"delete"],'testimonial');
 		$this->data["team"]=$this->AdminModel->getdata(["status!="=>"delete"],'funding_team');
 		$this->data["about"] = $this->baseModel->_get('about',['status'=>'active']);
@@ -39,7 +40,8 @@ class Home extends Base {
 	public function faqs()
 	{
 		$this->data["faq"]=$this->AdminModel->getdata(["status"=>"active"],'faq');
-		$this->data["page_title"]="FAQ's - Backabiz";
+		$this->data["page_title"]="Help Center";
+		$this->data['title']	= 'Help Center';
 		$this->render_front('faqs');
 	}
 
@@ -84,6 +86,7 @@ class Home extends Base {
                   'password' =>md5($generated_pass),
                   'user_type' => 'user',
                   'status'=>'pending',
+									'date_joined'=>date('Y-m-d H:i:s'),
                  'hash' => md5(rand(0, 10))
               );
 							$id=$this->AdminModel->insert('user',$registration_data);
@@ -267,6 +270,132 @@ class Home extends Base {
 	 $this->data["page_title"]="Legal";
 	 $this->render_front('legal');
  }
+ public function howitworks()
+ {
+	 $this->data["h_title"]=$this->AdminModel->getdata(["status="=>"active"],'how_title');
+	 $this->data['title']	= 'How it works?';
+	 $this->data["page_title"]="How it works?";
+	 $this->render_front('howitwork');
+ }
+ public function howBackabizWorks()
+ {
+	 $this->data["h_title"]=$this->AdminModel->getdata(["status="=>"active"],'how_backabiz');
+	 $this->data['title']	= 'How Backabiz Works';
+	 $this->data["page_title"]="How Backabiz Works";
+	 $this->render_front('howitwork');
+ }
+ public function whyBackabiz()
+ {
+	 $this->data["h_title"]=$this->AdminModel->getdata(["status="=>"active"],'why_backabiz');
+	 $this->data['title']	= 'Why Backabiz';
+	 $this->data["page_title"]="Why Backabiz";
+	 $this->render_front('howitwork');
+ }
+ public function helpCenter()
+ {
+	 $this->data["h_title"]=$this->AdminModel->getdata(["status="=>"active"],'help_center');
+	 $this->data['title']	= 'Help Centre';
+	 $this->data["page_title"]="Help Centre";
+	 $this->render_front('howitwork');
+ }
+public function lost_password()
+{
+	$this->data['title']	= 'Password Reset';
+	$this->data["page_title"] = "Password Reset";
+	$this->render_front('passwordReset');
+}
+public function submit_lost_password()
+{
+	$this->form_validation->set_rules('email', 'E-mail', 'required|valid_email');
+	if ($this->form_validation->run() == TRUE) {
+		$user_mail=$this->input->post('email');
+		$update_data = array(
+			 'hash' => md5(rand(0, 10))
+		);
+		$this->AdminModel->doupdate(["email"=>$user_mail],'user',$update_data);
+		$check=$this->AdminModel->CheckUserMail($user_mail);
+		if($check){
 
+			$config = Array(
+		'protocol'  => 'smtp',
+		'smtp_host' => 'ssl://smtp.googlemail.com',
+		'smtp_port' => '465',
+		'smtp_user' => 'nirajs.official@gmail.com',
+		'smtp_pass' => 'nir@j7580',
+		'mailtype'  => 'html',
+		'starttls'  => true,
+		'newline'   => "\r\n"
+);
+
+  //subject
+	$message= /*-----------email body starts-----------*/
+		'Dear,'.$check->first_name.' '.$check->last_name.'
+
+		We want to help you
+		reset your password.
+		-------------------------------------------------
+		Please click below link to reset your password:
+
+		' . base_url() . 'home/resetPassword/' . $check->email . '/' . $check->hash;
+
+
+
+
+	/*-----------email body ends-----------*/
+
+				$this->load->library('email', $config);
+
+				$this->email->from('nirajs.official@gmail.com', 'Password Reset-Backabiz');
+				$this->email->to($user_mail);
+				$this->email->subject("Please reset you password at Backabiz");
+				$this->email->message($message);
+				if($this->email->send()){
+				$this->session->set_flashdata(['msg'=> 'A link to reset your password has been sent to you registered email,If you dont see it be sure to check you spam folder too' ,'type'=>'success']);
+				redirect('home/message');
+		}
+	}
+	else{
+		$this->session->set_flashdata(['error'=> 'Please enter a valid registered email' ,'type'=>'success']);
+		redirect('home/lost_password');
+}
+	}else{
+		$this->session->set_flashdata(['error'=> 'Please enter a valid registered email' ,'type'=>'success']);
+		redirect('home/lost_password');
+}
+}
+
+public function resetPassword($email=null,$hash=null)
+{
+	$where=array('email'=>$email,'hash'=>$hash);
+	$verified=$this->AdminModel->getdata($where,'user');
+	if($verified){
+		$this->data["email"]=$email;
+		$this->data['title']	= 'Password Update';
+ 	 $this->data["page_title"]="Password Update";
+	  $this->session->set_flashdata(['success'=> 'Please change your password','type'=>'success']);
+		$this->render_front('changePassword');
+	}else{
+		$this->session->set_flashdata(['msg'=> 'Link expired, click lost password again to reset your password','type'=>'danger']);
+				redirect('home/message');
+	}
+}
+
+public function submit_new_password()
+{
+	$email=$this->input->post('email');
+	$data = array(
+		'password' => md5($this->input->post("psw")),
+		'hash'=>md5(rand(0, 10)),
+	);
+	$where=array('email'=>$email);
+	$verified=$this->AdminModel->doupdate($where,'user',$data);
+	if($verified){
+	$this->session->set_flashdata(['msg'=> 'Password changed succesfully,please login to continue','type'=>'success']);
+			redirect('home/message');
+		}else{
+			$this->session->set_flashdata(['msg'=> 'Password Update Failed,please try again','type'=>'danger']);
+			redirect('home/message');
+		}
+}
 
 }

@@ -39,7 +39,7 @@
                         </ul>
                     </nav><!-- /#main-nav -->
               </div>
-              <div class="dashboard-right"><a href="<?php echo base_url('new-project')?>" class="submit">Add New Project</a></div>
+              <div class="dashboard-right"><a href="<?php echo base_url('new-project')?>" class="submit">Add New Campaign</a></div>
              </div>
             </div>
           </div>
@@ -154,7 +154,7 @@
 						    <textarea name="bio" rows="3"  class="form-control"><?php if(isset($user[0]['bio'])){ echo $user[0]['bio'];}?></textarea>
 						</div>
 						<h3 class="reward-option">Payment Info</h3>
-            <input type="submit" class="submit" name="Edit" value="Edit">
+            <input type="submit" class="submit" name="Edit" value="Save">
 						<!-- <button type="submit" class="submit">Edit</button> -->
 						<button class="cancel" style="display: none;">Cancel</button>
 						<button class="blue" style="display: none;">Save</button>

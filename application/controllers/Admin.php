@@ -509,10 +509,12 @@ class Admin extends CI_Controller
         $where=array("status"=>"active");
         $table="project";
         $data2 = $this->AdminModel->getdata($where,$table);
+        $where2=array('status'=>'active');
+        $category=$this->AdminModel->getdata($where,'category');
         $data1=$this->AdminModel->get_countries();
         // print_r($data1);
         // die;
-        $data=array('page_title'=>"Project",'layout_page'=>'project','projects'=>$data2,"countries"=>$data1);
+        $data=array('page_title'=>"Project",'layout_page'=>'project','projects'=>$data2,"countries"=>$data1,"category"=>$category);
         $this->load->view('admin/layout', $data);
     }
 
@@ -523,6 +525,45 @@ class Admin extends CI_Controller
         $der1=implode(",",$der);
         // $cname = $_FILES['userfile']['name'];
         // $filename = time() . sha1($cname);
+        if(!empty($_FILES['files']['name']) && count(array_filter($_FILES['files']['name'])) > 0){
+            $filesCount = count($_FILES['files']['name']);
+            for($i = 0; $i < $filesCount; $i++){
+                $_FILES['file']['name']     = $_FILES['files']['name'][$i];
+                $_FILES['file']['type']     = $_FILES['files']['type'][$i];
+                $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+                $_FILES['file']['error']     = $_FILES['files']['error'][$i];
+                $_FILES['file']['size']     = $_FILES['files']['size'][$i];
+
+                // File upload configuration
+                $uploadPath = 'uploads/project/';
+                $config['upload_path'] = $uploadPath;
+                $config['allowed_types'] = 'jpg|jpeg|png|gif';
+                //$config['max_size']    = '100';
+                //$config['max_width'] = '1024';
+                //$config['max_height'] = '768';
+
+                // Load and initialize upload library
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+
+                // Upload file to server
+                if($this->upload->do_upload('file')){
+                    // Uploaded file data
+                    $fileData = $this->upload->data();
+                    $uploadData[$i] = $fileData['file_name'];
+                }else{
+                    $errorUploadType .= $_FILES['file']['name'].' | ';
+                }
+            }
+          }
+
+            $errorUploadType = !empty($errorUploadType)?'<br/>File Type Error: '.trim($errorUploadType, ' | '):'';
+            if(!empty($uploadData)){
+                // Insert files data into the database
+                $image=implode(",", $uploadData);
+              }else{
+                $image= "N/A";
+              }
 
 
         $config['upload_path'] = "uploads/project/";
@@ -533,13 +574,13 @@ class Admin extends CI_Controller
 
         $this->upload->initialize($config);
 
-        if ($this->upload->do_upload('feature_img')) {
-            $imageDetailArray = $this->upload->data();
-
-            $image = $imageDetailArray['file_name'];
-        }else{
-            $image="N/A";
-        }
+        // if ($this->upload->do_upload('feature_img')) {
+        //     $imageDetailArray = $this->upload->data();
+        //
+        //     $image = $imageDetailArray['file_name'];
+        // }else{
+        //     $image="N/A";
+        // }
         if ($this->upload->do_upload('reward_img')) {
             $imageDetail = $this->upload->data();
 
@@ -568,6 +609,8 @@ class Admin extends CI_Controller
                 'location'=>$this->input->post('location'),
                 'reward_p_amount'=>$this->input->post('reward_p_amount'),
                 'reward_desc'=>$this->input->post('reward_desc'),
+                'contributor_table'=>$this->input->post('contributor_table'),
+                'contributor_anonymity'=>$this->input->post('contributor_anonymity'),
                 'del_month'=>$this->input->post('del_month'),
                 'del_year'=>$this->input->post('del_year'),
                 'quantity'=>$this->input->post('quantity'),
@@ -668,6 +711,45 @@ class Admin extends CI_Controller
 
         }
     }
+    if(!empty($_FILES['files']['name']) && count(array_filter($_FILES['files']['name'])) > 0){
+        $filesCount = count($_FILES['files']['name']);
+        for($i = 0; $i < $filesCount; $i++){
+            $_FILES['file']['name']     = $_FILES['files']['name'][$i];
+            $_FILES['file']['type']     = $_FILES['files']['type'][$i];
+            $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+            $_FILES['file']['error']     = $_FILES['files']['error'][$i];
+            $_FILES['file']['size']     = $_FILES['files']['size'][$i];
+
+            // File upload configuration
+            $uploadPath = 'uploads/project/';
+            $config['upload_path'] = $uploadPath;
+            $config['allowed_types'] = 'jpg|jpeg|png|gif';
+            //$config['max_size']    = '100';
+            //$config['max_width'] = '1024';
+            //$config['max_height'] = '768';
+
+            // Load and initialize upload library
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+
+            // Upload file to server
+            if($this->upload->do_upload('file')){
+                // Uploaded file data
+                $fileData = $this->upload->data();
+                $uploadData[$i] = $fileData['file_name'];
+            }else{
+                $errorUploadType .= $_FILES['file']['name'].' | ';
+            }
+        }
+      }
+
+        $errorUploadType = !empty($errorUploadType)?'<br/>File Type Error: '.trim($errorUploadType, ' | '):'';
+        if(!empty($uploadData)){
+            // Insert files data into the database
+            $image=implode(",", $uploadData);
+          }else{
+            $image= $image0;
+          }
 
         $config['upload_path'] = "uploads/project/";
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
@@ -676,25 +758,6 @@ class Admin extends CI_Controller
         $config['create_thumb'] = TRUE;
 
         $this->upload->initialize($config);
-
-        if ($this->upload->do_upload('feature_img')) {
-            $imageDetailArray = $this->upload->data();
-
-            // $configer = array(
-            //     'image_library' => 'gd2',
-            //     'source_image' => $imageDetailArray['full_path'],
-            //     'maintain_ratio' => TRUE,
-            //     'width' => 1920,
-            //     'height' => 1080,
-            // );
-            // $this->image_lib->clear();
-            // $this->image_lib->initialize($configer);
-            // $this->image_lib->resize();
-
-            $image = $imageDetailArray['file_name'];
-        }else{
-            $image=$image0;
-        }
         if ($this->upload->do_upload('reward_img')) {
             $imageDetail = $this->upload->data();
 
@@ -1681,6 +1744,398 @@ class Admin extends CI_Controller
         }else{
             $this->session->set_flashdata('error','failed! pls try again');
             redirect('admin/legal');
+        }
+    }
+
+    public function about_banner()
+    {
+        $user_id = $this->session->userdata('admin_id');
+        if (empty($user_id)) {
+            redirect('admin');
+        }
+        $where=array('status'=>'active');
+        $data = $this->AdminModel->getdata($where,"about_banner");
+        $data=array('page_title'=>'About Banner','layout_page'=>'about_banner','feature'=>$data);
+        $this->load->view('admin/layout',$data);
+    }
+    public function insert_about_banner()
+    {
+      $id=$this->input->post('id');
+      if(!empty($id)){
+     $where=array('status'=>"active",'id'=>$id);
+     $data = $this->AdminModel->getdata($where,"about_banner");
+     $img=$data[0]['image'];
+     $config['upload_path'] = "uploads/banner/";
+     $config['allowed_types'] = 'gif|jpg|png|jpeg';
+     $config['max_size'] = '409600';
+     // $config['file_name'] = $filename;
+     $config['create_thumb'] = TRUE;
+
+     $this->upload->initialize($config);
+
+     if ($this->upload->do_upload('p_image')) {
+         $imageDetailArray = $this->upload->data();
+
+         $image = $imageDetailArray['file_name'];
+     }else{
+         $image=$img;
+     }
+ }else{
+      $config['upload_path'] = "uploads/banner/";
+      $config['allowed_types'] = 'gif|jpg|png|jpeg';
+      $config['max_size'] = '409600';
+      // $config['file_name'] = $filename;
+      $config['create_thumb'] = TRUE;
+
+      $this->upload->initialize($config);
+
+      if ($this->upload->do_upload('p_image')) {
+          $imageDetailArray = $this->upload->data();
+
+          $image = $imageDetailArray['file_name'];
+      }else{
+          $image="N/A";
+      }
+    }
+         $data=array(
+            'title'=> $this->input->post("title"),
+            'b_title'=>$this->input->post("b_title"),
+            'image'=>$image,
+            'b_link'=>$this->input->post("b_link"),
+            'status'=>"active"
+        );
+        if(!empty($id)){
+          $where=array('id'=>$id,'status'=>'active');
+          $insert=$this->AdminModel->doupdate($where,'about_banner',$data);
+        }else{
+        $insert = $this->AdminModel->insert("about_banner",$data);
+      }
+        if ($insert){
+            $this->session->set_flashdata('success','Banner Updated successfully');
+            redirect('admin/about_banner');
+        }else{
+            $this->session->set_flashdata('error','failed! pls try again');
+            redirect('admin/about_banner');
+        }
+    }
+    public function how_title()
+    {
+      $user_id = $this->session->userdata('admin_id');
+      if (empty($user_id)) {
+          redirect('admin');
+      }
+      $where=array('status'=>'active');
+      $data = $this->AdminModel->getdata($where,"how_title");
+      $data=array('page_title'=>'How it Works?','layout_page'=>'how_title','feature'=>$data);
+      $this->load->view('admin/layout',$data);
+    }
+    public function Insert_how_title()
+    {
+      $id=$this->input->post('id');
+      if(!empty($id)){
+     $where=array('status'=>"active",'id'=>$id);
+     $data = $this->AdminModel->getdata($where,"how_title");
+     $img=$data[0]['banner_image'];
+     $config['upload_path'] = "uploads/banner/";
+     $config['allowed_types'] = 'gif|jpg|png|jpeg';
+     $config['max_size'] = '409600';
+     // $config['file_name'] = $filename;
+     $config['create_thumb'] = TRUE;
+
+     $this->upload->initialize($config);
+
+     if ($this->upload->do_upload('p_image')) {
+         $imageDetailArray = $this->upload->data();
+
+         $image = $imageDetailArray['file_name'];
+     }else{
+         $image=$img;
+     }
+ }else{
+      $config['upload_path'] = "uploads/banner/";
+      $config['allowed_types'] = 'gif|jpg|png|jpeg';
+      $config['max_size'] = '409600';
+      // $config['file_name'] = $filename;
+      $config['create_thumb'] = TRUE;
+
+      $this->upload->initialize($config);
+
+      if ($this->upload->do_upload('p_image')) {
+          $imageDetailArray = $this->upload->data();
+
+          $image = $imageDetailArray['file_name'];
+      }else{
+          $image="N/A";
+      }
+    }
+         $data=array(
+            't_1'=> $this->input->post("t_1"),
+            'des_1'=>$this->input->post("des_1"),
+            't_2'=>$this->input->post("t_2"),
+            'des_2'=>$this->input->post("des_2"),
+            't_3'=>$this->input->post("t_3"),
+            'des_3'=>$this->input->post("des_3"),
+            'bottom_title'=>$this->input->post("footer_b_title"),
+            'bottom_description'=>$this->input->post("footer_b_des"),
+            'button_link'=>$this->input->post("footer_b_link"),
+            'bottom_button'=>$this->input->post("footer_b_button"),
+            'banner_title'=> $this->input->post("title"),
+            'banner_description'=>$this->input->post("description"),
+            'banner_image'=>$image,
+            'status'=>"active"
+        );
+        if(!empty($id)){
+          $where=array('id'=>$id,'status'=>'active');
+          $insert=$this->AdminModel->doupdate($where,'how_title',$data);
+        }else{
+        $insert = $this->AdminModel->insert("how_title",$data);
+      }
+        if ($insert){
+            $this->session->set_flashdata('success','Updated successfully');
+            redirect('admin/how_title');
+        }else{
+            $this->session->set_flashdata('error','Update failed! pls try again');
+            redirect('admin/how_title');
+        }
+    }
+    public function how_backabiz()
+    {
+      $user_id = $this->session->userdata('admin_id');
+      if (empty($user_id)) {
+          redirect('admin');
+      }
+      $where=array('status'=>'active');
+      $data = $this->AdminModel->getdata($where,"how_backabiz");
+      $data=array('page_title'=>'How Backabiz Works','layout_page'=>'how_backabiz','feature'=>$data);
+      $this->load->view('admin/layout',$data);
+    }
+    public function Insert_how_backabiz()
+    {
+      $id=$this->input->post('id');
+      if(!empty($id)){
+     $where=array('status'=>"active",'id'=>$id);
+     $data = $this->AdminModel->getdata($where,"how_backabiz");
+     $img=$data[0]['banner_image'];
+     $config['upload_path'] = "uploads/banner/";
+     $config['allowed_types'] = 'gif|jpg|png|jpeg';
+     $config['max_size'] = '409600';
+     // $config['file_name'] = $filename;
+     $config['create_thumb'] = TRUE;
+
+     $this->upload->initialize($config);
+
+     if ($this->upload->do_upload('p_image')) {
+         $imageDetailArray = $this->upload->data();
+
+         $image = $imageDetailArray['file_name'];
+     }else{
+         $image=$img;
+     }
+ }else{
+      $config['upload_path'] = "uploads/banner/";
+      $config['allowed_types'] = 'gif|jpg|png|jpeg';
+      $config['max_size'] = '409600';
+      // $config['file_name'] = $filename;
+      $config['create_thumb'] = TRUE;
+
+      $this->upload->initialize($config);
+
+      if ($this->upload->do_upload('p_image')) {
+          $imageDetailArray = $this->upload->data();
+
+          $image = $imageDetailArray['file_name'];
+      }else{
+          $image="N/A";
+      }
+    }
+         $data=array(
+            't_1'=> $this->input->post("t_1"),
+            'des_1'=>$this->input->post("des_1"),
+            't_2'=>$this->input->post("t_2"),
+            'des_2'=>$this->input->post("des_2"),
+            't_3'=>$this->input->post("t_3"),
+            'des_3'=>$this->input->post("des_3"),
+            'bottom_title'=>$this->input->post("footer_b_title"),
+            'bottom_description'=>$this->input->post("footer_b_des"),
+            'button_link'=>$this->input->post("footer_b_link"),
+            'bottom_button'=>$this->input->post("footer_b_button"),
+            'banner_title'=> $this->input->post("title"),
+            'banner_description'=>$this->input->post("description"),
+            'banner_image'=>$image,
+            'status'=>"active"
+        );
+        if(!empty($id)){
+          $where=array('id'=>$id,'status'=>'active');
+          $insert=$this->AdminModel->doupdate($where,'how_backabiz',$data);
+        }else{
+        $insert = $this->AdminModel->insert("how_backabiz",$data);
+      }
+        if ($insert){
+            $this->session->set_flashdata('success','Updated successfully');
+            redirect('admin/how_backabiz');
+        }else{
+            $this->session->set_flashdata('error','Update failed! pls try again');
+            redirect('admin/how_backabiz');
+        }
+    }
+    public function why_backabiz()
+    {
+      $user_id = $this->session->userdata('admin_id');
+      if (empty($user_id)) {
+          redirect('admin');
+      }
+      $where=array('status'=>'active');
+      $data = $this->AdminModel->getdata($where,"why_backabiz");
+      $data=array('page_title'=>'Why Backabiz','layout_page'=>'why_backabiz','feature'=>$data);
+      $this->load->view('admin/layout',$data);
+    }
+    public function Insert_why_backabiz()
+    {
+      $id=$this->input->post('id');
+      if(!empty($id)){
+     $where=array('status'=>"active",'id'=>$id);
+     $data = $this->AdminModel->getdata($where,"why_backabiz");
+     $img=$data[0]['banner_image'];
+     $config['upload_path'] = "uploads/banner/";
+     $config['allowed_types'] = 'gif|jpg|png|jpeg';
+     $config['max_size'] = '409600';
+     // $config['file_name'] = $filename;
+     $config['create_thumb'] = TRUE;
+
+     $this->upload->initialize($config);
+
+     if ($this->upload->do_upload('p_image')) {
+         $imageDetailArray = $this->upload->data();
+
+         $image = $imageDetailArray['file_name'];
+     }else{
+         $image=$img;
+     }
+ }else{
+      $config['upload_path'] = "uploads/banner/";
+      $config['allowed_types'] = 'gif|jpg|png|jpeg';
+      $config['max_size'] = '409600';
+      // $config['file_name'] = $filename;
+      $config['create_thumb'] = TRUE;
+
+      $this->upload->initialize($config);
+
+      if ($this->upload->do_upload('p_image')) {
+          $imageDetailArray = $this->upload->data();
+
+          $image = $imageDetailArray['file_name'];
+      }else{
+          $image="N/A";
+      }
+    }
+         $data=array(
+            't_1'=> $this->input->post("t_1"),
+            'des_1'=>$this->input->post("des_1"),
+            't_2'=>$this->input->post("t_2"),
+            'des_2'=>$this->input->post("des_2"),
+            't_3'=>$this->input->post("t_3"),
+            'des_3'=>$this->input->post("des_3"),
+            'bottom_title'=>$this->input->post("footer_b_title"),
+            'bottom_description'=>$this->input->post("footer_b_des"),
+            'button_link'=>$this->input->post("footer_b_link"),
+            'bottom_button'=>$this->input->post("footer_b_button"),
+            'banner_title'=> $this->input->post("title"),
+            'banner_description'=>$this->input->post("description"),
+            'banner_image'=>$image,
+            'status'=>"active"
+        );
+        if(!empty($id)){
+          $where=array('id'=>$id,'status'=>'active');
+          $insert=$this->AdminModel->doupdate($where,'why_backabiz',$data);
+        }else{
+        $insert = $this->AdminModel->insert("why_backabiz",$data);
+      }
+        if ($insert){
+            $this->session->set_flashdata('success','Updated successfully');
+            redirect('admin/why_backabiz');
+        }else{
+            $this->session->set_flashdata('error','Update failed! pls try again');
+            redirect('admin/why_backabiz');
+        }
+    }
+    public function help_center()
+    {
+      $user_id = $this->session->userdata('admin_id');
+      if (empty($user_id)) {
+          redirect('admin');
+      }
+      $where=array('status'=>'active');
+      $data = $this->AdminModel->getdata($where,"help_center");
+      $data=array('page_title'=>'Help Centre','layout_page'=>'help_center','feature'=>$data);
+      $this->load->view('admin/layout',$data);
+    }
+    public function Insert_help_center()
+    {
+      $id=$this->input->post('id');
+      if(!empty($id)){
+     $where=array('status'=>"active",'id'=>$id);
+     $data = $this->AdminModel->getdata($where,"help_center");
+     $img=$data[0]['banner_image'];
+     $config['upload_path'] = "uploads/banner/";
+     $config['allowed_types'] = 'gif|jpg|png|jpeg';
+     $config['max_size'] = '409600';
+     // $config['file_name'] = $filename;
+     $config['create_thumb'] = TRUE;
+
+     $this->upload->initialize($config);
+
+     if ($this->upload->do_upload('p_image')) {
+         $imageDetailArray = $this->upload->data();
+
+         $image = $imageDetailArray['file_name'];
+     }else{
+         $image=$img;
+     }
+ }else{
+      $config['upload_path'] = "uploads/banner/";
+      $config['allowed_types'] = 'gif|jpg|png|jpeg';
+      $config['max_size'] = '409600';
+      // $config['file_name'] = $filename;
+      $config['create_thumb'] = TRUE;
+
+      $this->upload->initialize($config);
+
+      if ($this->upload->do_upload('p_image')) {
+          $imageDetailArray = $this->upload->data();
+
+          $image = $imageDetailArray['file_name'];
+      }else{
+          $image="N/A";
+      }
+    }
+         $data=array(
+            't_1'=> $this->input->post("t_1"),
+            'des_1'=>$this->input->post("des_1"),
+            't_2'=>$this->input->post("t_2"),
+            'des_2'=>$this->input->post("des_2"),
+            't_3'=>$this->input->post("t_3"),
+            'des_3'=>$this->input->post("des_3"),
+            'bottom_title'=>$this->input->post("footer_b_title"),
+            'bottom_description'=>$this->input->post("footer_b_des"),
+            'button_link'=>$this->input->post("footer_b_link"),
+            'bottom_button'=>$this->input->post("footer_b_button"),
+            'banner_title'=> $this->input->post("title"),
+            'banner_description'=>$this->input->post("description"),
+            'banner_image'=>$image,
+            'status'=>"active"
+        );
+        if(!empty($id)){
+          $where=array('id'=>$id,'status'=>'active');
+          $insert=$this->AdminModel->doupdate($where,'help_center',$data);
+        }else{
+        $insert = $this->AdminModel->insert("help_center",$data);
+      }
+        if ($insert){
+            $this->session->set_flashdata('success','Updated successfully');
+            redirect('admin/help_center');
+        }else{
+            $this->session->set_flashdata('error','Update failed! pls try again');
+            redirect('admin/help_center');
         }
     }
 }

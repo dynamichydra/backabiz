@@ -36,12 +36,16 @@
       <link rel="stylesheet" href="<?php echo base_url(); ?>assets/style.css">
       <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <!-- <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script> -->
       <!-- jquery.flexslider.js -->
       <script src="<?php echo base_url(); ?>assets/js/flexslider-min.js"></script>
+
       <!-- bootstrap js -->
       <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
       <script src="<?php echo base_url(); ?>assets/js/main.js"></script>
+      <!-- <script src="<?php echo base_url(); ?>assets/js/jquery.magnific-popup.js"></script> -->
+      <script src="//cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
+
      </head>
      <body class="header-fixed page no-sidebar header-style-2 topbar-style-2">
       <div class="wrapper">
@@ -63,11 +67,11 @@
                          <?php
                           if(!empty($_SESSION['user'])){
                            ?>
-                         <li><a href='<?php echo base_url('new-project')?>'><i class="fa fa-file-text-o"></i>Start a Project</a></li>
+                         <li><a href='<?php echo base_url('new-project')?>'><i class="fa fa-file-text-o"></i>Start a Backabiz</a></li>
                          <?php
                        } else {
                          ?>
-                         <li><a href='<?php echo base_url('home/login') ?>'><i class="fa fa-file-text-o"></i>Start a Project</a></li>
+                         <li><a href='<?php echo base_url('home/login') ?>'><i class="fa fa-file-text-o"></i>Start a Backabiz</a></li>
                          <?php
                        }
                          ?>
@@ -109,8 +113,17 @@
                                 <li class="menu-item"><a href="<?php echo base_url()?>">Home</a></li>
                                 <li class="menu-item"><a href="<?php echo base_url('home/about') ?>">About</a></li>
                                 <li class="menu-item menu-item-has-children">
-                                    <a href="<?php echo base_url('project/projects') ?>">Explore <i class="fa fa-angle-down"></i></a>
+                                    <a >How it works? <i class="fa fa-angle-down"></i></a>
                                     <ul class="sub-menu">
+                                      <li class="menu-item"><a href="<?php echo base_url('home/howBackabizWorks') ?>">How Backabiz Works</a></li>
+                                      <li class="menu-item"><a href="<?php echo base_url('home/whyBackabiz') ?>">Why Backabiz</a></li>
+                                      <li class="menu-item"><a href="<?php echo base_url('home/help-centre') ?>">Help Centre</a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item menu-item-has-children">
+                                  <a href="<?php echo base_url('project/projects') ?>">Explore <i class="fa fa-angle-down"></i></a>
+                                  <ul class="sub-menu">
+
                                       <?php
                     if (isset($category)) {
                       foreach ($category as $key=>$value) {
@@ -124,7 +137,7 @@
                                     </ul>
                                 </li>
                                 <li class="menu-item"><a href="<?php echo base_url('home/news') ?>">News</a></li>
-                                <li class="menu-item"><a href="<?php echo base_url('home/faqs') ?>">Faqs</a></li>
+                                <!-- <li class="menu-item"><a href="<?php echo base_url('home/faqs') ?>">Faqs</a></li> -->
                                 <li class="menu-item"><a href="<?php echo base_url('home/contact') ?>">Contact</a></li>
                             </ul>
                         </nav><!-- /#main-nav -->
@@ -145,7 +158,6 @@
             -webkit-box-orient: vertical;
         }
     </style>
-
             <script>
             $(function($) {
   let url = window.location.href;

@@ -50,7 +50,7 @@
                           <?php echo $about[0]['p_3'];?>
                         </li>
                       </ul>
-                      <a href="<?php echo base_url('new-project')?>" class="site-btn">start a project</a>
+                      <a href="<?php echo base_url('new-project')?>" class="site-btn">Start a Backabiz</a>
                     </div>
                   </div>
                 </div><!-- end row -->
@@ -108,7 +108,7 @@
                   <div class="col-md-8 col-md-offset-2">
                     <div class="joint-pro-txt">
                       <h2>Join <span>25,788 </span>Projects, Organisations and Campaigns on Funlin</h2>
-                      <a href="<?php echo base_url('new-project')?>" class="site-btn">start a project</a>
+                      <a href="<?php echo base_url('new-project')?>" class="site-btn">Start a Backabiz</a>
                     </div>
                   </div>
                 </div>
