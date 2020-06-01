@@ -36,8 +36,7 @@
 
 
                       <div class="faq-fot">
-                        <h2>Still have a question?</h2>
-                        <a href="#" class="site-btn">GET IN TOUCH WITH US</a>
+                        <a href="https://bb.wsdev.in/contact" class="site-btn">Still have a question?</a>
                       </div>
                     </div>
                   </div>

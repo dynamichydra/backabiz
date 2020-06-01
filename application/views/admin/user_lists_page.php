@@ -62,7 +62,7 @@
               <td><?php echo $vn['first_name']." ".$vn['last_name'];?></td>
               <td><a href><?php echo $vn['email'];?></a></td>
               <td><?php echo $vn['phone'];?></td>
-              <td><?php echo $vn['date_joined'];?></td>
+              <td><?php echo date('d M Y',strtotime($vn['date_joined']));?></td>
               <?php
               if($vn['status']=="active"){
                 ?>

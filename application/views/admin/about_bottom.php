@@ -37,6 +37,11 @@
                         ?>" placeholder="Enter Sub Title" value="">
             </div>
             <div class="form-group">
+              <label for="s_title_1">Sub Title</label>
+              <input type="text" class="form-control" name="s_title_1" id="s_title_1" value="<?php if (isset($feature[0]['subtitle_1'])) { echo $feature[0]['subtitle_1'];}
+                        ?>" placeholder="Enter Sub Title" value="">
+            </div>
+            <div class="form-group">
               <label for="points">Points</label>
               <input type="text" class="form-control" name="p_1" id="p_1" value="<?php if (isset($feature[0]['p_1'])) { echo $feature[0]['p_1'];}
                         ?>" placeholder="Enter point1">

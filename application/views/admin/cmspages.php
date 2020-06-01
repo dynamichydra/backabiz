@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Page Content</label>
-                            <textarea  name="content" rows="10" cols="80"><?php echo ($content)?$content["page_content"]:''; ?></textarea>
+                            <textarea id="editor1"  name="content" rows="10" cols="80"><?php echo ($content)?$content["page_content"]:''; ?></textarea>
                         </div>
                     </div>
                     <div class="box-footer">
@@ -51,7 +51,7 @@
 </div>
 
 
-<script>
+<!-- <script>
     tinymce.init({
       selector: 'textarea',
       height: 200,
@@ -88,4 +88,12 @@
         input.click();
       }
     });
+</script> -->
+<script>
+CKEDITOR.replace( 'editor1' );
+// CKEDITOR.replace( 'editor2' );
+// CKEDITOR.replace( 'editor3' );
+// CKEDITOR.replace( 'editor4' );
+// CKEDITOR.replace( 'editor5' );
+// CKEDITOR.replace( 'editor6' );
 </script>

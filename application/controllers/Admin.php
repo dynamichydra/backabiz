@@ -690,8 +690,9 @@ class Admin extends CI_Controller
         $where=array('id'=>$id);
         $table="project";
         $did=$this->AdminModel->getdata($where,$table);
+        $cat=$this->AdminModel->getdata(['status='=>'active'],'category');
         $data1=$this->AdminModel->get_countries();
-        $data=array('page_title'=>'Project List','layout_page'=>'edit_project','project'=>$did,"countries"=>$data1);
+        $data=array('page_title'=>'Project List','layout_page'=>'edit_project','project'=>$did,"countries"=>$data1,"category"=>$cat);
         // print_r($data);
         // die;
         $this->load->view('admin/layout', $data);
@@ -702,6 +703,8 @@ class Admin extends CI_Controller
         $table="project";
         $where=array('id'=>$id);
         $did=$this->AdminModel->getdata($where,$table);
+        $der=$this->input->post('category');
+        $der1=implode(",",$der);
         // print_r($did);
         // die;
         if (!empty($did)){
@@ -771,7 +774,7 @@ class Admin extends CI_Controller
                 'title'=>$this->input->post('title'),
                 'description'=>$this->input->post('description'),
                 'short_description'=>$this->input->post('short_description'),
-                'category'=>$this->input->post('category'),
+                'category'=>$der1,
                 'tag'=>$this->input->post('tag'),
                 'video'=>$this->input->post('video'),
                 'project_end_method'=>$this->input->post('method'),
@@ -1581,6 +1584,7 @@ class Admin extends CI_Controller
          $data=array(
             'title'=> $this->input->post("title"),
             'subtitle'=>$this->input->post("s_title"),
+            'subtitle_1'=>$this->input->post("s_title_1"),
             'image'=>$image,
             'p_1'=>$this->input->post("p_1"),
             'p_2'=>$this->input->post("p_2"),
@@ -1996,6 +2000,11 @@ class Admin extends CI_Controller
      $where=array('status'=>"active",'id'=>$id);
      $data = $this->AdminModel->getdata($where,"why_backabiz");
      $img=$data[0]['banner_image'];
+     $img1=$data[0]['image_1'];
+     $img2=$data[0]['image_2'];
+     $img3=$data[0]['image_3'];
+     $img4=$data[0]['image_4'];
+     $img5=$data[0]['image_5'];
      $config['upload_path'] = "uploads/banner/";
      $config['allowed_types'] = 'gif|jpg|png|jpeg';
      $config['max_size'] = '409600';
@@ -2010,6 +2019,41 @@ class Admin extends CI_Controller
          $image = $imageDetailArray['file_name'];
      }else{
          $image=$img;
+     }
+     if ($this->upload->do_upload('image_1')) {
+         $imageDetailArray = $this->upload->data();
+
+         $image1 = $imageDetailArray['file_name'];
+     }else{
+         $image1=$img1;
+     }
+     if ($this->upload->do_upload('image_2')) {
+         $imageDetailArray = $this->upload->data();
+
+         $image2 = $imageDetailArray['file_name'];
+     }else{
+         $image2=$img2;
+     }
+     if ($this->upload->do_upload('image_3')) {
+         $imageDetailArray = $this->upload->data();
+
+         $image3 = $imageDetailArray['file_name'];
+     }else{
+         $image3=$img3;
+     }
+     if ($this->upload->do_upload('image_4')) {
+         $imageDetailArray = $this->upload->data();
+
+         $image4 = $imageDetailArray['file_name'];
+     }else{
+         $image4=$img4;
+     }
+     if ($this->upload->do_upload('image_5')) {
+         $imageDetailArray = $this->upload->data();
+
+         $image5 = $imageDetailArray['file_name'];
+     }else{
+         $image5=$img5;
      }
  }else{
       $config['upload_path'] = "uploads/banner/";
@@ -2027,6 +2071,41 @@ class Admin extends CI_Controller
       }else{
           $image="N/A";
       }
+      if ($this->upload->do_upload('image_1')) {
+          $imageDetailArray = $this->upload->data();
+
+          $image1 = $imageDetailArray['file_name'];
+      }else{
+          $image1="N/A";
+      }
+      if ($this->upload->do_upload('image_2')) {
+          $imageDetailArray = $this->upload->data();
+
+          $image2 = $imageDetailArray['file_name'];
+      }else{
+          $image2="N/A";
+      }
+      if ($this->upload->do_upload('image_3')) {
+          $imageDetailArray = $this->upload->data();
+
+          $image3 = $imageDetailArray['file_name'];
+      }else{
+          $image3 ="N/A";
+      }
+      if ($this->upload->do_upload('image_4')) {
+          $imageDetailArray = $this->upload->data();
+
+          $image4 = $imageDetailArray['file_name'];
+      }else{
+          $image4 = "N/A";
+      }
+      if ($this->upload->do_upload('image_5')) {
+          $imageDetailArray = $this->upload->data();
+
+          $image5 = $imageDetailArray['file_name'];
+      }else{
+          $image5 = "N/A";
+      }
     }
          $data=array(
             't_1'=> $this->input->post("t_1"),
@@ -2035,12 +2114,19 @@ class Admin extends CI_Controller
             'des_2'=>$this->input->post("des_2"),
             't_3'=>$this->input->post("t_3"),
             'des_3'=>$this->input->post("des_3"),
-            'bottom_title'=>$this->input->post("footer_b_title"),
-            'bottom_description'=>$this->input->post("footer_b_des"),
+            't_4'=>$this->input->post("t_4"),
+            'des_4'=>$this->input->post("des_4"),
+            't_5'=>$this->input->post("t_5"),
+            'des_5'=>$this->input->post("des_5"),
             'button_link'=>$this->input->post("footer_b_link"),
             'bottom_button'=>$this->input->post("footer_b_button"),
             'banner_title'=> $this->input->post("title"),
             'banner_description'=>$this->input->post("description"),
+            'image_1'=>$image1,
+            'image_2'=>$image2,
+            'image_3'=>$image3,
+            'image_4'=>$image4,
+            'image_5'=>$image5,
             'banner_image'=>$image,
             'status'=>"active"
         );
@@ -2115,8 +2201,10 @@ class Admin extends CI_Controller
             'des_2'=>$this->input->post("des_2"),
             't_3'=>$this->input->post("t_3"),
             'des_3'=>$this->input->post("des_3"),
-            'bottom_title'=>$this->input->post("footer_b_title"),
-            'bottom_description'=>$this->input->post("footer_b_des"),
+            't_4'=>$this->input->post("t_4"),
+            'des_4'=>$this->input->post("des_4"),
+            't_5'=>$this->input->post("t_5"),
+            'des_5'=>$this->input->post("des_5"),
             'button_link'=>$this->input->post("footer_b_link"),
             'bottom_button'=>$this->input->post("footer_b_button"),
             'banner_title'=> $this->input->post("title"),
@@ -2136,6 +2224,349 @@ class Admin extends CI_Controller
         }else{
             $this->session->set_flashdata('error','Update failed! pls try again');
             redirect('admin/help_center');
+        }
+    }
+    public function add_news()
+    {
+      $user_id = $this->session->userdata('admin_id');
+      if (empty($user_id)) {
+          redirect('admin');
+      }
+      $where=array('status'=>'active');
+      $data = $this->AdminModel->getdata($where,"news_category");
+      $data=array('page_title'=>'Add Blogs','layout_page'=>'news','category'=>$data);
+      $this->load->view('admin/layout',$data);
+    }
+
+    public function news_categories($id=null)
+    {
+        if(empty($id="")){
+       $where=array('status'=>"active");
+   }else{
+    $where=array('status'=>"active",'id'=>$id);
+   }
+       $table="news_category";
+       $category=$this->AdminModel->getdata($where,$table);
+       $data=array('page_title'=>'Add New Category','layout_page'=>'news_categories','category'=>$category);
+        $this->load->view('admin/layout', $data);
+    }
+
+    public function news_category_list()
+    {
+         $user_id = $this->session->userdata('admin_id');
+        if (empty($user_id)) {
+            redirect('admin');
+        }
+        $where=array('status!='=>"delete");
+        $table="news_category";
+       $category=$this->AdminModel->getdata($where,$table);
+       $data=array('page_title'=>'Category List','layout_page'=>'news_category_list','category'=>$category);
+        $this->load->view('admin/layout', $data);
+    }
+    public function edit_news_category($id)
+    {
+        $where=array('status'=>'active','id'=>$id);
+        $table="news_category";
+        $cat = $this->AdminModel->getdata($where,$table);
+        $data=array('page_title'=>'Edit Category','layout_page'=>'edit_news_category','category'=>$cat);
+        $this->load->view('admin/layout', $data);
+    }
+    public function insert_news_category($id=null)
+    {
+        $where1=array('id'=>$id);
+        $where=array('status'=>'active');
+        $table="news_category";
+        $category = $this->AdminModel->getdata($where,$table);
+            $cover_data = array(
+                'category_name'=>$this->input->post('cat_name'),
+                'status'=>'active'
+            );
+            if(empty($id)){
+            $this->AdminModel->insert($table,$cover_data);
+            $this->session->set_flashdata('success','New Category Added Successfully');
+            redirect('admin/news_category_list');
+        }else{
+            $this->AdminModel->doupdate($where1,$table,$cover_data);
+            $this->session->set_flashdata('success','Category Updated Successfully');
+            redirect('admin/news_category_list');
+        }
+    }
+
+    public function delete_news_category($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"delete");
+        $table="news_category";
+        $status=$this->AdminModel->doupdate($where,$table,$data);
+        if ($status){
+            $this->session->set_flashdata('success','Deleted Successfully');
+            redirect('admin/news_category_list');
+        }else{
+            $this->session->set_flashdata('error','Delete Failed! Pls Try Again');
+            redirect('admin/news_category_list');
+        }
+    }
+    public function news_category_inactive($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"inactive");
+        $status=$this->AdminModel->doupdate($where,'news_category',$data);
+        if ($status){
+            $this->session->set_flashdata('success','News Category is Inactive');
+            redirect('admin/news_category_list');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/news_category_list');
+        }
+    }
+    public function news_category_active($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"active");
+        $status=$this->AdminModel->doupdate($where,'news_category',$data);
+        if ($status){
+            $this->session->set_flashdata('success','News Category is Active');
+            redirect('admin/news_category_list');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/news_category_list');
+        }
+    }
+
+    public function news_list()
+    {
+         $user_id = $this->session->userdata('admin_id');
+        if (empty($user_id)) {
+            redirect('admin');
+        }
+        $where=array('status!='=>"delete");
+        $table="news";
+       $category=$this->AdminModel->getdata($where,$table);
+       $data=array('page_title'=>'Blogs List','layout_page'=>'news_list','news'=>$category);
+        $this->load->view('admin/layout', $data);
+    }
+    public function edit_news($id)
+    {
+        $where=array('status'=>'active','id'=>$id);
+        $table="news_category";
+        $cat = $this->AdminModel->getdata(['status!='=>'delete'],$table);
+        $new = $this->AdminModel->getdata($where,"news");
+        $data=array('page_title'=>'Edit Blog','layout_page'=>'edit_news','category'=>$cat,'feature'=>$new);
+        $this->load->view('admin/layout', $data);
+    }
+    public function insert_news()
+    {
+      $id=$this->input->post('id');
+        $where1=array('id'=>$id);
+        $table="news";
+        if(!empty($id)){
+
+        $where=array('status'=>"active",'id'=>$id);
+        $data = $this->AdminModel->getdata($where,"news");
+        $img=$data[0]['image'];
+        $config['upload_path'] = "uploads/banner/";
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '409600';
+        // $config['file_name'] = $filename;
+        $config['create_thumb'] = TRUE;
+
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_upload('p_image')) {
+            $imageDetailArray = $this->upload->data();
+
+            $image = $imageDetailArray['file_name'];
+        }else{
+            $image=$img;
+        }
+    }else{
+         $config['upload_path'] = "uploads/banner/";
+         $config['allowed_types'] = 'gif|jpg|png|jpeg';
+         $config['max_size'] = '409600';
+         // $config['file_name'] = $filename;
+         $config['create_thumb'] = TRUE;
+
+         $this->upload->initialize($config);
+
+         if ($this->upload->do_upload('p_image')) {
+             $imageDetailArray = $this->upload->data();
+
+             $image = $imageDetailArray['file_name'];
+         }else{
+             $image="N/A";
+         }
+       }
+
+            if(empty($id)){
+              $cover_data = array(
+                  'title'=>$this->input->post('title'),
+                  'description'=>$this->input->post('description'),
+                  'category'=>$this->input->post('category'),
+                  'image'=>$image,
+                  'date_added'=>date("d-m-Y h:i:s a", time()),
+                  'status'=>'active'
+              );
+
+            $this->AdminModel->insert($table,$cover_data);
+            $this->session->set_flashdata('success','News Added Successfully');
+            redirect('admin/news_list');
+        }else{
+          $cover_data = array(
+              'title'=>$this->input->post('title'),
+              'description'=>$this->input->post('description'),
+              'category'=>$this->input->post('category'),
+              'image'=>$image,
+              'status'=>'active'
+          );
+
+            $this->AdminModel->doupdate($where1,$table,$cover_data);
+            $this->session->set_flashdata('success','News Updated Successfully');
+            redirect('admin/news_list');
+        }
+    }
+
+    public function delete_news($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"delete");
+        $table="news";
+        $status=$this->AdminModel->doupdate($where,$table,$data);
+        if ($status){
+            $this->session->set_flashdata('success','Deleted Successfully');
+            redirect('admin/news_list');
+        }else{
+            $this->session->set_flashdata('error','Delete Failed! Pls Try Again');
+            redirect('admin/news_list');
+        }
+    }
+    public function news_inactive($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"inactive");
+        $status=$this->AdminModel->doupdate($where,'news',$data);
+        if ($status){
+            $this->session->set_flashdata('success','News is Inactive');
+            redirect('admin/news_list');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/news_list');
+        }
+    }
+    public function news_active($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"active");
+        $status=$this->AdminModel->doupdate($where,'news',$data);
+        if ($status){
+            $this->session->set_flashdata('success','News is Active');
+            redirect('admin/news_list');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/news_list');
+        }
+    }
+
+    public function backabiz_faq()
+    {
+        $user_id = $this->session->userdata('admin_id');
+        if (empty($user_id)) {
+            redirect('admin');
+        }
+        $data=array('page_title'=>'Add New Faq','layout_page'=>'how_backabiz_faq');
+        $this->load->view('admin/layout',$data);
+    }
+
+    public function backabiz_insert_faq()
+    {
+         $data=array(
+            'ques'=> $this->input->post("question"),
+            'ans'=>$this->input->post("answer"),
+            'status'=>"active"
+        );
+        $table="howbackabizwork_faq";
+        $insert = $this->AdminModel->insert($table,$data);
+        if ($insert){
+            $this->session->set_flashdata('success','FAQ added successfully');
+            redirect('admin/backabiz_faq_list');
+        }else{
+            $this->session->set_flashdata('error','FAQ! pls try again');
+            redirect('admin/backabiz_faq_list');
+        }
+    }
+    public function backabiz_faq_list()
+    {
+        $where=array('status!='=>'delete');
+        $table="howbackabizwork_faq";
+        $banner = $this->AdminModel->getdata($where,$table);
+        $data=array('page_title'=>'FAQ List','layout_page'=>'howbackabizwork_faq_list','faq'=>$banner);
+        $this->load->view('admin/layout', $data);
+    }
+    public function backabiz_edit_faq($id)
+    {
+        $where=array('status'=>'active','id'=>$id);
+        $table="howbackabizwork_faq";
+        $faq = $this->AdminModel->getdata($where,$table);
+        $data=array('page_title'=>'Edit faq','layout_page'=>'edit_howbackabizwork_faq','faq_data'=>$faq);
+        $this->load->view('admin/layout', $data);
+    }
+    public function backabiz_update_faq()
+    {
+        $id=$this->input->post("id");
+        $where=array('id'=>$id);
+        $data=array(
+            'ques'=> $this->input->post("question"),
+            'ans'=>$this->input->post("answer"),
+        );
+        $table="howbackabizwork_faq";
+        // print_r($data);
+        // die;
+        $insert = $this->AdminModel->doupdate($where,$table,$data);;
+        if ($insert){
+            $this->session->set_flashdata('success','FAQ Updated successfully');
+            redirect('admin/backabiz_faq_list');
+        }else{
+            $this->session->set_flashdata('error','FAQ update failed');
+            redirect('admin/backabiz_faq_list');
+        }
+    }
+    public function backabiz_delete_faq($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"delete");
+        $table="howbackabizwork_faq";
+        $status=$this->AdminModel->doupdate($where,$table,$data);
+        if ($status){
+            $this->session->set_flashdata('success','FAQ deleted successfully');
+            redirect('admin/backabiz_faq_list');
+        }else{
+            $this->session->set_flashdata('error','FAQ delete failed');
+            redirect('admin/backabiz_faq_list');
+        }
+    }
+    public function backabiz_faq_inactive($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"inactive");
+        $status=$this->AdminModel->doupdate($where,'howbackabizwork_faq',$data);
+        if ($status){
+            $this->session->set_flashdata('success','FAQ is Inactive');
+            redirect('admin/backabiz_faq_list');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/backabiz_faq_list');
+        }
+    }
+    public function backabiz_faq_active($id)
+    {
+        $where=array("id"=>$id);
+        $data=array("status"=>"active");
+        $status=$this->AdminModel->doupdate($where,'howbackabizwork_faq',$data);
+        if ($status){
+            $this->session->set_flashdata('success','FAQ is Active');
+            redirect('admin/backabiz_faq_list');
+        }else{
+            $this->session->set_flashdata('error','delete failed');
+            redirect('admin/backabiz_faq_list');
         }
     }
 }

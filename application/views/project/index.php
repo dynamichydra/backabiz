@@ -70,11 +70,11 @@
                    					<div class="clearfix"></div>
                    				</div>
 	                      		<div class="raised-bar">
-	                      			<div class="neo-progressbar"><div style="width:<?php echo ($project->rec_amount/$project->funding_goal)*100;?>%"></div></div>
+	                      			<div class="neo-progressbar"><div style="width:<?php echo ($project->funding_rec/$project->funding_goal)*100;?>%"></div></div>
 	                      		</div>
-	                      		<div class="progression-studios-raised-percent"><?php echo number_format(($project->rec_amount/$project->funding_goal)*100,2)?>%</div>
-	                      		<div class="progression-studios-fund-raised">$<?php echo number_format($project->rec_amount);?></div>
-	                      		<div class="progression-studios-funding-goal">raised of $<?php echo number_format($project->funding_goal);?> goal</div>
+	                      		<div class="progression-studios-raised-percent"><?php echo number_format(($project->funding_rec/$project->funding_goal)*100,2)?>%</div>
+	                      		<div class="progression-studios-fund-raised">$<?php echo number_format($project->funding_rec);?></div>
+	                      		<div class="progression-studios-funding-goal">raised of $<?php if(isset($project->funding_goal)){ echo number_format($project->funding_goal);}?> goal</div>
 	                      		<div class="progression-studios-index-time-remaining">
 	                      			<ul>
                                 <?php
@@ -98,16 +98,31 @@
 	                      		</div>
 	                      		<ul class="spcl-campaign">
                               <li>
-      	                      		<form method="post" class="cart" id="project-display"> $ <input type="number" step="any" min="0" placeholder="100" name="donate_amount_field" class="input-text amount wpneo_donate_amount_field text" value="100" data-min-price="50" data-max-price="45000">
+                                <?php
+                                $amount_left= number_format($project->funding_goal-$project->funding_rec);
+                                ?>
+      	                      		<form method="post" action="<?php echo base_url('home/add_back')?>" class="cart" id="project-display">
+                                    <input type="hidden" name="user_id" value="<?php if(isset($_SESSION['user'])){echo $_SESSION['user']['id'];};?>">
+                                    <input type="hidden" name="project_id" value="<?php echo number_format($project->id);?>">
+                                    <input type="hidden" name="project_title" value="<?php echo ($project->title);?>">
+                                     $ <input type="number" name="donate_amount_field" class="input-text amount wpneo_donate_amount_field text" min="1" max="<?php echo $amount_left;?>" placeholder="100" required>
                       					   <button type="submit" class="submit">Back Campaign</button>
                   						    </form>
                               </li>
                               <li>
                                   <ul id="blog-single-social-sharing">
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-reddit"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+                                    <?php
+$actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+?>
+                                    <li><a href="http://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode($actual_link);?>" allowTransparency="true" allow="encrypted-media" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                    <!-- <li><?php
+echo '<iframe src="https://www.facebook.com/plugins/share_button.php?href='.$actual_link.'&layout=button_count&size=large&mobile_iframe=true&width=83&height=28&appId" width="83" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>';
+?></li> -->
+                                    <li><a href="http://twitter.com/share?text=<?php echo ($project->title);?>&url=<?php echo urlencode($actual_link);?>" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="https://www.reddit.com/submit?url=<?php echo urlencode($actual_link);?>&title=<?php echo ($project->title);?>" target="_blank"><i class="fa fa-reddit"></i></a></li>
+                                    <li><a href="mailto:?subject=I wanted you to see this Campaign by Backabiz&amp;body=Check out this campaign <?php echo $actual_link;?>."
+   title="Share by Email"><i class="fa fa-envelope"></i></a></li>
+                                    <!-- <li><a href="#"><i class="fa fa-envelope"></i></a></li> -->
                                   </ul>
                               </li>
 	                      		</ul>
@@ -116,6 +131,7 @@
                    	</div>
                 </div>
             </section>
+            <!-- <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fbb.wsdev.in%2Fcampaigns%2FCarwyn-Photography" allowTransparency="true" allow="encrypted-media"><i class="fa fa-facebook"></i></iframe> -->
             <section id="project-wrapper-bot" class="section-padding" style="padding-top: 40px;">
                 <div class="container">
                 <div class="row">
@@ -136,6 +152,13 @@
 							    <div id="project-tab1" class="row tab-pane active"><br>
 							     		<div class="col-md-8">
 							     			<div class="project-text-area">
+                          <?php
+                          if(!empty($project->video)){
+                          ?>
+                          <object width="650" height="350" data="https://www.youtube.com/v/<?php $vid=explode("=",$project->video); if(!empty($vid[1])) echo $vid[1]; ?>" type="application/x-shockwave-flash"><param name="src" value="<?php $vid=explode("=",$project->video); if(!empty($vid[1])) echo $vid[1]; ?>" /></object>
+                            <?php
+                          }
+                          ?>
 							     				<?php echo $project->description;?>
 							     			</div>
 							     		</div>
@@ -162,8 +185,10 @@
 											<li>
 												<span class="round-circle"></span>
                         <?php $datetime = explode(" ",$value['date']);
-                        $date = $datetime[0]; ?>
-												<h4><?php echo $date?></h4>
+                        $date = $datetime[0];
+                        $timestamp = strtotime($date);
+                        $new_date = date("d-m-Y", $timestamp); ?>
+												<h4><?php echo $new_date?></h4>
 												<p class="update-title"><?php echo $value['update_title']?></p>
 												<p><?php echo $value['update_details']?></p>
 											</li>
@@ -189,9 +214,9 @@
                           ?>
                           <tr>
                             <td><?php echo $v->name;?></td>
-                            <td> <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span><?php number_format($v->amount);?></span>
+                            <td> <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span><?php echo number_format($v->amount);?></span>
                             </td>
-                            <td><?php echo date('M d, Y',strtotime($v->date));?></td>
+                            <td><?php echo date('d M, Y',strtotime($v->date));?></td>
                           </tr>
                           <?php
                         }
@@ -212,8 +237,8 @@
                 <div class="container">
                    <div class="row">
                    		<div class="col-sm-12">
-	                        <h2 class="main-heading">Related Projects</h2>
-	                        <p class="sub-heading">Discover projects just for you and get great recommendations when you select your interests.</p>
+	                        <h2 class="main-heading">Related Campaigns</h2>
+	                        <p class="sub-heading">Discover campaigns just for you and get great recommendations when you select your interests.</p>
                      	</div>
 
                       <?php
@@ -224,13 +249,25 @@
                       <div class="col-sm-4">
 	                      <div class="project-item">
 	                      	<div class="project-image-container">
-	                      		<a href="<?php echo base_url('project/'.$value['p_id']);?>">
+                            <?php
+                      $url = str_replace(' ','-',$value['title']);
+                      $url = str_replace(":",'',$url);
+                      $url = str_replace("'",'',$url);
+                      // $url = str_replace("%26",'&',$url);
+                  ?>
+	                      		<a href="<?php echo base_url('campaigns/'.$url);?>">
                               <?php $cats = explode(",", $value['feature_img']);?>
 	                      			<img src="<?php echo base_url('uploads/project/' . $cats[0]); ?>" style="width:360px; height:250px;" alt="project-one">
 	                      		</a>
 	                      		<ul class="project-link">
                                     <li>
-                                      <a href="<?php echo base_url('project/category/').$value['category']?>"><?php echo $value['category']?></a>
+                                      <?php
+                                $url = str_replace(' ','-',$value['category']);
+                                $url = str_replace(":",'',$url);
+                                $url = str_replace("'",'',$url);
+                                // $url = str_replace("%26",'&',$url);
+                            ?>
+                                      <a href="<?php echo base_url('All-Campaigns/').$url?>"><?php echo $value['category']?></a>
                                     </li>
                                 </ul>
 	                      		<!--<a href="#" class="project-link">Film &amp; Video</a>-->
@@ -248,12 +285,18 @@
 	                      	</div>
 	                      	<div class="project-details">
 	                      		<p class="author-byline">by <a href="#"><?php echo $value['first_name'];?>  <?php echo $value['last_name'];?></a></p>
-	                      		<h2 class="productauthor__title"><a href="<?php echo base_url('project/'.$value['p_id']);?>"><?php echo $value['title']?></a></h2>
+                            <?php
+                      $url = str_replace(' ','-',$value['title']);
+                      $url = str_replace(":",'',$url);
+                      $url = str_replace("'",'',$url);
+                      // $url = str_replace("%26",'&',$url);
+                  ?>
+	                      		<h2 class="productauthor__title"><a href="<?php echo base_url('campaigns/'.$url);?>"><?php echo $value['title']?></a></h2>
 	                      		<div class="raised-bar">
-	                      			<div class="neo-progressbar"><div style="width:<?php echo ($value['rec_amount']/$value['funding_goal'])*100;?>%"></div></div>
+	                      			<div class="neo-progressbar"><div style="width:<?php echo ($value['funding_rec']/$value['funding_goal'])*100;?>%"></div></div>
 	                      		</div>
-	                      		<div class="progression-studios-raised-percent"><?php echo number_format(($value['rec_amount']/$value['funding_goal'])*100,2)?>%</div>
-	                      		<div class="progression-studios-fund-raised">$<?php echo number_format($value['rec_amount']);?></div>
+	                      		<div class="progression-studios-raised-percent"><?php echo number_format(($value['funding_rec']/$value['funding_goal'])*100,2)?>%</div>
+	                      		<div class="progression-studios-fund-raised">$<?php echo number_format($value['funding_rec']);?></div>
 	                      		<div class="progression-studios-funding-goal">raised of $<?php echo $value['funding_goal']?></div>
                             <?php
                            $date1=date_create($value['end_date']);

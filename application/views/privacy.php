@@ -1,20 +1,23 @@
-<!-- body content start -->
 <main>
- <!-- Breadcrumbs -->
- <?php $this->load->view('include/small_banner');?>
-   <!-- end breadcrumbs-sec -->
+          <!-- Breadcrumbs -->
+          <?php $this->load->view('include/small_banner');?>
+          <!-- end breadcrumbs-sec -->
+         
+          <!-- faq-sec Section -->
+            <section id="news-sec" class="section-padding">               
+              <div class="container">   
+                <div class="row">
 
- <!-- faq-sec Section -->
-<div>
-<h2><b><center><?php echo $terms[0]['title'];?></b></center></h2>
-<br>
-<p><center><?php echo $terms[0]['description'];?></center></p>
-<br>
-</div>
-           </div>
-         </div>
-
-       </div>
-     </div>
-   </section>
-</main>
+                  <div class="col-md-12">
+                    <div class="news-single-details">
+	                     <p>
+		                     <?php echo $terms[0]['description'];?>
+	                     </p>
+                    </div><!--end news-wrap-->
+              
+                    
+                  </div>
+                </div>
+              </div>
+            </section>
+        </main>

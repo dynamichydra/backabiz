@@ -7,6 +7,11 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <title><?php echo $page_title;?></title>
+      <!-- <meta property="og:url"           content="https://www.your-domain.com/your-page.html" />
+      <meta property="og:type"          content="BAckabiz" />
+      <meta property="og:title"         content="BAckabiz" />
+      <meta property="og:description"   content="<?php if(isset($description)) echo $description?>" />
+      <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" /> -->
       <!-- Mobile specific metas
          ============================================ -->
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +22,7 @@
          ============================================ --
       <link href="https://fonts.googleapis.com/css?family=Barlow:400,500,600,700,800&display=swap" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
 
       <!-- CSS  -->
       <!-- Bootstrap CSS
@@ -32,12 +38,16 @@
       <!-- menu-->
       <!-- main CSS
          ============================================ -->
+         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/magnific-popup.css">
       <link rel="stylesheet" href="<?php echo base_url(); ?>assets/frontend/assets/css/custom.css">
       <link rel="stylesheet" href="<?php echo base_url(); ?>assets/style.css">
       <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+      <!-- <script src="//cdn.tinymce.com/4/tinymce.min.js"></script> -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <!-- jquery.flexslider.js -->
       <script src="<?php echo base_url(); ?>assets/js/flexslider-min.js"></script>
+      <script type="text/javascript" src="<?php echo base_url(); ?>assets/ckeditor/ckeditor.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
       <!-- bootstrap js -->
       <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
@@ -67,7 +77,7 @@
                          <?php
                           if(!empty($_SESSION['user'])){
                            ?>
-                         <li><a href='<?php echo base_url('new-project')?>'><i class="fa fa-file-text-o"></i>Start a Backabiz</a></li>
+                         <li><a href='<?php echo base_url('new-campaign')?>'><i class="fa fa-file-text-o"></i>Start a Backabiz</a></li>
                          <?php
                        } else {
                          ?>
@@ -111,17 +121,17 @@
                         <nav id="main-nav" class="main-nav">
                             <ul id="menu-primary-menu" class="menu">
                                 <li class="menu-item"><a href="<?php echo base_url()?>">Home</a></li>
-                                <li class="menu-item"><a href="<?php echo base_url('home/about') ?>">About</a></li>
+                                <li class="menu-item"><a href="<?php echo base_url('about') ?>">About</a></li>
                                 <li class="menu-item menu-item-has-children">
-                                    <a >How it works? <i class="fa fa-angle-down"></i></a>
+                                    <a >How it works <i class="fa fa-angle-down"></i></a>
                                     <ul class="sub-menu">
-                                      <li class="menu-item"><a href="<?php echo base_url('home/howBackabizWorks') ?>">How Backabiz Works</a></li>
-                                      <li class="menu-item"><a href="<?php echo base_url('home/whyBackabiz') ?>">Why Backabiz</a></li>
-                                      <li class="menu-item"><a href="<?php echo base_url('home/help-centre') ?>">Help Centre</a></li>
+                                      <li class="menu-item"><a href="<?php echo base_url('how-backabiz-works') ?>">How Backabiz Works</a></li>
+                                      <li class="menu-item"><a href="<?php echo base_url('why-Backabiz') ?>">Why Backabiz</a></li>
+                                      <li class="menu-item"><a href="<?php echo base_url('FAQs') ?>">FAQ</a></li>
                                     </ul>
                                 </li>
                                 <li class="menu-item menu-item-has-children">
-                                  <a href="<?php echo base_url('project/projects') ?>">Explore <i class="fa fa-angle-down"></i></a>
+                                  <a href="<?php echo base_url('All-Campaigns') ?>">Explore <i class="fa fa-angle-down"></i></a>
                                   <ul class="sub-menu">
 
                                       <?php
@@ -129,16 +139,22 @@
                       foreach ($category as $key=>$value) {
 
                        ?>
-                     <li class="menu-item"><a href="<?php echo base_url('project/category/').$value['cat_name']?>">&nbsp;<?php echo $value['cat_name']?></a></li>
+                       <?php
+                 $url = str_replace(' ','-',$value['cat_name']);
+                 $url = str_replace(":",'',$url);
+                 $url = str_replace("'",'',$url);
+                 // $url = str_replace("%26",'&',$url);
+             ?>
+                     <li class="menu-item"><a href="<?php echo base_url('All-Campaigns/').$url;?>">&nbsp;<?php echo $value['cat_name']?></a></li>
                                      <?php
                        }
                      }
                      ?>
                                     </ul>
                                 </li>
-                                <li class="menu-item"><a href="<?php echo base_url('home/news') ?>">News</a></li>
+                                <li class="menu-item"><a href="<?php echo base_url('blogs') ?>">Blog</a></li>
                                 <!-- <li class="menu-item"><a href="<?php echo base_url('home/faqs') ?>">Faqs</a></li> -->
-                                <li class="menu-item"><a href="<?php echo base_url('home/contact') ?>">Contact</a></li>
+                                <li class="menu-item"><a href="<?php echo base_url('contact') ?>">Contact</a></li>
                             </ul>
                         </nav><!-- /#main-nav -->
 

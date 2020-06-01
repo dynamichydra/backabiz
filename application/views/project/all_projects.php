@@ -12,13 +12,25 @@
                       <div class="col-sm-4">
 	                      <div class="project-item">
 	                      	<div class="project-image-container">
-	                      		<a href="<?php echo base_url('campaigns/' . $vn['p_id']); ?>">
+                            <?php
+                      $url = str_replace(' ','-',$vn['title']);
+                      $url = str_replace(":",'',$url);
+                      $url = str_replace("'",'',$url);
+                      // $url = str_replace("%26",'&',$url);
+                  ?>
+	                      		<a href="<?php echo base_url('campaigns/' . $url); ?>">
                               <?php $cats = explode(",", $vn['feature_img']);?>
 	                      			<img src="<?php echo base_url('uploads/project/' . $cats[0]); ?>" style="width:360px; height:250px;" alt="project-one">
 	                      		</a>
 	                      		<ul class="project-link">
                                     <li>
-                                      <a href="<?php echo base_url('project/category/').$vn['category']?>"><?php echo $vn['category'];?></a>
+                                      <?php
+                                $url = str_replace(' ','-',$vn['category']);
+                                $url = str_replace(":",'',$url);
+                                $url = str_replace("'",'',$url);
+                                // $url = str_replace("%26",'&',$url);
+                            ?>
+                                      <a href="<?php echo base_url('All-Campaigns/').$url;?>"><?php echo $vn['category'];?></a>
                                     </li>
                                 </ul>
 	                      		<!--<a href="#" class="project-link">Film &amp; Video</a>-->
@@ -36,14 +48,20 @@
 	                      	</div>
 	                      	<div class="project-details">
 	                      		<p class="author-byline">by <a href="#"><?php echo $vn['first_name'];?>  <?php echo $vn['last_name'];?></a></p>
-	                      		<h2 class="productauthor__title"><a href="<?php echo base_url('campaigns/' . $vn['p_id']); ?>"><?php echo $vn['title'];?></a></h2>
+                            <?php
+                      $url = str_replace(' ','-',$vn['title']);
+                      $url = str_replace(":",'',$url);
+                      $url = str_replace("'",'',$url);
+                      // $url = str_replace("%26",'&',$url);
+                  ?>
+	                      		<h2 class="productauthor__title"><a href="<?php echo base_url('campaigns/' . $url); ?>"><?php echo $vn['title'];?></a></h2>
 
 
                             <div class="raised-bar">
-                              <div class="neo-progressbar"><div style="width:<?php echo ($vn['rec_amount']/$vn['funding_goal'])*100;?>%"></div></div>
+                              <div class="neo-progressbar"><div style="width:<?php echo ($vn['funding_rec']/$vn['funding_goal'])*100;?>%"></div></div>
                             </div>
-                            <div class="progression-studios-raised-percent"><?php echo number_format(($vn['rec_amount']/$vn['funding_goal'])*100,2)?>%</div>
-                            <div class="progression-studios-fund-raised">$<?php echo number_format($vn['rec_amount']);?></div>
+                            <div class="progression-studios-raised-percent"><?php echo number_format(($vn['funding_rec']/$vn['funding_goal'])*100,2)?>%</div>
+                            <div class="progression-studios-fund-raised">$<?php echo number_format($vn['funding_rec']);?></div>
                             <div class="progression-studios-funding-goal">raised of $<?php echo number_format($vn['funding_goal']);?> goal</div>
 
                             <?php

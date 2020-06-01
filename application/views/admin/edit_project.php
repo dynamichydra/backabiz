@@ -43,24 +43,26 @@
 } ?></textarea>
 <div class="form-group">
                             <label for="short_description">Short Description</label>
-                            <textarea id="editor1" name="short_description" rows="10" cols="80"><?php if (!empty($vn["short_description"])) {
+                            <textarea id="editor2" name="short_description" rows="10" cols="80"><?php if (!empty($vn["short_description"])) {
     echo $vn["short_description"];
-} ?></textarea>
-              <div class="form-group">
-              <label for="category">Category</label>
-              <!-- <div class="col-sm-10"> -->
-                <select name="category" class="form-control c-select" required>
-                  <option value="uncategorized" <?php if ($vn["category"]=='uncategorized') {echo "selected";}?>>Uncategorized</option>
-                  <option value="Design" <?php if ($vn["category"]=='Design') {echo "selected";}?>>Design</option>
-                  <option value="Education" <?php if ($vn["category"]=='Education') {echo "selected";}?>>Education</option>
-                  <option value="Film & Video" <?php if ($vn["category"]=='Film & Video') {echo "selected";}?>>Film & Video</option>
-                  <option value="Food" <?php if ($vn["category"]=='Food') {echo "selected";}?>>Food</option>
-                  <option value="Games" <?php if ($vn["category"]=='Games') {echo "selected";}?>>Games</option>
-                  <option value="Technology" <?php if ($vn["category"]=='Technology') {echo "selected";}?>>Tech</option>
-                </select>
-              <!-- </div> -->
-            </div>
-                        </div>
+} ?></textarea></div>
+<div class="form-group">
+    <label>Category</label>
+    <select name="category[]" class="form-control c-select"  required multiple>
+      <option value="uncategorized">Uncategorized</option>
+
+
+      <?php
+                    foreach ($category as $key=>$value) {?>
+                      <option value="<?php echo $value['cat_name']; ?>" <?php  if(isset($vn["category"]) && $vn["category"] == $value['cat_name'])  echo 'selected'; ?>>
+<?php echo $value['cat_name']; ?>
+</option><?php
+                    }
+                    ?>
+    </select>
+    <small>Select your project category</small>
+</div>
+
             <div class="form-group">
               <label for="tag">Tag</label>
               <input type="text" class="form-control" name="tag" id="tag" placeholder="Enter tag" value="<?php if (!empty($vn["tag"])) {
@@ -106,7 +108,7 @@
               </div>
                 </div>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <div class="formwrapper d-flex">
                   <div class="col-md-6">
                   <label for="amount">Minimum Amount</label>
@@ -122,14 +124,14 @@
 } ?>" required>
               </div>
                 </div>
-            </div>
+            </div> -->
             <div class="form-group">
               <label for="goal">Funding Goal</label>
               <input type="text" class="form-control" name="funding_goal" id="goal" placeholder="Enter Funding Goal here" value="<?php if (!empty($vn["funding_goal"])) {
     echo $vn["funding_goal"];
 } ?>" required>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <div class="formwrapper d-flex">
                   <div class="col-md-6">
                   <label for="amount">Recommended Amount</label>
@@ -145,7 +147,7 @@
 } ?>" required>
               </div>
                 </div>
-            </div>
+            </div> -->
             <div class="form-group">
               <label for="country">country</label>
                 <select name="country" class="form-control c-select" required>
@@ -168,12 +170,12 @@
 
             <h3>Reward Option</h3>
             <hr>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="reward_p_amount">Pledge Amount</label>
               <input type="text" class="form-control" name="reward_p_amount" id="reward_p_amount" placeholder="Put the Pledge Amount here" value="<?php if (!empty($vn["reward_p_amount"])) {
     echo $vn["reward_p_amount"];
 } ?>" required>
-            </div>
+            </div> -->
             <div class="form-group">
               <label for="reward_img">Reward Image</label>
               <input type="file" name=" reward_img" id="reward_img" class="form-control">
@@ -189,7 +191,7 @@
 
             <div class="form-group">
                             <label for="reward_desc">Reward Description</label>
-                            <textarea id="editor1" name="reward_desc" rows="10" placeholder="Put the reward description here" cols="80"><?php if (!empty($vn["reward_desc"])) {
+                            <textarea id="editor3" name="reward_desc" rows="10" placeholder="Put the reward description here" cols="80"><?php if (!empty($vn["reward_desc"])) {
     echo $vn["reward_desc"];
 } ?></textarea>
 <div class="form-group">
@@ -280,7 +282,7 @@
     </div>
   </div>
   <!-- / -->
-  <script>
+  <!-- <script>
     tinymce.init({
         selector: 'textarea',
         height: 200,
@@ -297,6 +299,11 @@
             '//www.tinymce.com/css/codepen.min.css'
         ]
     });
+</script> -->
+<script>
+  CKEDITOR.replace( 'editor1' );
+  CKEDITOR.replace( 'editor2' );
+  CKEDITOR.replace( 'editor3' );
 </script>
 
 </body>

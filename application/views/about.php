@@ -135,7 +135,7 @@
               </div><!-- end container -->
             </section>
           <!-- Bottom About Section -->
-            <section id="btm-abt-sec" class="section-padding bg-light-grey" style="background: url(../assets/images/heart-small.png) no-repeat;background-position: bottom right;">
+            <section id="btm-abt-sec" class="section-padding bg-light-grey" style="background: url(../assets/images/heart-small.png) no-repeat;background-position: top right;">
               <div class="top-testi-bg bg-light-grey" style="background: url(../assets/images/heart-large.png) no-repeat; background-size: 220px auto;background-position: 30px 30px;">
               <div class="container">
                 <div class="row">
@@ -146,6 +146,9 @@
                       </h2>
                       <p class="sub-hdn">
                         <?php echo $about_bottom[0]['subtitle'];?>
+                      </p>
+                      <p class="sub-hdn">
+                        <?php if(!empty($about_bottom[0]['subtitle_1'])) echo $about_bottom[0]['subtitle_1'];?>
                       </p>
                       <ul>
                         <li>

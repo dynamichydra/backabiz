@@ -163,6 +163,38 @@
                     <i class="fa fa-caret-down"></i>
                   </span>
 
+                  <span class="nav-text">Blogs</span>
+                </a>
+                <ul class="nav-sub">
+                  <li>
+                    <a href="<?php echo base_url('admin/add_news'); ?>" >
+                      <span class="nav-text">Add Blog </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/news_list'); ?>" >
+                      <span class="nav-text">All Blogs </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/news_categories'); ?>" >
+                      <span class="nav-text">Add Categories </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/news_category_list'); ?>" >
+                      <span class="nav-text">Categories List </span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <a>
+                  <span class="nav-caret">
+                    <i class="fa fa-caret-down"></i>
+                  </span>
+
                   <span class="nav-text">About</span>
                 </a>
                 <ul class="nav-sub">
@@ -176,7 +208,7 @@
                       <span class="nav-text">Bottom Section </span>
                     </a>
                   </li>
-                  <li>
+                  <!-- <li>
                     <a href="<?php echo base_url('admin/funding_team'); ?>" >
                       <span class="nav-text">Add Funding Team </span>
                     </a>
@@ -185,7 +217,7 @@
                     <a href="<?php echo base_url('admin/funding_team_list'); ?>" >
                       <span class="nav-text">Funding Team List </span>
                     </a>
-                  </li>
+                  </li> -->
                   <li>
                     <a href="<?php echo base_url('admin/about_banner'); ?>" >
                       <span class="nav-text">About Banner </span>
@@ -246,14 +278,19 @@
                   <span class="nav-text">How it Works</span>
                 </a>
                 <ul class="nav-sub">
-                  <li>
+                  <!-- <li>
                     <a href="<?php echo base_url('admin/how_title'); ?>" >
                       <span class="nav-text">How it Works?</span>
                     </a>
-                  </li>
+                  </li> -->
                   <li>
                     <a href="<?php echo base_url('admin/how_backabiz'); ?>" >
                       <span class="nav-text">How Backabiz Works</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url('admin/backabiz_faq'); ?>" >
+                      <span class="nav-text">How Backabiz Works Faq</span>
                     </a>
                   </li>
                   <li>
@@ -288,11 +325,11 @@
                       <span class="nav-text">Privacy</span>
                     </a>
                   </li>
-                  <li>
+                  <!-- <li>
                     <a href="<?php echo base_url('admin/legal'); ?>" >
                       <span class="nav-text">Legal</span>
                     </a>
-                  </li>
+                  </li> -->
                 </ul>
               </li>
 

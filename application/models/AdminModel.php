@@ -54,6 +54,7 @@ class AdminModel extends BaseModel
     {
         $this->db->select('*');
         $this->db->where($where);
+        $this->db->order_by('cat_name');
         // $this->db->limit(6);
         $sql = $this->db->get($table);
         if ($sql->num_rows() > 0) {
@@ -127,7 +128,7 @@ class AdminModel extends BaseModel
 
     public function getProjectDetails()
     {
-      $query = $this->db->query("SELECT user.last_name,user.first_name,user.img as user_img, project.title, project.category, project.end_date, project.start_date, project.status, project.funding_goal, project.feature_img, project.rec_amount, project.location, project.id as p_id, countries.country_name
+      $query = $this->db->query("SELECT user.last_name,user.first_name,user.img as user_img, project.title, project.category, project.end_date, project.start_date, project.status, project.funding_goal, project.funding_rec, project.feature_img, project.rec_amount, project.location, project.id as p_id, countries.country_name
 FROM user
 INNER JOIN project ON user.id=project.user_id
 INNER JOIN countries on project.country=countries.id WHERE project.status='active'");
@@ -139,7 +140,7 @@ INNER JOIN countries on project.country=countries.id WHERE project.status='activ
     }
     public function getAllProjectDetails()
     {
-      $query = $this->db->query("SELECT user.last_name,user.first_name,user.img as user_img, project.title, project.category, project.id, project.end_date, project.start_date, project.status, project.funding_goal, project.feature_img, project.rec_amount, project.location, countries.country_name
+      $query = $this->db->query("SELECT user.last_name,user.first_name,user.img as user_img, project.title, project.category, project.id, project.end_date, project.start_date, project.status, project.funding_goal, project.funding_rec, project.feature_img, project.rec_amount, project.location, countries.country_name
 FROM user
 INNER JOIN project ON user.id=project.user_id
 INNER JOIN countries on project.country=countries.id WHERE project.status='active' AND project.featured= 'yes' LIMIT 3");
@@ -151,7 +152,7 @@ INNER JOIN countries on project.country=countries.id WHERE project.status='activ
     }
     public function getFeaturedprojects()
     {
-      $query = $this->db->query("SELECT user.last_name,user.first_name,user.img as user_img, project.title, project.id as p_id, project.short_description, project.category, project.end_date, project.start_date, project.status, project.funding_goal, project.feature_img, project.rec_amount, project.location, countries.country_name,project.featured
+      $query = $this->db->query("SELECT user.last_name,user.first_name,user.img as user_img, project.title, project.id as p_id, project.short_description, project.category, project.end_date, project.start_date, project.status, project.funding_goal, project.funding_rec, project.feature_img, project.rec_amount, project.location, countries.country_name,project.featured
 FROM user
 INNER JOIN project ON user.id=project.user_id
 INNER JOIN countries on project.country=countries.id WHERE project.status='active' and project.featured='yes'");
@@ -163,7 +164,7 @@ INNER JOIN countries on project.country=countries.id WHERE project.status='activ
     }
     public function getCategorytProjects($value)
     {
-      $query = $this->db->query("SELECT user.last_name,user.first_name,user.img as user_img, project.title, project.category, project.end_date, project.start_date, project.status, project.funding_goal, project.feature_img, project.rec_amount, project.location , project.id as p_id, countries.country_name
+      $query = $this->db->query("SELECT user.last_name,user.first_name,user.img as user_img, project.title, project.category, project.end_date, project.start_date, project.status, project.funding_goal, project.funding_rec, project.feature_img, project.rec_amount, project.location , project.id as p_id, countries.country_name
 FROM user
 INNER JOIN project ON user.id=project.user_id
 INNER JOIN countries on project.country=countries.id WHERE project.status='active' AND project.category='".$value."'");
@@ -208,5 +209,15 @@ INNER JOIN countries on project.country=countries.id WHERE project.user_id=$id A
             return FALSE;
         }
     }
-    
+    public function latestnews()
+    {
+      $query=$this->db->query("SELECT * FROM (
+    SELECT * FROM news ORDER BY id DESC LIMIT 4) sub ORDER BY id ASC");
+    if($query){
+    return $query->result_array();
+  }else{
+    return false;
+  }
+    }
+
 }

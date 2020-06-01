@@ -28,18 +28,18 @@
                                 </ul>
                             </li>
                             <li class="menu-item menu-item-has-children">
-                                <a href="#">Projects <i class="fa fa-angle-down"></i></a>
+                                <a href="#">Campaigns <i class="fa fa-angle-down"></i></a>
                                 <ul class="sub-menu">
-                                   <li class="menu-item"><a href="<?php echo base_url('dashboard/my_projects/').$user[0]['id']?>">My Projects</a></li>
-                                   <li class="menu-item"><a href="backed_campaigns.html">My Invested Projects</a></li>
-                                   <li class="menu-item"><a href="pledges_received.html">Pledges Received</a></li>
-                                   <li class="menu-item"><a href="bookmark.html">Bookmarks</a></li>
+                                   <li class="menu-item"><a href="<?php echo base_url('dashboard/my_campaigns/').$user[0]['id']?>">My Campaigns</a></li>
+                                   <li class="menu-item"><a href="<?php echo base_url('dashboard/backed_campaigns/').$user[0]['id']?>">My Invested Campaigns</a></li>
+                                   <!-- <li class="menu-item"><a href="pledges_received.html">Pledges Received</a></li>
+                                   <li class="menu-item"><a href="bookmark.html">Bookmarks</a></li> -->
                                 </ul>
                             </li>
                         </ul>
                     </nav><!-- /#main-nav -->
               </div>
-              <div class="dashboard-right"><a href="<?php echo base_url('new-project')?>" class="submit">Add New Campaign</a></div>
+              <div class="dashboard-right"><a href="<?php echo base_url('new-campaign')?>" class="submit">Add New Campaign</a></div>
              </div>
             </div>
           </div>

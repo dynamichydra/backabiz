@@ -3,16 +3,37 @@
          <!-- Breadcrumbs -->
          <?php $this->load->view('include/small_banner');?>
            <!-- end breadcrumbs-sec -->
-           <?php if ($this->session->flashdata('success')) { ?>
-           <div class="alert alert-success"> <?= $this->session->flashdata('success') ?> </div>
-           <?php } ?>
-           <?php if ($this->session->flashdata('error')) { ?>
-           <div class="alert alert-danger"> <?= $this->session->flashdata('error') ?> </div>
-           <?php } ?>
+
+
+           <?php if ($this->session->flashdata('success')): ?>
+                           <script>
+                               swal({
+                                   title: "Message Sent",
+                                   text: "<?php echo $this->session->flashdata('success'); ?>",
+                                   // timer: 1500,
+                                   icon: "success",
+                                   showConfirmButton: false,
+                                   button: "Aww yiss!",
+                                   type: 'success'
+                               });
+                           </script>
+                   <?php endif; ?>
+                   <?php if ($this->session->flashdata('error')): ?>
+                                   <script>
+                                       swal({
+                                           title: "Error!",
+                                           text: "<?php echo $this->session->flashdata('error'); ?>",
+                                           dangerMode: true,
+                                           // timer: 1500,
+                                           icon: "warning",
+                                           showConfirmButton: false,
+                                           button: "OK",
+                                           type: 'error'
+                                       });
+                                   </script>
+                           <?php endif; ?>
          <!-- Map -->
-           <section class="site-map">
-             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25200.629033626272!2d-122.51109268477789!3d37.85845058687319!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085845331c92675%3A0xb903aa6d828f51ee!2sSausalito%2C%20CA%2094965%2C%20USA!5e0!3m2!1sen!2sin!4v1585922102460!5m2!1sen!2sin" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-           </section>
+
          <!-- Form Section -->
            <section class="form-div site-gap">
              <div class="container">

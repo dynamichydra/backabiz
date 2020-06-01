@@ -12,8 +12,9 @@ class Project extends Base {
 
 	public function index($id=null)
 	{
-    if($id && $id>0){
-      $this->data['project']	= $this->ProjectModel->get_project_detail(['p.id'=>$id]);
+    if(!empty($id)){
+			$value = str_replace('-', ' ',$id);
+      $this->data['project']	= $this->ProjectModel->get_project_detail(['p.title'=>$value]);
       if(count($this->data['project'])>0){
         $this->data['project']   = $this->data['project'][0];
         $this->data['title']	= $this->data['project']->title;
@@ -43,18 +44,19 @@ class Project extends Base {
 	$this->data["project_details"]=$this->AdminModel->getProjectDetails();
 	$this->render_front('project/all_projects');
 	}
-	public function category($value)
+	public function category($url)
 	{
 	// 	if( !isset($_SESSION["user"]) ){
 	// redirect('home/login');
 	// }
-	$url = str_replace('%20', ' ',$value);
+	$value = str_replace('-', ' ',$url);
 	// echo $url;
 	$this->data["page_title"]="$url";
 	$this->data['title']	= $url;
 	// $project_details =$this->AdminModel->getProjectDetails($id);
 	$this->data["user"]=$this->AdminModel->getdata(["status"=>"active"],'user');
-	$this->data["project_details"]=$this->AdminModel->getCategorytProjects($url);
+	$this->data["project_details"]=$this->AdminModel->getCategorytProjects($value);
 	$this->render_front('project/all_projects');
 	}
+
 }

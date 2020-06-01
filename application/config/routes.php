@@ -50,9 +50,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'home';
-$route['new-project'] = 'dashboard/new_project';
-// $route['project/(:num)'] = 'project/index/$1';
-$route['campaigns/(:num)'] = 'project/index/$1';
-$route['home/help-centre'] = 'home/faqs';
+$route['new-campaign'] = 'dashboard/new_project';
+$route['how-backabiz-works'] = 'home/howBackabizWorks';
+$route['why-Backabiz'] = 'home/whyBackabiz';
+$route['All-Campaigns'] = 'project/projects';
+$route['All-Campaigns/(:any)'] = 'project/category/$1';
+// $route['profile/(:num)'] = 'dashboard/profile/$1';
+
+$route['blogs'] = 'home/news';
+$route['contact'] = 'home/contact';
+$route['about'] = 'home/about';
+$route['campaigns/(:any)'] = 'project/index/$1';
+$route['dashboard/my_campaigns/(:num)'] = 'dashboard/my_projects/$1';
+$route['blogs/(:any)'] = 'home/title/$1';
+$route['FAQs'] = 'home/faqs';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

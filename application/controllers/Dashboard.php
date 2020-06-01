@@ -45,15 +45,17 @@ class Dashboard extends Base {
 		if(!empty($id)){
 			$this->data["page_title"]="Edit Campaign";
 			$this->data['title']	= 'Edit Campaign';
-			$this->data['category']	= $this->baseModel->_get('category',['status'=>'active']);
+			$this->data['category']	= $this->AdminModel->getdataCategory(["status"=>"active"],'category');
 			$this->data['project']	= $this->baseModel->_get('project',['status'=>'Pending','id'=>$id]);
 			$this->data['country']	= $this->baseModel->_get('countries');
+			$this->data['currency']	= $this->baseModel->_get('currency');
 			$this->render_front('user/new_project');
 		}else{
 		$this->data["page_title"]="New Campaign";
 		$this->data['title']	= 'Start a Campaign';
-		$this->data['category']	= $this->baseModel->_get('category',['status'=>'active']);
+		$this->data['category']	= $this->AdminModel->getdataCategory(["status"=>"active"],'category');
 		$this->data['country']	= $this->baseModel->_get('countries');
+		$this->data['currency']	= $this->baseModel->_get('currency');
 		$this->render_front('user/new_project');
 	}
 	}
@@ -129,6 +131,7 @@ class Dashboard extends Base {
 						'end_date'=>$this->input->post('end_date'),
 						'min_amount'=>$this->input->post('min_amount'),
 						'max_amount'=>$this->input->post('max_amount'),
+						'currency'=>$this->input->post('currency'),
 						'funding_goal'=>$this->input->post('funding_goal'),
 						'rec_amount'=>$this->input->post('rec_amount'),
 						'pledge_amount'=>$this->input->post('pledge_amount'),
@@ -233,6 +236,8 @@ class Dashboard extends Base {
 							'end_date'=>$this->input->post('end_date'),
 							'min_amount'=>$this->input->post('min_amount'),
 							'max_amount'=>$this->input->post('max_amount'),
+							'project_end_method'=>$this->input->post('emethod'),
+							'currency'=>$this->input->post('currency'),
 							'funding_goal'=>$this->input->post('funding_goal'),
 							'rec_amount'=>$this->input->post('rec_amount'),
 							'pledge_amount'=>$this->input->post('pledge_amount'),
@@ -486,7 +491,7 @@ public function my_projects($id=null)
 redirect('home/login');
 }
 $this->data["page_title"]="My Campaigns";
-$this->data['title']	= 'Campaigns';
+$this->data['title']	= 'My Campaigns';
 // $project_details =$this->AdminModel->getProjectDetails($id);
 $this->data["user"]=$this->AdminModel->getdata(["id"=>$id],'user');
 $this->data["project_details"]=$this->AdminModel->getMyProjectDetails($id);
@@ -531,5 +536,18 @@ public function update($id=null)
 	 $project_id=$this->AdminModel->getdata(["id"=>$id],'project_update');
 	 $p_id=$project_id[0]['project_id'];
 		redirect('dashboard/update/'.$p_id);
+	 }
+	 public function backed_campaigns($id=null)
+	 {
+	 	if( !isset($_SESSION["user"]) ){
+	 redirect('home/login');
+	 }
+	 $this->data["page_title"]="My Invested Campaigns";
+	 $this->data['title']	= 'My Invested Campaigns';
+	 // $project_details =$this->AdminModel->getProjectDetails($id);
+	 $this->data["user"]=$this->AdminModel->getdata(["id"=>$id],'user');
+	 $this->data["backers"]=$this->AdminModel->getdata(["user_id"=>$id],'backers');
+	 // $this->data["project_details"]=$this->AdminModel->getMyProjectDetails($id);
+	 $this->render_front('user/backed_campaigns');
 	 }
 }

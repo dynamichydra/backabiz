@@ -16,12 +16,33 @@
                 </div>
               </div><!-- end container -->
             </section><!-- end breadcrumbs-sec -->
-            <?php if ($this->session->flashdata('success')) { ?>
-            <div class="alert alert-success"> <?= $this->session->flashdata('success') ?> </div>
-            <?php } ?>
-            <?php if ($this->session->flashdata('error')) { ?>
-            <div class="alert alert-danger"> <?= $this->session->flashdata('error') ?> </div>
-            <?php } ?>
+
+            <?php if ($this->session->flashdata('success')): ?>
+                            <script>
+                                swal({
+                                    title: "Done",
+                                    text: "<?php echo $this->session->flashdata('success'); ?>",
+                                    timer: 1500,
+                                    icon: "success",
+                                    showConfirmButton: false,
+                                    button: "Aww yiss!",
+                                    type: 'success'
+                                });
+                            </script>
+                    <?php endif; ?>
+                    <?php if ($this->session->flashdata('error')): ?>
+                                    <script>
+                                        swal({
+                                            title: "Error!",
+                                            text: "<?php echo $this->session->flashdata('error'); ?>",
+                                            dangerMode: true,
+                                            // timer: 1500,
+                                            showConfirmButton: false,
+                                            icon: "warning",
+                                            type: 'error'
+                                        });
+                                    </script>
+                            <?php endif; ?>
           <!-- Form Section start-->
             <section class="project-form-wrapper section-padding">
               <div class="container">

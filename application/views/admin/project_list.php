@@ -57,8 +57,8 @@
           <tr>
               <td><?php echo $vn['title'];?></td>
               <td><a href><?php echo $vn['category'];?></a></td>
-              <td><?php echo $vn['start_date'];?></td>
-              <td><?php echo $vn['end_date'];?></td>
+              <td><?php echo date('d M Y',strtotime($vn['start_date']));?></td>
+              <td><?php echo date('d M Y',strtotime($vn['end_date']));?></td>
               <td><?php echo $vn['funding_goal'];?></td>
               <?php
               if($vn['status']=="active"){

@@ -29,12 +29,12 @@
             </div>
             <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea id="editor1" name="description" rows="10" cols="80"><?php if (!empty($pagecontent["page_content"])) {
+                            <textarea id="editor1" name="description" rows="10" cols="80" required><?php if (!empty($pagecontent["page_content"])) {
     echo $pagecontent["page_content"];
 } ?></textarea>
 <div class="form-group">
                             <label for="short_description">Short Description</label>
-                            <textarea id="editor1" name="short_description" rows="10" cols="80"><?php if (!empty($pagecontent["page_content"])) {
+                            <textarea id="editor2" name="short_description" rows="10" cols="80" required><?php if (!empty($pagecontent["page_content"])) {
     echo $pagecontent["page_content"];
 } ?></textarea>
               <div class="form-group">
@@ -90,7 +90,7 @@
               </div>
                 </div>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <div class="formwrapper d-flex">
                   <div class="col-md-6">
                   <label for="amount">Minimum Amount</label>
@@ -102,12 +102,12 @@
                 <input type="text" class="form-control" name="max_amount" id="amount" placeholder="Project start Data" required>
               </div>
                 </div>
-            </div>
+            </div> -->
             <div class="form-group">
               <label for="goal">Funding Goal</label>
               <input type="text" class="form-control" name="funding_goal" id="goal" placeholder="Enter Funding Goal here" required>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <div class="formwrapper d-flex">
                   <div class="col-md-6">
                   <label for="amount">Recommended Amount</label>
@@ -119,8 +119,8 @@
                 <input type="text" class="form-control" name="pledge_amount" id="amount" placeholder="Predefined Pledge Amount" required>
               </div>
                 </div>
-            </div>
-            <div class="form-group">
+            </div> -->
+            <!-- <div class="form-group">
                 <label>Contributor Table</label>
                 <div class="checkbox-wrap"><input type="checkbox" name="contributor_table" value="1">Show contributor table on project single page</div>
 
@@ -129,7 +129,7 @@
                 <label>Contributor Anonymity</label>
                 <div class="checkbox-wrap"><input type="checkbox" name="contributor_anonymity" value="1">Make contributors anonymous on the contributor table</div>
 
-            </div>
+            </div> -->
             <div class="form-group">
               <label for="country">country</label>
               <!-- <div class="col-sm-10"> -->
@@ -150,10 +150,10 @@
 
             <h3>Reward Option</h3>
             <hr>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="reward_p_amount">Pledge Amount</label>
               <input type="text" class="form-control" name="reward_p_amount" id="reward_p_amount" placeholder="Put the Pledge Amount here" required>
-            </div>
+            </div> -->
             <div class="form-group">
               <label for="reward_img">Reward Image</label>
               <input type="file" name="reward_img" id="reward_img" class="form-control" required>
@@ -167,7 +167,7 @@
 
             <div class="form-group">
                             <label for="reward_desc">Reward Description</label>
-                            <textarea id="editor1" name="reward_desc" rows="10" cols="80"></textarea></div>
+                            <textarea id="editor3" name="reward_desc" rows="10" cols="80" required></textarea></div>
 
             <div class="form-group">
                 <div class="formwrapper d-flex">
@@ -244,23 +244,10 @@
   </div>
   <!-- / -->
   <script>
-    tinymce.init({
-        selector: 'textarea',
-        height: 200,
-        theme: 'modern',
-        plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
-        toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | media',
-        image_advtab: true,
-        templates: [
-            {title: 'Test template 1', content: 'Test 1'},
-            {title: 'Test template 2', content: 'Test 2'}
-        ],
-        content_css: [
-            '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-            '//www.tinymce.com/css/codepen.min.css'
-        ]
-    });
-</script>
+  CKEDITOR.replace( 'editor1' );
+  CKEDITOR.replace( 'editor2' );
+  CKEDITOR.replace( 'editor3' );
+  </script>
 
 </body>
 </html>
