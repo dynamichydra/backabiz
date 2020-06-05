@@ -19,7 +19,7 @@
                                           <li class="menu-item"><a href="<?php echo base_url('dashboard/profile/').$user[0]['id']?>">Profile</a></li>
                                           <li class="menu-item"><a href="profile-contact.html">Contact</a></li>
                                           <li class="menu-item"><a href="<?php echo base_url('dashboard/password/').$user[0]['id']?>">Password</a></li>
-                                          <li class="menu-item"><a href="rewards.html">Rewards</a></li>
+                                          <!-- <li class="menu-item"><a href="rewards.html">Rewards</a></li> -->
                                           <li class="menu-item"><a href="<?php echo base_url();?>home/logout">Logout</a></li>
                                       </ul>
                                   </li>
@@ -51,7 +51,7 @@
                          <?php
                          $cats = explode(",", $vn['feature_img']);
                          ?>
-                         <img class="profile-form-img img-responsive" style="height:160px; width:180px;" src="<?php echo base_url('uploads/project/' . $cats[0]); ?>" alt="Profile Image">
+                         <img class="profile-form-img img-responsive" style="height:180px; width:250px;" src="<?php echo base_url('uploads/project/' . $cats[0]); ?>" alt="Profile Image">
                        </div>
                         <div class="col-md-9">
                           <div class="campaign-right clearfix">

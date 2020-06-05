@@ -33,10 +33,28 @@
               <label for="exampleInputEmail1">Email address</label>
               <input type="email" class="form-control" value="<?php echo $vn['email'];?>" name="email" id="exampleInputEmail1" placeholder="Enter email">
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="phone">Mobile Number</label>
               <input type="text" class="form-control" value="<?php echo $vn['phone'];?>" name="phone" id="phone" placeholder="Enter phone no.">
-            </div>
+            </div> -->
+
+            <label>Mobile Number</label>
+            <div class="form-group">
+              <div class="input-group">
+                <!-- <div class="input-group-btn"> -->
+            <select name="country_code" style="width:80px;height:35px;margin-top: 0px;" required>
+              <?php
+                            foreach ($countries as $key=>$value) {?>
+                              <option value="<?php echo $value['phonecode']; ?>" <?php  if($vn["country_code"] == $value['phonecode']){ echo 'selected';} elseif('61'==$value['phonecode']){ echo 'selected'; } ?>>
++<?php echo $value['phonecode']; ?>
+</option><?php
+                            }
+                            ?>
+            </select>
+          <!-- </div> -->
+            <input type="text" name="phone" value="<?php echo $vn['phone'];?>" class="form-control" id="phone" placeholder="Enter phone no.">
+          </div>
+        </div>
             <!-- <div class="form-group">
               <label for="password">Password</label>
               <input type="password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="psw" id="psw" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder="Password">
@@ -107,13 +125,17 @@
               <input type="text" class="form-control" value="<?php echo $vn['about'];?>" name="about" id="about" placeholder="about us">
             </div>
             <div class="form-group">
+                <label>Company Registration Number:</label>
+                <input type="text"  name="company_reg_no" value="<?php echo $vn['company_reg_no'];?>" class="form-control">
+            </div>
+            <div class="form-group">
               <label for="bio">Bio</label>
               <input type="text" class="form-control" value="<?php echo $vn['bio'];?>" name="bio" id="bio" placeholder="bio">
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="fax">Fax</label>
               <input type="text" class="form-control" value="<?php echo $vn['fax'];?>" name="fax" id="fax" placeholder="fax">
-            </div>
+            </div> -->
             <div class="form-group">
               <label for="web">Website</label>
               <input type="text" class="form-control" value="<?php echo $vn['website'];?>" name="web" id="web" placeholder="website">
@@ -136,8 +158,14 @@
             </div>
             <div class="form-group">
               <div class="input-group">
-                <div class="input-group-addon">Pinterest</div>
-                <input class="form-control" value="pinterest" type="text" name="pt_link" >
+                <div class="input-group-addon">Instagram</div>
+                <input class="form-control" value="<?php echo $vn['instagram'];?>" type="text" name="pt_link" >
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon">Reddit</div>
+                <input class="form-control" value="<?php echo $vn['reddit'];?>" type="text" name="profile_vk" >
               </div>
             </div>
             <!-- <div class="form-group">

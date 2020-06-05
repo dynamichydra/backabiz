@@ -400,9 +400,11 @@ class Dashboard extends Base {
 				// 'city'=> $this->input->post("city"),
 				'facebook'=> $this->input->post("fb_link"),
 				'twitter'=> $this->input->post("tw_link"),
-				'pinterest'=> $this->input->post("pt_link"),
-				'vk'=> $this->input->post("profile_vk"),
-				'linkedin'=> $this->input->post("profile_linkedin"),
+				'instagram'=> $this->input->post("pt_link"),
+				'reddit'=> $this->input->post("profile_vk"),
+				'company_reg_no'=> $this->input->post("company_reg_no"),
+				'country_code'=> $this->input->post("country_code"),
+				'offer_reward'=> $this->input->post("colorCheckbox"),
 			);
 			// print_r($data);
 			// die;

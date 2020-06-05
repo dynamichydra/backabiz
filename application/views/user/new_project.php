@@ -19,7 +19,7 @@
                   <div class="form-group">
           <label>Title</label>
           <input type="text" name="title" id="title" value="<?php if (!empty($project[0]["title"])) { echo $project[0]["title"];} ?>" class="form-control" required>
-          <small>Put the project title here</small>
+          <small>Put the campaign title here</small>
       </div>
       <div class="form-group">
           <label>Description</label>
@@ -69,7 +69,7 @@
         <div class="form-group">
           <label>Feature Image</label>
           <input type="file" name="files[]" id="feature_img" class="form-control" multiple >
-          <small>Upload project feature images/ atleast one image is mandatory</small>
+          <small>Upload campaign feature images/ atleast one image is mandatory</small>
           <?php
           if(isset($project[0]['feature_img'])){
           $cats = explode(",", $project[0]['feature_img']);
@@ -84,31 +84,32 @@
       <div class="form-group">
           <label>Video</label>
           <input type="text" name="video" id="video" placeholder="https://" value="<?php if (!empty($project[0]["video"])) { echo $project[0]["video"];} ?>" class="form-control">
+          <!-- <small>Url should look like:- https://www.youtube.com/watch?v=zQ4gy5eM7OM</small> -->
           <small style="color:red"><b>Copy the video url and paste it here</b> (only youtube videos allowed)</small>
       </div>
       <div class="form-group">
-          <label>Project End Method</label>
+          <label>Campaign End Method</label>
           <select name="emethod" required>
             <option selected="selected" value="">- Select -</option>
             <option value="target_goal" <?php if (isset($project[0]["project_end_method"]) && $project[0]["project_end_method"]=='target_goal') {echo "selected";}?>>Target Goal</option>
             <option value="target_date" <?php if (isset($project[0]["project_end_method"]) && $project[0]["project_end_method"]=='target_date') {echo "selected";}?>>Target Date</option>
             <option value="target_goal_and_date" <?php if (isset($project[0]["project_end_method"]) && $project[0]["project_end_method"]=='target_goal_and_date') {echo "selected";}?>>Target Goal &amp; Date</option>
-            <option value="never_end" <?php if (isset($project[0]["project_end_method"]) && $project[0]["project_end_method"]=='never_end') {echo "selected";}?>>Project Never Ends</option>
+            <!-- <option value="never_end" <?php if (isset($project[0]["project_end_method"]) && $project[0]["project_end_method"]=='never_end') {echo "selected";}?>>Project Never Ends</option> -->
           </select>
-          <small>Choose the stage when project will end</small>
+          <small><b style="color:red">Note:-</b> Each Backabiz campaign has a maximum three months duration.</small>
       </div>
       <div class="form-group row">
         <div class="col-md-6">
           <label>Start Date</label>
             <!-- <input type="date" name="start_date" id="start_date" placeholder="" value="<?php if (!empty($project[0]["start_date"])) { echo $project[0]["start_date"];} ?>" class="form-control" required> -->
-            <input id="date1" class="form-control" name="start_date" type="date" value="<?php if (!empty($project[0]["start_date"])) { echo $project[0]["start_date"];} ?>" class="form-control" required/>
-            <small>Project start date (dd-mm-yy)</small>
+            <input id="date" class="form-control" name="start_date" type="date" value="<?php if (!empty($project[0]["start_date"])) { echo $project[0]["start_date"];} ?>" required/>
+            <small>campaign start date (dd-mm-yy)</small>
         </div>
         <div class="col-md-6">
           <label>End Date</label>
             <!-- <input type="date" name="end_date" id="end_date" placeholder="" value="<?php if (!empty($project[0]["end_date"])) { echo $project[0]["end_date"];} ?>" class="form-control" required> -->
-            <input id="date1" class="form-control" name="end_date" type="date" value="<?php if (!empty($project[0]["end_date"])) { echo $project[0]["end_date"];} ?>" required/>
-            <small>Project end date (dd-mm-yy)</small>
+            <input id="date" class="form-control" name="end_date" type="date" value="<?php if (!empty($project[0]["end_date"])) { echo $project[0]["end_date"];} ?>" required/>
+            <small>campaign end date (dd-mm-yy)</small>
         </div>
 
       </div>
@@ -135,7 +136,7 @@
                                     ?>
                                   </select>
           <input type="number" name="funding_goal" id="funding_goal" value="<?php if (!empty($project[0]["funding_goal"])) { echo $project[0]["funding_goal"];} ?>" class="form-control" required>
-          <small>Project funding goal</small>
+          <small>campaign funding goal</small>
       </div>
       <!-- <div class="form-group row">
         <div class="col-md-6">
@@ -174,11 +175,16 @@
           <small>Select your country</small>
       </div>
       <div class="form-group">
-          <label>Location</label>
+          <label>Campaign City Location</label>
           <input type="text" name="location" id="location" value="<?php if (!empty($project[0]["location"])) { echo $project[0]["location"];} ?>" class="form-control" required>
-          <small>Put the project location here</small>
+          <small>Put the campaign city location here</small>
       </div>
       <br>
+
+      <label>
+                <input type="checkbox" name="colorCheckbox"
+                       value="C" <?php  if(isset($project[0]["offer_reward"]) && $project[0]["offer_reward"] == "C")  echo 'checked'; ?>> Are you providing a reward?</label>
+      <div class="C selectt"  <?php if(isset($project[0]["offer_reward"]) && $project[0]["offer_reward"] == "C") { echo ' style="display:block" ';}else{echo ' style="display:none;" ';} ?>>
       <h3 class="reward-option">Reward Option</h3>
       <!-- <div class="form-group">
           <label>Pledge Amount</label>
@@ -197,13 +203,13 @@
       </div>
       <div class="form-group">
           <label>Reward</label>
-          <textarea cols="20" rows="2" name="reward_desc" id="editor3" class="form-control" required><?php if (!empty($project[0]["reward_desc"])) { echo $project[0]["reward_desc"];} ?></textarea>
+          <textarea cols="20" rows="2" name="reward_desc" id="editor3" class="form-control"><?php if (!empty($project[0]["reward_desc"])) { echo $project[0]["reward_desc"];} ?></textarea>
           <small>Reward Description</small>
       </div>
       <div class="form-group row">
         <div class="col-md-6">
           <label>Estimated Delivery Month</label>
-            <select class="form-control" name="del_month" required>
+            <select class="form-control" name="del_month">
               <option selected="selected" value="">- Select -</option>
               <option value="jan"<?php if ( isset($project[0]["del_month"]) && $project[0]["del_month"]=='jan') {echo "selected";}?>>January</option>
               <option value="feb"<?php if (isset($project[0]["del_month"]) && $project[0]["del_month"]=='feb') {echo "selected";}?>>February</option>
@@ -213,11 +219,11 @@
               <option value="sep"<?php if (isset($project[0]["del_month"]) && $project[0]["del_month"]=='sep') {echo "selected";}?>>September</option><option value="oct"<?php if (isset($project[0]["del_month"]) && $project[0]["del_month"]=='oct') {echo "selected";}?>>October</option>
               <option value="nov"<?php if (isset($project[0]["del_month"]) && $project[0]["del_month"]=='nov') {echo "selected";}?>>November</option><option value="dec"<?php if (isset($project[0]["del_month"]) && $project[0]["del_month"]=='dec') {echo "selected";}?>>December</option>
             </select>
-            <small>Estimated Delivery Month of the Reward</small>
+            <small>Estimated Reward Delivery Month</small>
         </div>
         <div class="col-md-6">
           <label>Estimated Delivery Year</label>
-            <select class="form-control" name="del_year"><option selected="selected" value="" required>- Select -</option>
+            <select class="form-control" name="del_year"><option selected="selected" value="" >- Select -</option>
               <?php
               for($i= date('Y');$i<date('Y')+30;$i++){
                 ?>
@@ -226,7 +232,7 @@
               }
               ?>
               </select>
-            <small>Estimated Delivery Year of the Reward</small>
+            <small>Estimated Reward Delivery Year</small>
         </div>
       </div>
       <div class="form-group">
@@ -235,11 +241,13 @@
           <small>Quantity of physical products</small>
       </div>
       <span class="border-line"></span>
+    </div>
+
       <div class="form-group">
-          <div class="checkbox-wrap"><input type="checkbox" id="agree" name="agree" value="1" <?php if (isset($project[0]["t&c"]) && $project[0]["t&c"]=='1') {echo "checked";}?>>I agree with the terms and conditions.</div>
+          <div class="checkbox-wrap"><input type="checkbox" id="agree" name="agree" value="1" <?php if (isset($project[0]["t&c"]) && $project[0]["t&c"]=='1') {echo "checked";}?>>I agree with the <a target="_blank" href='<?php echo base_url('home/terms')?>'>terms and conditions.</a></div>
       </div>
       <div class="form-group submit-wrap">
-          <input type="submit" class="submit" value="Submit Project">
+          <input type="submit" class="submit" value="Submit Campaign">
           <a href="<?php echo base_url('/');?>" type="submit" class="cancel">Cancel</a>
       </div>
           </form>
@@ -250,6 +258,13 @@
       </div>
     </section>
 </main>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.9/datepicker.min.js"></script>
+<script>
+$(function($) {
+   $( "#date" ).datepicker();
+ });
+</script>
+
 <!-- <script>
   tinymce.init({
       selector: 'textarea',
@@ -288,13 +303,21 @@
       }
   });
 </script> -->
+<script type="text/javascript">
+            $(document).ready(function() {
+                $('input[type="checkbox"]').click(function() {
+                    var inputValue = $(this).attr("value");
+                    $("." + inputValue).toggle();
+                });
+            });
+        </script>
 <script>
   CKEDITOR.replace( 'editor1' );
   CKEDITOR.replace( 'editor2' );
   CKEDITOR.replace( 'editor3' );
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $(document).ready(function(){
     if ( $('#date1').prop('type') != 'date' ) $('#date1').datepicker();
 });
-</script>
+</script> -->

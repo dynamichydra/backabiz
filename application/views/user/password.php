@@ -19,7 +19,7 @@
                                           <li class="menu-item"><a href="<?php echo base_url('dashboard/profile/').$user[0]['id']?>">Profile</a></li>
                                           <li class="menu-item"><a href="profile-contact.html">Contact</a></li>
                                           <li class="menu-item"><a href="<?php echo base_url('dashboard/password/').$user[0]['id']?>">Password</a></li>
-                                          <li class="menu-item"><a href="rewards.html">Rewards</a></li>
+                                          <!-- <li class="menu-item"><a href="rewards.html">Rewards</a></li> -->
                                           <li class="menu-item"><a href="<?php echo base_url();?>home/logout">Logout</a></li>
                                       </ul>
                                   </li>

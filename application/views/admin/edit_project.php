@@ -79,6 +79,7 @@
               <input type="text" class="form-control" name="video" id="exampleInputEmail1" placeholder="Enter video link here" value="<?php if (!empty($vn["video"])) {
     echo $vn["video"];
 } ?>" required>
+<small style="color:red"><b>Copy the video url and paste it here</b> (only youtube videos allowed)</small>
             </div>
             <div class="form-group">
               <label for="method">Project End Method</label>
@@ -87,8 +88,9 @@
                   <option value="target goal" <?php if ($vn["project_end_method"]=='target goal') {echo "selected";}?>>Target Goal</option>
                   <option value="target date" <?php if ($vn["project_end_method"]=='target date') {echo "selected";}?>>Target Date</option>
                   <option value="target goal and date" <?php if ($vn["project_end_method"]=='target goal and date') {echo "selected";}?>>Target Goal & Date</option>
-                  <option value="never end" <?php if ($vn["project_end_method"]=='never end') {echo "selected";}?>>Project Never Ends</option>
+                  <!-- <option value="never end" <?php if ($vn["project_end_method"]=='never end') {echo "selected";}?>>Project Never Ends</option> -->
                 </select>
+                <small><b style="color:red">Note:-</b> Each Backabiz campaign has a maximum three months duration.</small>
               <!-- </div> -->
             </div>
             <div class="form-group">

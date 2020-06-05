@@ -112,7 +112,11 @@ class Admin extends CI_Controller
             'city'=> $this->input->post("city"),
             'facebook'=> $this->input->post("fb_link"),
             'twitter'=> $this->input->post("tw_link"),
-            'pinterest'=> $this->input->post("pt_link"),
+            'instagram'=> $this->input->post("pt_link"),
+            'reddit'=> $this->input->post("profile_vk"),
+            'company_reg_no'=> $this->input->post("company_reg_no"),
+    				'country_code'=> $this->input->post("country_code"),
+            'date_joined'=>date('Y-m-d H:i:s'),
             'user_type'=>"user",
             'status'=>"Pending"
         );
@@ -147,7 +151,8 @@ class Admin extends CI_Controller
         $where= array("id"=>$id,"status"=>"active");
         $table="user";
         $user_data=$this->AdminModel->getdata($where,$table);
-        $data=array('page_title'=>'Edit User','layout_page'=>'edit_user','user_data'=>$user_data);
+        $data1=$this->AdminModel->get_countries();
+        $data=array('page_title'=>'Edit User','layout_page'=>'edit_user','user_data'=>$user_data,'countries'=>$data1);
         // print_r($data);
         // die;
         $this->load->view('admin/layout', $data);
@@ -193,7 +198,11 @@ class Admin extends CI_Controller
           'city'=> $this->input->post("city"),
           'facebook'=> $this->input->post("fb_link"),
           'twitter'=> $this->input->post("tw_link"),
-          'pinterest'=> $this->input->post("pt_link")
+          // 'pinterest'=> $this->input->post("pt_link"),
+          'instagram'=> $this->input->post("pt_link"),
+          'reddit'=> $this->input->post("profile_vk"),
+          'company_reg_no'=> $this->input->post("company_reg_no"),
+  				'country_code'=> $this->input->post("country_code"),
         );
         $table="user";
         // print_r($data);

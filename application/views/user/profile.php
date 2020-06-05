@@ -18,7 +18,7 @@
                                           <li class="menu-item"><a href="<?php echo base_url('dashboard/profile/').$user[0]['id']?>">Profile</a></li>
                                           <li class="menu-item"><a href="profile-contact.html">Contact</a></li>
                                           <li class="menu-item"><a href="<?php echo base_url('dashboard/password/').$user[0]['id']?>">Password</a></li>
-                                          <li class="menu-item"><a href="rewards.html">Rewards</a></li>
+                                          <!-- <li class="menu-item"><a href="rewards.html">Rewards</a></li> -->
                                           <li class="menu-item"><a href="<?php echo base_url();?>home/logout">Logout</a></li>
                                       </ul>
                                   </li>
@@ -91,25 +91,51 @@
                 		<div class="col-md-6">
                 			<div class="all-form">
 	                       		<h3 class="reward-option">Contact Info</h3>
-	                       		<div class="form-group">
+
+                            <div class="form-group">
+            								    <label>Company Registration Number:</label>
+            								    <input type="text"  name="company_reg_no" value="<?php echo $user[0]['company_reg_no']?>" class="form-control">
+            								</div>
+
 								    <label>Mobile Number:</label>
-								    <input type="text"  name="phone" value="<?php echo $user[0]['phone']?>" class="form-control">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-btn">
+                    <select name="country_code" style="width:80px;height:10px;margin-top: 0px;color: inherit;background-color:#f7f7f9" required>
+                                      <?php
+                                                    foreach ($countries as $key=>$value) {?>
+                                                      <option value="<?php echo $value['phonecode']; ?>" <?php  if($user[0]["country_code"] == $value['phonecode']){ echo 'selected';} elseif('61'==$value['phonecode']){ echo 'selected'; } ?>>
+                    +<?php echo $value['phonecode']; ?>
+                    </option><?php
+                                                    }
+                                                    ?>
+                    </select>
+                  </div>
+                    <input type="text" name="phone" value="<?php echo $user[0]['phone']?>" class="form-control">
+                  </div>
 								</div>
+                <!-- <div class="form-group">
+  <select style="width:80px;height:20px;">
+    <option selected="selected">Please select</option>
+    <option>1</option>
+  </select>
+  <input type='text' name='test' style="width: 387px;height:17px;border-color: rgba(120, 130, 140, 0.3);" value='' />
+</div> -->
 								<div class="form-group">
 								    <label>Email:</label>
 								    <input type="email"  name="email" value="<?php echo $user[0]['email']?>" class="form-control">
 								</div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 								    <label>Fax:</label>
 								    <input type="text"  name="fax" value="<?php echo $user[0]['fax']?>" class="form-control">
-								</div>
+								</div> -->
 								<div class="form-group">
 								    <label>Website:</label>
 								    <input type="text"  name="web" value="<?php echo $user[0]['website']?>" class="form-control">
 								</div>
                 <div class="form-group">
-                  <label for="country">country</label>
-                    <select name="country" id="country" class="form-control c-select" onchange= "get_state(this.value)" required>
+                  <label for="country">Country</label>
+                    <select style="background-color:#f7f7f9" name="country" id="country" class="form-control c-select" onchange= "get_state(this.value)" required>
                       <option value="">Select Country</option>
                       <?php
                                     foreach ($countries as $key=>$value) {?>
@@ -156,22 +182,22 @@
 								    <input type="text" name="tw_link" value="<?php echo $user[0]['twitter']?>" class="form-control">
 								</div>
 								<div class="form-group">
-								    <label>VK:</label>
-								    <input type="text" name="profile_vk" value="<?php echo $user[0]['vk']?>" class="form-control">
+								    <label>Reddit:</label>
+								    <input type="text" name="profile_vk" value="<?php echo $user[0]['reddit']?>" class="form-control">
 								</div>
-								<div class="form-group">
-								    <label>Linkedin:</label>
+								<!-- <div class="form-group">
+								    <label>Reddit:</label>
 								    <input type="text" name="profile_linkedin" value="<?php echo $user[0]['linkedin']?>"  class="form-control">
-								</div>
+								</div> -->
 								<div class="form-group">
-								    <label>Pinterest:</label>
-								    <input type="text" name="pt_link" value="<?php echo $user[0]['pinterest']?>" class="form-control">
+								    <label>Instagram:</label>
+								    <input type="text" name="pt_link" value="<?php echo $user[0]['instagram']?>" class="form-control">
 								</div>
 							</div>
                 		</div>
 
                 		<div class="col-md-12">
-                			<button class="submit">Edit</button>
+                			<button class="submit">SAVE</button>
                 		</div>
                 	</form>
                 	</div>

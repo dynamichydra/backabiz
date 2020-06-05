@@ -4,13 +4,13 @@
             <section class="breadcrumbs-sec" style="background: url(<?php echo base_url('assets/frontend/assets/images/breadcrumbs-bg.jpg');?>) no-repeat;">
               <div class="container">
                 <div class="breadcrumbs-text">
-                  <h3>My account</h3>
+                  <h3>Login/Register</h3>
                   <ul>
                     <li>
                       <a href="index.html">home</a>
                     </li>
                     <li>
-                      <span>My account</span>
+                      <span>Login/Register</span>
                     </li>
                   </ul>
                 </div>

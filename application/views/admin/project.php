@@ -65,6 +65,7 @@
             <div class="form-group">
               <label for="video">Video</label>
               <input type="text" class="form-control" name="video" id="exampleInputEmail1" placeholder="Enter video link here" required>
+              <small style="color:red"><b>Copy the video url and paste it here</b> (only youtube videos allowed)</small>
             </div>
             <div class="form-group">
               <label for="method">Project End Method</label>
@@ -73,8 +74,9 @@
                   <option value="target goal">Target Goal</option>
                   <option value="target date">Target Date</option>
                   <option value="target goal and date">Target Goal & Date</option>
-                  <option value="never end">Project Never Ends</option>
+                  <!-- <option value="never end">Project Never Ends</option> -->
                 </select>
+                <small><b style="color:red">Note:-</b> Each Backabiz campaign has a maximum three months duration.</small>
               <!-- </div> -->
             </div>
             <div class="form-group">

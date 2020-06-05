@@ -47,7 +47,7 @@ class Home extends Base {
 
 	public function login()
 	{
-		$this->data["page_title"]="login - Backabiz";
+		$this->data["page_title"]="Login/Register - Backabiz";
 		$this->render_front('login');
 	}
 

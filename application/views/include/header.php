@@ -55,6 +55,8 @@
       <!-- <script src="<?php echo base_url(); ?>assets/js/jquery.magnific-popup.js"></script> -->
       <script src="//cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 
+      
+
 
      </head>
      <body class="header-fixed page no-sidebar header-style-2 topbar-style-2">
@@ -184,6 +186,5 @@
   });
 });
             </script>
-
 
         </header>
